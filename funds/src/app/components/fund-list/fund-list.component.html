@@ -1,12 +1,12 @@
 <!-- fund-list.component.html -->
 <div *ngIf="funds" class="fund-list">
     <div class="fund-info-labels">
-        <div>Fund Name</div>
-        <div>Type</div>
-        <div>Company</div>
+        <div  class="fund-info-label">Fund Name</div>
+        <div class="fund-info-label">Type</div>
+        <div class="fund-info-label">Company</div>
     </div>
     <hr>
-    <div *ngFor="let fund of funds" class="fund-info-data-row">
+    <div *ngFor="let fund of funds">
         <app-fund [fund]="fund"></app-fund>
     </div>
 </div>

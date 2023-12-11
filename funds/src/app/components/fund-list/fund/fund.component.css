@@ -1,12 +1,20 @@
 /* fund.component.css */
-.fund-info-data {
+.fund-info {
   display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
+  flex: 1;
 }
 
-.fund-info-data .name,
-.fund-info-data .type,
-.fund-info-data .company {
+.fund-info-data {
+  display: flex;
+  border: 1px solid blue;
+}
+
+.fund-info-value {
+  flex: 1.5;
+  margin: 5px;
+  border: 1px solid green;
+}
+
+.fund-info-value:not(:first-child) {
   flex: 1;
 }

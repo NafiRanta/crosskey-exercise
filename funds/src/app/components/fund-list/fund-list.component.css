@@ -1,15 +1,9 @@
 /* fund-list.component.css */
 .fund-list {
   display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
   border: 1px solid red;
-  flex-direction: column; /* Change to row for one line */
-}
-
-.fund-list div {
+  flex-direction: column;
   flex: 1;
-  margin-right: 10px;
 }
 
 .fund-info-labels {
@@ -17,6 +11,10 @@
 }
 
 .fund-info-label {
-  flex: 1;
+  flex: 1.5; /* Adjust the flex value based on your preference */
   font-weight: bold;
+}
+
+.fund-info-label:not(:first-child) {
+  flex: 1; /* All labels except the first one get equal space */
 }
