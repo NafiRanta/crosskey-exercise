@@ -1,10 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Fund } from 'src/app/models/fund';
+import { FundService } from 'src/app/services/fund.service';
 
 @Component({
   selector: 'app-fund-details',
   templateUrl: './fund-details.component.html',
   styleUrls: ['./fund-details.component.css']
 })
-export class FundDetailsComponent {
+export class FundDetailsComponent implements OnInit {
+  selectedFund: Fund | null;
 
+  constructor(private fundService: FundService) { }
+
+  ngOnInit() {
+    this.fundService.selectedFund$.subscribe((fund) => {
+      this.selectedFund = fund;
+      console.log("selectedFund in fund details component:", this.selectedFund);
+    });
+  }
 }

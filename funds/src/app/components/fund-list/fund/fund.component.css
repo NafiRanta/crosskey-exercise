@@ -7,14 +7,20 @@
 .fund-info-data {
   display: flex;
   border: 1px solid blue;
+  cursor: pointer;
 }
 
 .fund-info-value {
   flex: 1.5;
   margin: 5px;
   border: 1px solid green;
+  width: 100%;
 }
 
 .fund-info-value:not(:first-child) {
   flex: 1;
+}
+
+.highlight {
+  background-color: #ccc;
 }

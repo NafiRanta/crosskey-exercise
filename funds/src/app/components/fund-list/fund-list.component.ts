@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Fund } from 'src/app/models/fund';
-
+import { FundService } from 'src/app/services/fund.service';
 @Component({
   selector: 'app-fund-list',
   templateUrl: './fund-list.component.html',
@@ -9,10 +9,11 @@ import { Fund } from 'src/app/models/fund';
 export class FundListComponent implements OnInit{
 @Input() funds: Fund[];
 
-  constructor() { }
+  constructor(private fundService: FundService) { }
 
   ngOnInit(): void {
-    console.log("all funds", this.funds);
+    this.fundService.setFunds(this.funds);
   }
+
 
 }

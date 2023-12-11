@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FundService } from './services/fund.service';
 import { Fund } from './models/fund';
 import { Observable, of } from 'rxjs';
-import { catchError,tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',

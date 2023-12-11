@@ -1,5 +1,5 @@
 <!-- fund.component.html -->
-<div class="fund-info-data">
+<div #fundInfoData class="fund-info-data" id="{{fund.instrumentId}}" (click)="onSelectedFund(fund)">
     <div class="fund-info-value">{{ fund.fundName }}</div>
     <div class="fund-info-value">{{ fund.fundType }}</div>
     <div class="fund-info-value">{{ fund.fundCompany }}</div>
