@@ -1,0 +1,11 @@
+/* app.component.css */
+.grid-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.fund-list,
+.fund-details {
+  width: 50%; /* Each component takes 50% width, adjust as needed */
+  box-sizing: border-box; /* Include padding and border in the width calculation */
+}

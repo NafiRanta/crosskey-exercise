@@ -1,0 +1,12 @@
+/* fund.component.css */
+.fund-info-data {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.fund-info-data .name,
+.fund-info-data .type,
+.fund-info-data .company {
+  flex: 1;
+}

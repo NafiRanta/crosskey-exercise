@@ -1,0 +1,22 @@
+/* fund-list.component.css */
+.fund-list {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  border: 1px solid red;
+  flex-direction: column; /* Change to row for one line */
+}
+
+.fund-list div {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.fund-info-labels {
+  display: flex;
+}
+
+.fund-info-label {
+  flex: 1;
+  font-weight: bold;
+}

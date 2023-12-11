@@ -1,0 +1,15 @@
+/* app-search.component.css */
+
+.search-container {
+  display: flex;
+  align-items: center;
+}
+
+.search-field {
+  width: 100%;
+  overflow: hidden;
+}
+
+mat-icon {
+  color: #888;
+}

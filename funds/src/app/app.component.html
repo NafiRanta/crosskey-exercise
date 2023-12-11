@@ -1,15 +1,22 @@
-
-<mat-card>
+<!-- app.component.html -->
+<mat-card *ngIf="!isLoading">
   <mat-card-header>
-    <mat-card-title>Mutual Funds</mat-card-title>
+    <div class="header-content">
+      <mat-card-title>Mutual Funds</mat-card-title>
+      <app-search></app-search>
+    </div>
   </mat-card-header>
-  <mat-card-content>
-    Card content goes here.
-  </mat-card-content>
+  <div class="grid-container">
+    <app-fund-list [funds]="allFunds$ | async" class="fund-list"></app-fund-list>
+    <app-fund-details class="fund-details"></app-fund-details>
+  </div>
 </mat-card>
-<mat-grid-list cols="2" rowHeight="100px">
-  <mat-grid-tile class="fund-list">Fund list</mat-grid-tile>
-  <mat-grid-tile class="fund-details">Fund Details</mat-grid-tile>
-  <!-- ... other grid tiles -->
-</mat-grid-list>
 
+<ng-container *ngIf="isLoading && !isError">
+  <div class="spinner-container">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-container>
+<ng-container *ngIf="!isLoading && isError">
+  <div>Error loading data. Please try again.</div>
+</ng-container>
