@@ -1,0 +1,1197 @@
+[
+    {
+        "status": {
+            "success": true,
+            "errors": [],
+            "infos": [],
+            "jSessionId": "1NUsNSBrbmQGYFKPdEnaK9efK0yjZIjm3iXIeFXp"
+        },
+        "data": [
+            {
+                "instrumentId": "9884",
+                "isin": "LU0050372472",
+                "fundName": "BlackRock GF Euro Bond Fund A2 EUR",
+                "fundType": "Aktiefond",
+                "estimationDate": 1679868000000,
+                "rate": 25.6,
+                "change1y": -10.55,
+                "currency": "EUR",
+                "availableForMonthlySaving": false,
+                "redemptionMinFee": {
+                    "amount": 100,
+                    "currency": "EUR",
+                    "empty": false
+                },
+                "redemptionPercent": null,
+                "subscriptionMinFee": {
+                    "amount": 100,
+                    "currency": "EUR",
+                    "empty": false
+                },
+                "subscriptionPercent": null,
+                "subscriptionMinValue": {
+                    "amount": 150,
+                    "currency": "EUR",
+                    "empty": false
+                },
+                "investmentClass": null,
+                "permissions": {
+                    "allowedToBuy": true,
+                    "allowedToSell": false,
+                    "allowedToSwap": false,
+                    "allowedForWatchlist": true,
+                    "allowedForDetailedInformation": true,
+                    "allowedToTrade": true
+                },
+                "buyCommissions": null,
+                "sellCommissions": null,
+                "change1m": 1.35,
+                "change3m": 1.51,
+                "change3y": -11.57,
+                "minimumCommission": null,
+                "technicalCommission": null,
+                "technicalCommissionUp": null,
+                "sellCommission": null,
+                "administrativeFee": 0.75,
+                "startDate": 1564610400000,
+                "yearHigh": 26.06,
+                "yearLow": 24.94,
+                "graphImageLink": null,
+                "documents": [
+                    {
+                        "url": "https://doc.morningstar.com/document/55a4a01bfd568359ddd5557ffd5568eb.msdoc/?clientid=alandsbanken&key=173740fb42c97e8e",
+                        "title": "Faktablad"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/cost_and_charges/LU0050372472_AOS.pdf",
+                        "title": "Förhandsinformation om kostnader"
+                    }
+                ],
+                "fundCompany": "BlackRock SA",
+                "startValue": 100,
+                "closePrice": 25.6,
+                "latestClosePriceDate": 1679868000000,
+                "countDecimals": 1
+            },
+            {
+                "instrumentId": "9882",
+                "isin": "LU0055631609",
+                "fundName": "BlackRock Global Funds - World Gold A2 USD",
+                "fundType": "Aktiefond",
+                "estimationDate": 1679868000000,
+                "rate": 34.46,
+                "change1y": -17.76,
+                "currency": "USD",
+                "availableForMonthlySaving": false,
+                "redemptionMinFee": {
+                    "amount": 0,
+                    "currency": "USD",
+                    "empty": false
+                },
+                "redemptionPercent": null,
+                "subscriptionMinFee": {
+                    "amount": 0,
+                    "currency": "USD",
+                    "empty": false
+                },
+                "subscriptionPercent": null,
+                "subscriptionMinValue": {
+                    "amount": 100,
+                    "currency": "USD",
+                    "empty": false
+                },
+                "investmentClass": null,
+                "permissions": {
+                    "allowedToBuy": true,
+                    "allowedToSell": false,
+                    "allowedToSwap": false,
+                    "allowedForWatchlist": true,
+                    "allowedForDetailedInformation": true,
+                    "allowedToTrade": true
+                },
+                "buyCommissions": null,
+                "sellCommissions": null,
+                "change1m": 13.99,
+                "change3m": 8.36,
+                "change3y": 23.51,
+                "minimumCommission": null,
+                "technicalCommission": null,
+                "technicalCommissionUp": null,
+                "sellCommission": null,
+                "administrativeFee": 1.75,
+                "startDate": 788742000000,
+                "yearHigh": 36.22,
+                "yearLow": 30.23,
+                "graphImageLink": null,
+                "documents": [
+                    {
+                        "url": null,
+                        "title": "Förhandsinformation om kostnader"
+                    }
+                ],
+                "fundCompany": "BlackRock SA",
+                "startValue": 0,
+                "closePrice": 34.46,
+                "latestClosePriceDate": 1679868000000,
+                "countDecimals": 1
+            },
+            {
+                "instrumentId": "9810",
+                "isin": "SE0000429789",
+                "fundName": "Carnegie Fonder Sverigefond",
+                "fundType": "Aktiefond",
+                "estimationDate": 1679868000000,
+                "rate": 3797.0626,
+                "change1y": -2.43,
+                "currency": "SEK",
+                "availableForMonthlySaving": false,
+                "redemptionMinFee": {
+                    "amount": 50,
+                    "currency": "SEK",
+                    "empty": false
+                },
+                "redemptionPercent": null,
+                "subscriptionMinFee": {
+                    "amount": 50,
+                    "currency": "SEK",
+                    "empty": false
+                },
+                "subscriptionPercent": null,
+                "subscriptionMinValue": {
+                    "amount": 0,
+                    "currency": "SEK",
+                    "empty": false
+                },
+                "investmentClass": null,
+                "permissions": {
+                    "allowedToBuy": true,
+                    "allowedToSell": true,
+                    "allowedToSwap": true,
+                    "allowedForWatchlist": true,
+                    "allowedForDetailedInformation": true,
+                    "allowedToTrade": true
+                },
+                "buyCommissions": null,
+                "sellCommissions": null,
+                "change1m": -3.25,
+                "change3m": 3.19,
+                "change3y": 64.67,
+                "minimumCommission": null,
+                "technicalCommission": null,
+                "technicalCommissionUp": null,
+                "sellCommission": null,
+                "administrativeFee": 1.4,
+                "startDate": 1485903600000,
+                "yearHigh": 4043.7313,
+                "yearLow": 3708.9783,
+                "graphImageLink": null,
+                "documents": [
+                    {
+                        "url": "https://doc.morningstar.com/document/a6dd34f8f68813464817f3583767ce29.msdoc/?clientid=advisermorningstar&key=9d8913dc6fbdd2d3",
+                        "title": "Faktablad"
+                    }
+                ],
+                "fundCompany": "Carnegie Fonder",
+                "startValue": 0,
+                "closePrice": 3797.0626,
+                "latestClosePriceDate": 1679868000000,
+                "countDecimals": 2
+            },
+            {
+                "instrumentId": "9823",
+                "isin": "LU0251131958",
+                "fundName": "Fidelity America Fund A Acc USD",
+                "fundType": "Aktiefond",
+                "estimationDate": 1679868000000,
+                "rate": 28.31,
+                "change1y": -13.69,
+                "currency": "USD",
+                "availableForMonthlySaving": false,
+                "redemptionMinFee": {
+                    "amount": 0,
+                    "currency": "USD",
+                    "empty": false
+                },
+                "redemptionPercent": null,
+                "subscriptionMinFee": {
+                    "amount": 0,
+                    "currency": "USD",
+                    "empty": false
+                },
+                "subscriptionPercent": null,
+                "subscriptionMinValue": {
+                    "amount": 10,
+                    "currency": "USD",
+                    "empty": false
+                },
+                "investmentClass": null,
+                "permissions": {
+                    "allowedToBuy": true,
+                    "allowedToSell": true,
+                    "allowedToSwap": true,
+                    "allowedForWatchlist": true,
+                    "allowedForDetailedInformation": true,
+                    "allowedToTrade": true
+                },
+                "buyCommissions": null,
+                "sellCommissions": null,
+                "change1m": -5.19,
+                "change3m": -4.2,
+                "change3y": 66.92,
+                "minimumCommission": null,
+                "technicalCommission": null,
+                "technicalCommissionUp": null,
+                "sellCommission": null,
+                "administrativeFee": 1,
+                "startDate": null,
+                "yearHigh": 31.39,
+                "yearLow": 27.75,
+                "graphImageLink": null,
+                "documents": [],
+                "fundCompany": "Fidelity",
+                "startValue": 100,
+                "closePrice": 28.31,
+                "latestClosePriceDate": 1679868000000,
+                "countDecimals": 4
+            },
+            {
+                "instrumentId": "9883",
+                "isin": "LU0028120375",
+                "fundName": "Invesco Emerging Europe Equity Fund",
+                "fundType": "Medellång räntefond",
+                "estimationDate": 1607554800000,
+                "rate": 105,
+                "change1y": null,
+                "currency": "USD",
+                "availableForMonthlySaving": false,
+                "redemptionMinFee": {
+                    "amount": 0,
+                    "currency": "USD",
+                    "empty": false
+                },
+                "redemptionPercent": null,
+                "subscriptionMinFee": {
+                    "amount": 0,
+                    "currency": "USD",
+                    "empty": false
+                },
+                "subscriptionPercent": null,
+                "subscriptionMinValue": {
+                    "amount": 100,
+                    "currency": "USD",
+                    "empty": false
+                },
+                "investmentClass": null,
+                "permissions": {
+                    "allowedToBuy": true,
+                    "allowedToSell": false,
+                    "allowedToSwap": false,
+                    "allowedForWatchlist": true,
+                    "allowedForDetailedInformation": true,
+                    "allowedToTrade": true
+                },
+                "buyCommissions": null,
+                "sellCommissions": null,
+                "change1m": null,
+                "change3m": null,
+                "change3y": null,
+                "minimumCommission": null,
+                "technicalCommission": null,
+                "technicalCommissionUp": null,
+                "sellCommission": null,
+                "administrativeFee": 1.5,
+                "startDate": 1569880800000,
+                "yearHigh": null,
+                "yearLow": null,
+                "graphImageLink": null,
+                "documents": [],
+                "fundCompany": "Invesco Management S.A.",
+                "startValue": 100,
+                "closePrice": 105,
+                "latestClosePriceDate": 1607554800000,
+                "countDecimals": 4
+            },
+            {
+                "instrumentId": "9802",
+                "isin": "SE0000740698",
+                "fundName": "Lannebo Småbolag",
+                "fundType": "Aktiefond",
+                "estimationDate": 1679868000000,
+                "rate": 144.57,
+                "change1y": -5.37,
+                "currency": "SEK",
+                "availableForMonthlySaving": false,
+                "redemptionMinFee": {
+                    "amount": 0,
+                    "currency": "SEK",
+                    "empty": false
+                },
+                "redemptionPercent": null,
+                "subscriptionMinFee": {
+                    "amount": 0,
+                    "currency": "SEK",
+                    "empty": false
+                },
+                "subscriptionPercent": null,
+                "subscriptionMinValue": {
+                    "amount": 0,
+                    "currency": "SEK",
+                    "empty": false
+                },
+                "investmentClass": null,
+                "permissions": {
+                    "allowedToBuy": true,
+                    "allowedToSell": false,
+                    "allowedToSwap": false,
+                    "allowedForWatchlist": true,
+                    "allowedForDetailedInformation": true,
+                    "allowedToTrade": true
+                },
+                "buyCommissions": null,
+                "sellCommissions": null,
+                "change1m": -0.7,
+                "change3m": 8.76,
+                "change3y": 75,
+                "minimumCommission": null,
+                "technicalCommission": null,
+                "technicalCommissionUp": null,
+                "sellCommission": null,
+                "administrativeFee": 1.65,
+                "startDate": 1561932000000,
+                "yearHigh": 155.07,
+                "yearLow": 134.91,
+                "graphImageLink": null,
+                "documents": [
+                    {
+                        "url": "https://doc.morningstar.com/document/bebd674e3c957a86febb04e28b982c4a.msdoc/?clientid=alandsbanken&key=173740fb42c97e8e",
+                        "title": "Faktablad"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/cost_and_charges/SE0000740698_AOS.pdf",
+                        "title": "Förhandsinformation om kostnader"
+                    }
+                ],
+                "fundCompany": "Lannebo Fonder AB",
+                "startValue": 123,
+                "closePrice": 144.57,
+                "latestClosePriceDate": 1679868000000,
+                "countDecimals": 3
+            },
+            {
+                "instrumentId": "9834",
+                "isin": "FI0008808340",
+                "fundName": "Ålandsbanken Cash Manager B",
+                "fundType": "Räntefond",
+                "estimationDate": 1679612400000,
+                "rate": 26.51,
+                "change1y": -0.08,
+                "currency": "EUR",
+                "availableForMonthlySaving": false,
+                "redemptionMinFee": {
+                    "amount": 0,
+                    "currency": "EUR",
+                    "empty": false
+                },
+                "redemptionPercent": null,
+                "subscriptionMinFee": {
+                    "amount": 0,
+                    "currency": "EUR",
+                    "empty": false
+                },
+                "subscriptionPercent": null,
+                "subscriptionMinValue": {
+                    "amount": 50,
+                    "currency": "EUR",
+                    "empty": false
+                },
+                "investmentClass": "Ränteinstrument",
+                "permissions": {
+                    "allowedToBuy": true,
+                    "allowedToSell": true,
+                    "allowedToSwap": true,
+                    "allowedForWatchlist": true,
+                    "allowedForDetailedInformation": true,
+                    "allowedToTrade": true
+                },
+                "buyCommissions": null,
+                "sellCommissions": null,
+                "change1m": 0.23,
+                "change3m": 0.95,
+                "change3y": 3.15,
+                "minimumCommission": null,
+                "technicalCommission": null,
+                "technicalCommissionUp": null,
+                "sellCommission": null,
+                "administrativeFee": 0.45,
+                "startDate": 1104447600000,
+                "yearHigh": 26.51,
+                "yearLow": 26.27,
+                "graphImageLink": null,
+                "documents": [],
+                "fundCompany": "Ålandsbanken Fondbolag Ab",
+                "startValue": 100,
+                "closePrice": 26.51,
+                "latestClosePriceDate": 1679612400000,
+                "countDecimals": 4
+            },
+            {
+                "instrumentId": "9827",
+                "isin": "FI4000087895",
+                "fundName": "Ålandsbanken Euro High Yield SEK",
+                "fundType": "Räntefond",
+                "estimationDate": 1679612400000,
+                "rate": 387.15,
+                "change1y": -5.71,
+                "currency": "SEK",
+                "availableForMonthlySaving": false,
+                "redemptionMinFee": {
+                    "amount": 0,
+                    "currency": "SEK",
+                    "empty": false
+                },
+                "redemptionPercent": null,
+                "subscriptionMinFee": {
+                    "amount": 0,
+                    "currency": "SEK",
+                    "empty": false
+                },
+                "subscriptionPercent": null,
+                "subscriptionMinValue": {
+                    "amount": 50,
+                    "currency": "SEK",
+                    "empty": false
+                },
+                "investmentClass": "Ränteinstrument",
+                "permissions": {
+                    "allowedToBuy": true,
+                    "allowedToSell": true,
+                    "allowedToSwap": true,
+                    "allowedForWatchlist": true,
+                    "allowedForDetailedInformation": true,
+                    "allowedToTrade": true
+                },
+                "buyCommissions": null,
+                "sellCommissions": null,
+                "change1m": -1.59,
+                "change3m": 0.98,
+                "change3y": 12.25,
+                "minimumCommission": null,
+                "technicalCommission": null,
+                "technicalCommissionUp": null,
+                "sellCommission": null,
+                "administrativeFee": 1,
+                "startDate": 1397426400000,
+                "yearHigh": 395.41,
+                "yearLow": 383.29,
+                "graphImageLink": null,
+                "documents": [
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/KIID/ehy_sek.pdf",
+                        "title": "Faktablad"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/sw_rules_aab_eurohighyield.pdf",
+                        "title": "Fondspecifika stadgar"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/gemensamma_stadgar_sv.pdf",
+                        "title": "Gemensamma fondstadgar"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/sw_monthly_euro_highyield_SEK.pdf",
+                        "title": "Månadsrapport"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/sw_prospect_aab.pdf",
+                        "title": "Prospekt"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/sw_yearreport.pdf",
+                        "title": "Årsberättelse"
+                    }
+                ],
+                "fundCompany": "Ålandsbanken Fondbolag Ab",
+                "startValue": 100,
+                "closePrice": 387.15,
+                "latestClosePriceDate": 1679612400000,
+                "countDecimals": 4
+            },
+            {
+                "instrumentId": "9846",
+                "isin": "FI4000124250",
+                "fundName": "Ålandsbanken Kina Aktie SEK",
+                "fundType": "Aktiefond",
+                "estimationDate": 1571868000000,
+                "rate": 123,
+                "change1y": null,
+                "currency": "SEK",
+                "availableForMonthlySaving": false,
+                "redemptionMinFee": {
+                    "amount": 0,
+                    "currency": "SEK",
+                    "empty": false
+                },
+                "redemptionPercent": null,
+                "subscriptionMinFee": {
+                    "amount": 0,
+                    "currency": "SEK",
+                    "empty": false
+                },
+                "subscriptionPercent": null,
+                "subscriptionMinValue": {
+                    "amount": 100,
+                    "currency": "SEK",
+                    "empty": false
+                },
+                "investmentClass": "Aktier",
+                "permissions": {
+                    "allowedToBuy": true,
+                    "allowedToSell": true,
+                    "allowedToSwap": true,
+                    "allowedForWatchlist": true,
+                    "allowedForDetailedInformation": true,
+                    "allowedToTrade": true
+                },
+                "buyCommissions": null,
+                "sellCommissions": null,
+                "change1m": null,
+                "change3m": null,
+                "change3y": null,
+                "minimumCommission": null,
+                "technicalCommission": null,
+                "technicalCommissionUp": null,
+                "sellCommission": null,
+                "administrativeFee": 1.85,
+                "startDate": 1425337200000,
+                "yearHigh": null,
+                "yearLow": null,
+                "graphImageLink": null,
+                "documents": [
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/KIID/kina_aktie_sekserie.pdf",
+                        "title": "Faktablad"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/sw_rules_aab_kina.pdf",
+                        "title": "Fondspecifika stadgar"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/gemensamma_stadgar_sv.pdf",
+                        "title": "Gemensamma fondstadgar"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/sw_monthly_kinaaktie_SEK.pdf",
+                        "title": "Månadsrapport"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/sw_prospect_aab.pdf",
+                        "title": "Prospekt"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/sw_yearreport.pdf",
+                        "title": "Årsberättelse"
+                    }
+                ],
+                "fundCompany": "Ålandsbanken Fondbolag Ab",
+                "startValue": 100,
+                "closePrice": 123,
+                "latestClosePriceDate": 1571868000000,
+                "countDecimals": 4
+            },
+            {
+                "instrumentId": "9821",
+                "isin": "FI4000167408",
+                "fundName": "Ålandsbanken Kort Ränta SEK",
+                "fundType": "Kort räntefond",
+                "estimationDate": 1552950000000,
+                "rate": 98,
+                "change1y": null,
+                "currency": "SEK",
+                "availableForMonthlySaving": false,
+                "redemptionMinFee": {
+                    "amount": 0,
+                    "currency": "SEK",
+                    "empty": false
+                },
+                "redemptionPercent": null,
+                "subscriptionMinFee": {
+                    "amount": 0,
+                    "currency": "SEK",
+                    "empty": false
+                },
+                "subscriptionPercent": null,
+                "subscriptionMinValue": {
+                    "amount": 100,
+                    "currency": "SEK",
+                    "empty": false
+                },
+                "investmentClass": "Ränteinstrument",
+                "permissions": {
+                    "allowedToBuy": true,
+                    "allowedToSell": true,
+                    "allowedToSwap": true,
+                    "allowedForWatchlist": true,
+                    "allowedForDetailedInformation": true,
+                    "allowedToTrade": true
+                },
+                "buyCommissions": null,
+                "sellCommissions": null,
+                "change1m": null,
+                "change3m": null,
+                "change3y": null,
+                "minimumCommission": null,
+                "technicalCommission": null,
+                "technicalCommissionUp": null,
+                "sellCommission": null,
+                "administrativeFee": 100.3,
+                "startDate": 1441663200000,
+                "yearHigh": null,
+                "yearLow": null,
+                "graphImageLink": null,
+                "documents": [
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/KIID/kort_ranta_sek_KIID.pdf",
+                        "title": "Faktablad"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/sw_rules_aab_kort_ranta.pdf",
+                        "title": "Fondspecifika stadgar"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/gemensamma_stadgar_sv.pdf",
+                        "title": "Gemensamma fondstadgar"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/sw_monthly_kort-raenta-sek.pdf",
+                        "title": "Månadsrapport"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/sw_prospect_aab.pdf",
+                        "title": "Prospekt"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/sw_yearreport.pdf",
+                        "title": "Årsberättelse"
+                    }
+                ],
+                "fundCompany": null,
+                "startValue": 100,
+                "closePrice": 98,
+                "latestClosePriceDate": 1552950000000,
+                "countDecimals": 4
+            },
+            {
+                "instrumentId": "9856",
+                "isin": "FI4000123245",
+                "fundName": "Ålandsbanken Norden Aktie B SEK",
+                "fundType": "Aktiefond",
+                "estimationDate": 1679612400000,
+                "rate": 1620.01,
+                "change1y": 2.24,
+                "currency": "SEK",
+                "availableForMonthlySaving": false,
+                "redemptionMinFee": {
+                    "amount": 0,
+                    "currency": "SEK",
+                    "empty": false
+                },
+                "redemptionPercent": null,
+                "subscriptionMinFee": {
+                    "amount": 0,
+                    "currency": "SEK",
+                    "empty": false
+                },
+                "subscriptionPercent": null,
+                "subscriptionMinValue": {
+                    "amount": 100,
+                    "currency": "SEK",
+                    "empty": false
+                },
+                "investmentClass": "Aktier",
+                "permissions": {
+                    "allowedToBuy": true,
+                    "allowedToSell": true,
+                    "allowedToSwap": true,
+                    "allowedForWatchlist": true,
+                    "allowedForDetailedInformation": true,
+                    "allowedToTrade": true
+                },
+                "buyCommissions": null,
+                "sellCommissions": null,
+                "change1m": -5.14,
+                "change3m": 0.22,
+                "change3y": 87.72,
+                "minimumCommission": null,
+                "technicalCommission": null,
+                "technicalCommissionUp": null,
+                "sellCommission": null,
+                "administrativeFee": 1.4,
+                "startDate": 1423522800000,
+                "yearHigh": 1747.52,
+                "yearLow": 1602.01,
+                "graphImageLink": null,
+                "documents": [
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/KIID/nord_aktie_sekserie.pdf",
+                        "title": "Faktablad"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/sw_rules_aab_nordiska.pdf",
+                        "title": "Fondspecifika stadgar"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/gemensamma_stadgar_sv.pdf",
+                        "title": "Gemensamma fondstadgar"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/sw_monthly_nordenaktie_SEK.pdf",
+                        "title": "Månadsrapport"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/Produktkort/sw_Norden_produktkort.pdf",
+                        "title": "Produktkort"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/sw_prospect_aab.pdf",
+                        "title": "Prospekt"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/sw_yearreport.pdf",
+                        "title": "Årsberättelse"
+                    }
+                ],
+                "fundCompany": "Ålandsbanken Fondbolag Ab",
+                "startValue": 100,
+                "closePrice": 1620.01,
+                "latestClosePriceDate": 1679612400000,
+                "countDecimals": 2
+            },
+            {
+                "instrumentId": "9820",
+                "isin": "FI4000167416",
+                "fundName": "Ålandsbanken Obligation Sverige",
+                "fundType": "Räntefond",
+                "estimationDate": 1545001200000,
+                "rate": 100,
+                "change1y": null,
+                "currency": "SEK",
+                "availableForMonthlySaving": false,
+                "redemptionMinFee": {
+                    "amount": 0,
+                    "currency": "SEK",
+                    "empty": false
+                },
+                "redemptionPercent": null,
+                "subscriptionMinFee": {
+                    "amount": 0,
+                    "currency": "SEK",
+                    "empty": false
+                },
+                "subscriptionPercent": null,
+                "subscriptionMinValue": {
+                    "amount": 100,
+                    "currency": "SEK",
+                    "empty": false
+                },
+                "investmentClass": "Ränteinstrument",
+                "permissions": {
+                    "allowedToBuy": true,
+                    "allowedToSell": true,
+                    "allowedToSwap": true,
+                    "allowedForWatchlist": true,
+                    "allowedForDetailedInformation": true,
+                    "allowedToTrade": true
+                },
+                "buyCommissions": null,
+                "sellCommissions": null,
+                "change1m": null,
+                "change3m": null,
+                "change3y": null,
+                "minimumCommission": null,
+                "technicalCommission": null,
+                "technicalCommissionUp": null,
+                "sellCommission": null,
+                "administrativeFee": 0.4,
+                "startDate": 1447110000000,
+                "yearHigh": null,
+                "yearLow": null,
+                "graphImageLink": null,
+                "documents": [
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/KIID/obligation_sverige.pdf",
+                        "title": "Faktablad"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/sw_rules__aab_obligation_sverige.pdf",
+                        "title": "Fondspecifika stadgar"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/gemensamma_stadgar_sv.pdf",
+                        "title": "Gemensamma fondstadgar"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/sw_monthly_obligation_sverige.pdf",
+                        "title": "Månadsrapport"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/sw_prospect_aab.pdf",
+                        "title": "Prospekt"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/sw_yearreport.pdf",
+                        "title": "Årsberättelse"
+                    }
+                ],
+                "fundCompany": "Ålandsbanken Fondbolag Ab",
+                "startValue": 100,
+                "closePrice": 100,
+                "latestClosePriceDate": 1545001200000,
+                "countDecimals": 4
+            },
+            {
+                "instrumentId": "9855",
+                "isin": "FI4000087903",
+                "fundName": "Ålandsbanken Premium 30 SEK",
+                "fundType": "Blandfond",
+                "estimationDate": 1621980000000,
+                "rate": 294.52,
+                "change1y": null,
+                "currency": "SEK",
+                "availableForMonthlySaving": false,
+                "redemptionMinFee": {
+                    "amount": 0,
+                    "currency": "SEK",
+                    "empty": false
+                },
+                "redemptionPercent": null,
+                "subscriptionMinFee": {
+                    "amount": 0,
+                    "currency": "SEK",
+                    "empty": false
+                },
+                "subscriptionPercent": null,
+                "subscriptionMinValue": {
+                    "amount": 5000,
+                    "currency": "SEK",
+                    "empty": false
+                },
+                "investmentClass": "Aktier",
+                "permissions": {
+                    "allowedToBuy": true,
+                    "allowedToSell": true,
+                    "allowedToSwap": true,
+                    "allowedForWatchlist": true,
+                    "allowedForDetailedInformation": true,
+                    "allowedToTrade": true
+                },
+                "buyCommissions": null,
+                "sellCommissions": null,
+                "change1m": null,
+                "change3m": null,
+                "change3y": null,
+                "minimumCommission": null,
+                "technicalCommission": null,
+                "technicalCommissionUp": null,
+                "sellCommission": null,
+                "administrativeFee": 1.3,
+                "startDate": 1133391600000,
+                "yearHigh": null,
+                "yearLow": null,
+                "graphImageLink": null,
+                "documents": [
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/KIID/p30_sek.pdf",
+                        "title": "Faktablad"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/sw_rules_aab_premium30.pdf",
+                        "title": "Fondspecifika stadgar"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/gemensamma_stadgar_sv.pdf",
+                        "title": "Gemensamma fondstadgar"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/sw_monthly_p30_SEK-klass.pdf",
+                        "title": "Månadsrapport"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/Produktkort/sw_Premium_30_produktkort.pdf",
+                        "title": "Produktkort"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/sw_prospect_aab.pdf",
+                        "title": "Prospekt"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/sw_yearreport.pdf",
+                        "title": "Årsberättelse"
+                    }
+                ],
+                "fundCompany": "Ålandsbanken Fondbolag Ab",
+                "startValue": 100,
+                "closePrice": 294.52,
+                "latestClosePriceDate": 1621980000000,
+                "countDecimals": 2
+            },
+            {
+                "instrumentId": "9824",
+                "isin": "FI4000087911",
+                "fundName": "Ålandsbanken Premium 50 SEK",
+                "fundType": "Blandfond",
+                "estimationDate": 1679612400000,
+                "rate": 326.86,
+                "change1y": -1.4,
+                "currency": "SEK",
+                "availableForMonthlySaving": false,
+                "redemptionMinFee": {
+                    "amount": 0,
+                    "currency": "SEK",
+                    "empty": false
+                },
+                "redemptionPercent": null,
+                "subscriptionMinFee": {
+                    "amount": 0,
+                    "currency": "SEK",
+                    "empty": false
+                },
+                "subscriptionPercent": null,
+                "subscriptionMinValue": {
+                    "amount": 50,
+                    "currency": "SEK",
+                    "empty": false
+                },
+                "investmentClass": null,
+                "permissions": {
+                    "allowedToBuy": true,
+                    "allowedToSell": true,
+                    "allowedToSwap": true,
+                    "allowedForWatchlist": true,
+                    "allowedForDetailedInformation": true,
+                    "allowedToTrade": true
+                },
+                "buyCommissions": null,
+                "sellCommissions": null,
+                "change1m": -1.5,
+                "change3m": 1.45,
+                "change3y": 35.83,
+                "minimumCommission": null,
+                "technicalCommission": null,
+                "technicalCommissionUp": null,
+                "sellCommission": null,
+                "administrativeFee": 1.5,
+                "startDate": 1133391600000,
+                "yearHigh": 339.2,
+                "yearLow": 322.59,
+                "graphImageLink": null,
+                "documents": [
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/KIID/p50_sek.pdf",
+                        "title": "Faktablad"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/sw_rules_aab_premium50.pdf",
+                        "title": "Fondspecifika stadgar"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/gemensamma_stadgar_sv.pdf",
+                        "title": "Gemensamma fondstadgar"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/sw_monthly_p50_SEK-klass.pdf",
+                        "title": "Månadsrapport"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/Produktkort/sw_Premium_50_produktkort.pdf",
+                        "title": "Produktkort"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/sw_prospect_aab.pdf",
+                        "title": "Prospekt"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/sw_yearreport.pdf",
+                        "title": "Årsberättelse"
+                    }
+                ],
+                "fundCompany": "Ålandsbanken Fondbolag Ab",
+                "startValue": 100,
+                "closePrice": 326.86,
+                "latestClosePriceDate": 1679612400000,
+                "countDecimals": 4
+            },
+            {
+                "instrumentId": "9839",
+                "isin": "FI4000087929",
+                "fundName": "Ålandsbanken Premium 70 SEK",
+                "fundType": "Blandfond",
+                "estimationDate": 1541631600000,
+                "rate": 273.22,
+                "change1y": null,
+                "currency": "SEK",
+                "availableForMonthlySaving": false,
+                "redemptionMinFee": {
+                    "amount": 0,
+                    "currency": "SEK",
+                    "empty": false
+                },
+                "redemptionPercent": null,
+                "subscriptionMinFee": {
+                    "amount": 0,
+                    "currency": "SEK",
+                    "empty": false
+                },
+                "subscriptionPercent": null,
+                "subscriptionMinValue": {
+                    "amount": 50,
+                    "currency": "SEK",
+                    "empty": false
+                },
+                "investmentClass": null,
+                "permissions": {
+                    "allowedToBuy": true,
+                    "allowedToSell": true,
+                    "allowedToSwap": true,
+                    "allowedForWatchlist": true,
+                    "allowedForDetailedInformation": true,
+                    "allowedToTrade": true
+                },
+                "buyCommissions": null,
+                "sellCommissions": null,
+                "change1m": null,
+                "change3m": null,
+                "change3y": null,
+                "minimumCommission": null,
+                "technicalCommission": null,
+                "technicalCommissionUp": null,
+                "sellCommission": null,
+                "administrativeFee": 1.7,
+                "startDate": 1397426400000,
+                "yearHigh": null,
+                "yearLow": null,
+                "graphImageLink": null,
+                "documents": [
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/KIID/p70_sek.pdf",
+                        "title": "Faktablad"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/sw_rules_aab_premium70.pdf",
+                        "title": "Fondspecifika stadgar"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/gemensamma_stadgar_sv.pdf",
+                        "title": "Gemensamma fondstadgar"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/sw_monthly_p70_SEK-klass.pdf",
+                        "title": "Månadsrapport"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/Produktkort/sw_Premium_70_produktkort.pdf",
+                        "title": "Produktkort"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/sw_prospect_aab.pdf",
+                        "title": "Prospekt"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/sw_yearreport.pdf",
+                        "title": "Årsberättelse"
+                    }
+                ],
+                "fundCompany": "Ålandsbanken Fondbolag Ab",
+                "startValue": 100,
+                "closePrice": 273.22,
+                "latestClosePriceDate": 1541631600000,
+                "countDecimals": 4
+            },
+            {
+                "instrumentId": "9854",
+                "isin": "FI4000123237",
+                "fundName": "Ålandsbanken Sverige Aktie B",
+                "fundType": "Aktiefond",
+                "estimationDate": 1593122400000,
+                "rate": 113,
+                "change1y": null,
+                "currency": "SEK",
+                "availableForMonthlySaving": false,
+                "redemptionMinFee": {
+                    "amount": 0,
+                    "currency": "SEK",
+                    "empty": false
+                },
+                "redemptionPercent": null,
+                "subscriptionMinFee": {
+                    "amount": 0,
+                    "currency": "SEK",
+                    "empty": false
+                },
+                "subscriptionPercent": null,
+                "subscriptionMinValue": {
+                    "amount": 100,
+                    "currency": "SEK",
+                    "empty": false
+                },
+                "investmentClass": "Aktier",
+                "permissions": {
+                    "allowedToBuy": true,
+                    "allowedToSell": true,
+                    "allowedToSwap": true,
+                    "allowedForWatchlist": true,
+                    "allowedForDetailedInformation": true,
+                    "allowedToTrade": true
+                },
+                "buyCommissions": null,
+                "sellCommissions": null,
+                "change1m": null,
+                "change3m": null,
+                "change3y": null,
+                "minimumCommission": null,
+                "technicalCommission": null,
+                "technicalCommissionUp": null,
+                "sellCommission": null,
+                "administrativeFee": 1.4,
+                "startDate": 1419980400000,
+                "yearHigh": null,
+                "yearLow": null,
+                "graphImageLink": null,
+                "documents": [
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/KIID/sve_aktie_sekserie.pdf",
+                        "title": "Faktablad"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/sw_rules_aab_sverige.pdf",
+                        "title": "Fondspecifika stadgar"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/gemensamma_stadgar_sv.pdf",
+                        "title": "Gemensamma fondstadgar"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/sw_monthly_sverigeaktie_SEK.pdf",
+                        "title": "Månadsrapport"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/Produktkort/sw_Sverige_produktkort.pdf",
+                        "title": "Produktkort"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/sw_prospect_aab.pdf",
+                        "title": "Prospekt"
+                    },
+                    {
+                        "url": "https://www.alandsbanken.se/uploads/pdf/fund/sw_yearreport.pdf",
+                        "title": "Årsberättelse"
+                    }
+                ],
+                "fundCompany": "Ålandsbanken Fondbolag Ab",
+                "startValue": 100,
+                "closePrice": 113,
+                "latestClosePriceDate": 1593122400000,
+                "countDecimals": 6
+            }
+        ]
+    }
+]
