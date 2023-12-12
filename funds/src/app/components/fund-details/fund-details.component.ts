@@ -9,12 +9,18 @@ import { FundService } from 'src/app/services/fund.service';
 })
 export class FundDetailsComponent implements OnInit {
   selectedFund: Fund | null;
+  closePriceDate: any;
 
   constructor(private fundService: FundService) { }
 
   ngOnInit() {
     this.fundService.selectedFund$.subscribe((fund) => {
       this.selectedFund = fund;
+      // convert epoch  to date in format 11-Dec-2020
+      this.closePriceDate = new Date(this.selectedFund?.latestClosePriceDate);
+      this.closePriceDate = this.closePriceDate?.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+      // add - between date and month and year
+      this.closePriceDate = this.closePriceDate?.replace(/ /g, '-');
     });
 
     console.log("selectedFund: fund-details", this.selectedFund)

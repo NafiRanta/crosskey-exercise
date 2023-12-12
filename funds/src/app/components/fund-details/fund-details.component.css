@@ -1,0 +1,46 @@
+.fund-info-data {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid purple;
+}
+
+.fund-info-value {
+  border: 1px solid green;
+  width: 100%;
+  margin: 0px;
+}
+
+.type-name {
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 44px;
+}
+
+.fund-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.price {
+  grid-column: 1;
+}
+
+.performance-header,
+.facts-header,
+.key-facts {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+h4 {
+  font-size: 10px;
+  margin-bottom: -5px;
+  font-weight: bold;
+}

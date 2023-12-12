@@ -12,6 +12,7 @@ import { FundService } from './services/fund.service';
 import { SearchComponent } from './components/search/search.component';
 import { FundDetailsComponent } from './components/fund-details/fund-details.component';
 import { FundComponent } from './components/fund-list/fund/fund.component';
+import { GraphComponent } from './components/graph/graph.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { FundComponent } from './components/fund-list/fund/fund.component';
     FundListComponent,
     SearchComponent,
     FundDetailsComponent,
-    FundComponent
+    FundComponent,
+    GraphComponent
   ],
   imports: [
     BrowserModule,

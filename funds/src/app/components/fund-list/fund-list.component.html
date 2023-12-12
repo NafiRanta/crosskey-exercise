@@ -1,12 +1,11 @@
-<div *ngIf="filteredFunds" class="fund-list">
-    <div class="fund-info-labels">
-      <div class="fund-info-label">Fund Name</div>
-      <div class="fund-info-label">Type</div>
-      <div class="fund-info-label">Company</div>
-    </div>
-  
-    <div *ngFor="let fund of filteredFunds" class="fund-info">
-      <app-fund [fund]="fund"></app-fund>
-    </div>
-  </div>
+<div class="fund-info-labels" *ngIf="filteredFunds">
+  <div class="fund-info-label">Fund Name</div>
+  <div class="fund-info-label">Type</div>
+  <div class="fund-info-label">Company</div>
+</div>
+
+<div *ngFor="let fund of filteredFunds" class="fund-info">
+  <app-fund [fund]="fund"></app-fund>
+</div>
+
   
