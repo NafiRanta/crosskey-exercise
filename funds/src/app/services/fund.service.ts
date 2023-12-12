@@ -12,6 +12,11 @@ export class FundService {
   private selectedFundSource = new BehaviorSubject<Fund | null>(null);
   selectedFund$ = this.selectedFundSource.asObservable();
   private funds: Fund[] = []; 
+  
+  private searchTextSubject = new BehaviorSubject<string[]>([]);
+  searchText$ = this.searchTextSubject.asObservable();
+  private searchTextSetSubject = new BehaviorSubject<boolean>(false);
+  searchTextSet$ = this.searchTextSetSubject.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -28,5 +33,14 @@ export class FundService {
 
   setSelectedFund(fund: Fund | null) {
     this.selectedFundSource.next(fund);
+  }
+
+  getSearchText(): string[] {
+    return this.searchTextSubject.value;
+  }
+
+  setSearchText(searchText: string[]): void {
+    this.searchTextSubject.next(searchText);
+    this.searchTextSetSubject.next(true); // Emit the event when searchText is set
   }
 }

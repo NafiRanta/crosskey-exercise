@@ -1,7 +1,15 @@
+.header-content {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 /* app.component.css */
 .grid-container {
   display: flex;
   flex-wrap: wrap;
+  margin-top: 50px;
 }
 
 .fund-list,

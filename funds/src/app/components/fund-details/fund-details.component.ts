@@ -15,7 +15,6 @@ export class FundDetailsComponent implements OnInit {
   ngOnInit() {
     this.fundService.selectedFund$.subscribe((fund) => {
       this.selectedFund = fund;
-      console.log("selectedFund in fund details component:", this.selectedFund);
     });
   }
 }

@@ -3,13 +3,28 @@
 .search-container {
   display: flex;
   align-items: center;
+  flex-direction: column;
 }
 
 .search-field {
   width: 100%;
   overflow: hidden;
+  display: flex;
+  align-items: center;
 }
 
 mat-icon {
   color: #888;
+}
+
+.search-result-for {
+  display: flex;
+  justify-content: center;
+}
+
+.search-item-results {
+  display: flex;
+  margin: -11px 0px 0px 5px;
+  padding: 2px;
+  align-items: center;
 }

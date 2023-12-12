@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FundService } from './services/fund.service';
 import { Fund } from './models/fund';
 import { Observable, of } from 'rxjs';
@@ -23,6 +23,7 @@ export class AppComponent implements OnInit{
   getFundList(): void {
     this.fundService.getFundList().pipe().subscribe({
       next: response => {
+        console.log('response: ', response);
         this.isLoading = false;
         this.isError = false;
         this.allFunds$ = of(response[0].data);
@@ -34,5 +35,6 @@ export class AppComponent implements OnInit{
       }
     })
   }
+
 }
 

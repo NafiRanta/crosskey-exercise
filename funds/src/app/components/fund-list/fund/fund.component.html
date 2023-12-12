@@ -1,5 +1,10 @@
 <!-- fund.component.html -->
-<div #fundInfoData class="fund-info-data" id="{{fund.instrumentId}}" (click)="onSelectedFund(fund)">
+<div #fundInfoData *ngIf="shouldShowFund"
+    class="fund-info-data" 
+
+    id="{{fund.instrumentId}}" 
+    (click)="onSelectedFund(fund)"
+    >
     <div class="fund-info-value">{{ fund.fundName }}</div>
     <div class="fund-info-value">{{ fund.fundType }}</div>
     <div class="fund-info-value">{{ fund.fundCompany }}</div>
