@@ -23,7 +23,6 @@ export class FundComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.fundService.selectedFund$.subscribe((fund) => {
       const fundToHighlight = document.getElementById(fund.instrumentId)
-      console.log("fund to highlight", fundToHighlight)
       if (fundToHighlight) {
         const allFundInfoData = document.querySelectorAll('.fund-info-data');
       allFundInfoData.forEach(element => {
