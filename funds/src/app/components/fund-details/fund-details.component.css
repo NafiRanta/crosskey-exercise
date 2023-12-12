@@ -1,11 +1,9 @@
 .fund-info-data {
   display: flex;
   flex-direction: column;
-  border: 1px solid purple;
 }
 
 .fund-info-value {
-  border: 1px solid green;
   width: 100%;
   margin: 0px;
 }
@@ -29,9 +27,14 @@
 .facts-header,
 .key-facts {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.facts-table {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 h1 {
@@ -40,7 +43,27 @@ h1 {
 }
 
 h4 {
+  font-size: 12px;
+}
+
+h5 {
   font-size: 10px;
   margin-bottom: -5px;
   font-weight: bold;
+}
+
+.facts-table-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.facts-label {
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 50px;
+}
+
+.facts-value {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 50px;
 }

@@ -6,6 +6,10 @@
   flex-direction: column;
 }
 
+.mat-mdc-card-header {
+  flex-direction: column;
+}
+
 .grid-container {
   display: flex;
   flex-wrap: wrap;
@@ -14,7 +18,7 @@
 
 .fund-list,
 .fund-details {
-  border: 1px solid red;
-  width: 50%; /* Each component takes 50% width, adjust as needed */
-  box-sizing: border-box; /* Include padding and border in the width calculation */
+  border: 1px solid gray;
+  width: 50%;
+  box-sizing: border-box;
 }

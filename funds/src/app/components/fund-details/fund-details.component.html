@@ -1,10 +1,11 @@
 <div class="fund-info-labels">
     <div class="fund-info-label">Fund Details</div>
 </div>
+<hr>
 <div class="fund-info">
     <div class="fund-info-data">
         <div class="fund-info-value type-name">
-            <h4>{{selectedFund.fundType.toUpperCase()}}</h4>
+            <h5>{{selectedFund.fundType.toUpperCase()}}</h5>
             {{selectedFund.fundName}}
         </div>
         <div class="fund-info-value fund-header">
@@ -22,11 +23,59 @@
             </div>
         </div>
         <div class="fund-info-value key-facts">
-            
             <div class="fund-info-value facts-header">
                 <h1>Key Facts</h1>
             </div>
-           
+           <div class="fund-info-value facts-table">
+                <div class="fund-info-value facts-table-grid">
+                    <div class="facts-label">
+                        <h4>Fund Inception</h4>
+                    </div>
+                    <div class="facts-value">
+                        <h4>{{startDate}}</h4>
+                    </div>                    
+                </div>
+                <div class="fund-info-value facts-table-grid">
+                    <div class="facts-label">
+                        <h4>ISIN</h4>
+                    </div>
+                    <div class="facts-value">
+                        <h4>{{selectedFund.isin}}</h4>
+                    </div>  
+                </div>
+                <div class="fund-info-value facts-table-grid">
+                    <div class="facts-label">
+                        <h4>Fund Base Currency</h4>
+                    </div>
+                    <div class="facts-value">
+                        <h4>{{selectedFund.currency}}</h4>
+                    </div>  
+                </div>
+                <div class="fund-info-value facts-table-grid">
+                    <div class="facts-label">
+                        <h4>Minimum Initial Investment</h4>
+                    </div>
+                    <div class="facts-value">
+                        <h4>{{selectedFund.startValue}}</h4>
+                    </div>  
+                </div>
+                <div class="fund-info-value facts-table-grid">
+                    <div class="facts-label">
+                        <h4>Management Fee</h4>
+                    </div>
+                    <div class="facts-value">
+                        <h4>{{selectedFund.administrativeFee}}</h4>
+                    </div>  
+                </div>
+                <div class="fund-info-value facts-table-grid">
+                    <div class="facts-label">
+                        <h4>Management Company</h4>
+                    </div>
+                    <div class="facts-value">
+                        <h4>{{selectedFund.fundCompany}}</h4>
+                    </div> 
+                </div>
+           </div>
         </div>
     </div>
     

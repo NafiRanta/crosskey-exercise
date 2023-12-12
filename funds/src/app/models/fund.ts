@@ -16,4 +16,6 @@ export class Fund{
     documents: string[];    
     administrativeFee: number;
     countDecimals: number;
+    startDate: number;
+    isin: number
 }

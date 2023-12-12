@@ -1,11 +1,8 @@
 <!-- Success and data fetched -->
 <mat-card *ngIf="!isLoading">
-  <mat-card-header>
-    <div class="header-content">
-      <mat-card-title>Mutual Funds</mat-card-title>
-      <app-search></app-search>
-    </div>
-  </mat-card-header>
+  <div class="header-content">
+    <app-search></app-search>
+  </div>
   <div class="grid-container">
     <app-fund-list 
       [allFunds]="allFunds$ | async" 

@@ -30,7 +30,6 @@ body {
 
 .fund-info-labels {
   display: flex;
-  border: 1px solid blue;
   margin: 5px;
 }
 
@@ -46,19 +45,15 @@ body {
 .fund-info {
   display: flex;
   flex-direction: column;
-  border: 3px solid orange;
   flex: 1;
 }
 
 .fund-info-data {
   display: flex;
-  border: 1px solid blue;
-  cursor: pointer;
 }
 
 .fund-info-value {
   flex: 1.5;
   margin: 5px;
-  border: 1px solid green;
   width: 100%;
 }

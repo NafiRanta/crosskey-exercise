@@ -1,11 +1,11 @@
 <div class="search-container">
-  <mat-form-field class="search-field" appearance="outline">
+  <mat-form-field class="search-field">
     <!--Update search query when user press on enter in input -->
     <input
       #searchInput
       (keyup.enter)="updateSearch()"
       matInput
-      placeholder="Search"
+      placeholder="Search funds by name, type, company"
       class="search-input"
     />
 
