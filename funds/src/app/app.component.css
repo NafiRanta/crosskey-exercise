@@ -21,4 +21,5 @@
   border: 1px solid gray;
   width: 50%;
   box-sizing: border-box;
+  overflow-y: auto;
 }

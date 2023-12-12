@@ -17,5 +17,5 @@ export class Fund{
     administrativeFee: number;
     countDecimals: number;
     startDate: number;
-    isin: number
+    isin: string
 }

@@ -31,14 +31,15 @@ filteredFunds: Fund[];
   }
 
   // Display all funds if searchText is empty
-  // Set filteredFunds to include only funds that match the fundName, fundType, or fundCompany
+  // Set filteredFunds to include only funds that match the isin, fundName, fundType, or fundCompany
   filterFunds(): void {
     if (this.searchText?.length > 0) {
       this.filteredFunds = this.allFunds.filter(fund =>
         this.searchText.some(keyword =>
           (fund.fundName?.toLowerCase() || '').includes(keyword.toLowerCase()) ||
           (fund.fundType?.toLowerCase() || '').includes(keyword.toLowerCase()) ||
-          (fund.fundCompany?.toLowerCase() || '').includes(keyword.toLowerCase())
+          (fund.fundCompany?.toLowerCase() || '').includes(keyword.toLowerCase()) ||
+          (fund.isin?.toLowerCase() || '').includes(keyword.toLowerCase()) 
         )
       );
       console.log("filteredFunds in fund-list", this.filteredFunds)
