@@ -16,5 +16,15 @@ export class FundDetailsComponent implements OnInit {
     this.fundService.selectedFund$.subscribe((fund) => {
       this.selectedFund = fund;
     });
+
+    console.log("selectedFund: fund-details", this.selectedFund)
+  }
+
+  ngOnChanges(): void {
+    this.fundService.selectedFund$.subscribe((fund) => {
+      this.selectedFund = fund;
+    });
+
+    console.log("selectedFund: fund-details 2", this.selectedFund)
   }
 }

@@ -1,30 +1,36 @@
 <div class="search-container">
   <mat-form-field class="search-field" appearance="outline">
+    <!--Update search query when user press on enter in input -->
     <input
       #searchInput
-      (keyup.enter)="updateSearchText()"
+      (keyup.enter)="updateSearch()"
       matInput
       placeholder="Search"
       class="search-input"
     />
-    <button
-      mat-button
-      matSuffix
-      *ngFor="let query of searchText"
-      (click)="cancelSearch(query)"
-    >
-      <mat-icon>close</mat-icon>
-    </button>
-    <button mat-button matSuffix *ngIf="!showCloseIcon" (click)="updateSearchText()">
+
+    <!--Show search icon when search query is empty -->
+    <!--Update search query when user clicks on search icon -->
+    <button mat-button matSuffix *ngIf="!showCloseIcon" (click)="updateSearch()">
       <mat-icon>search</mat-icon>
     </button>
   </mat-form-field>
-  <div class="search-result-for" *ngIf="searchText.length > 0">
+
+   <!-- Show search result -->
+  <div class="search-result-for" *ngIf="searchQuery.length > 0">
     <p><strong>Search result for:</strong></p>
-    <div *ngFor="let item of searchText" class="search-item-results">
+    <div *ngFor="let item of searchQuery" class="search-item-results">
         <div class="search-item">
             {{ item }}
         </div>
+          <!--Clear search query when user clicks on close icon -->
+        <button
+          mat-button
+          matSuffix
+          (click)="cancelSearch(item)"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
     </div>
 </div>
 </div>

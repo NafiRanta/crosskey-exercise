@@ -7,23 +7,23 @@ import { FundService } from 'src/app/services/fund.service';
   styleUrls: ['./fund-list.component.css']
 })
 export class FundListComponent implements OnInit{
-@Input() funds: Fund[];
+@Input() allFunds: Fund[];
 searchText: string[] = [];
 filteredFunds: Fund[]; 
 
   constructor(private fundService: FundService) { }
 
+  // Initialize filteredFunds with allFunds
+  // Subscribe to isQuery$, if true, set searchText to query
+  // Display funds that match the searchText via filterFunds()
   ngOnInit(): void {
-    this.fundService.setFunds(this.funds);
-    this.fundService.searchTextSet$.subscribe((isSet) => {
-      if (isSet) {
-        console.log("setSearchText fund-list", this.fundService.getSearchText());
-        this.searchText = this.fundService.getSearchText();
+    this.fundService.setFundArr(this.allFunds);
+    this.fundService.isQuery$.subscribe((query) => {
+      if (query) {
+        this.searchText = this.fundService.getQuery();
       }
       this.filterFunds();
     });
-    
-    console.log("filteredFunds: ", this.filteredFunds);
   }
 
   ngOnChanges(): void {
@@ -33,14 +33,17 @@ filteredFunds: Fund[];
   filterFunds(): void {
     if (this.searchText?.length > 0) {
       // Use filter to include only funds that match the searchText
-      this.filteredFunds = this.funds.filter(fund =>
+      this.filteredFunds = this.allFunds.filter(fund =>
         this.searchText.some(keyword =>
           fund.fundName.toLowerCase().includes(keyword.toLowerCase())
         )
       );
+      this.fundService.setFundArr(this.filteredFunds);
     } else {
       // If there's no searchText, display all funds
-      this.filteredFunds = this.funds;
+      this.filteredFunds = this.allFunds;
+      this.fundService.setFundArr(this.filteredFunds);
     }
+    
   }
 }

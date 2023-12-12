@@ -9,38 +9,48 @@ import { Fund } from '../models/fund';
 })
 export class FundService {
   private api = 'https://ivarpivar.netlify.app/api';
-  private selectedFundSource = new BehaviorSubject<Fund | null>(null);
-  selectedFund$ = this.selectedFundSource.asObservable();
   private funds: Fund[] = []; 
+
+  // Observable for selected fund
+  private selectedFundSubject = new BehaviorSubject<Fund | null>(null);
+  selectedFund$ = this.selectedFundSubject.asObservable();
   
-  private searchTextSubject = new BehaviorSubject<string[]>([]);
-  searchText$ = this.searchTextSubject.asObservable();
-  private searchTextSetSubject = new BehaviorSubject<boolean>(false);
-  searchTextSet$ = this.searchTextSetSubject.asObservable();
+  // Observable for query text
+  private querySubject = new BehaviorSubject<string[]>([]);
+  queryText$ = this.querySubject.asObservable();
+
+  // Observable for query event
+  private isQuerySubject = new BehaviorSubject<boolean>(false);
+  isQuery$ = this.isQuerySubject.asObservable();
 
   constructor(private http: HttpClient) { }
 
-  getFundList(): Observable<any> {
+  // Get API data
+  getAPI(): Observable<any> {
     return this.http.get(this.api);
   }
 
-  setFunds(funds: Fund[]) {
+  // Set fund array
+  setFundArr(funds: Fund[]) {
     this.funds = funds;
     if (funds.length > 0) {
       this.setSelectedFund(funds[0]); 
     }
   }
 
+  // Emit selected fund to subscribers
   setSelectedFund(fund: Fund | null) {
-    this.selectedFundSource.next(fund);
+    this.selectedFundSubject.next(fund);
   }
 
-  getSearchText(): string[] {
-    return this.searchTextSubject.value;
+  // Get search query
+  getQuery(): string[] {
+    return this.querySubject.value;
   }
 
-  setSearchText(searchText: string[]): void {
-    this.searchTextSubject.next(searchText);
-    this.searchTextSetSubject.next(true); // Emit the event when searchText is set
+  // Emit search query to subscribers
+  setQuery(searchText: string[]): void {
+    this.querySubject.next(searchText);
+    this.isQuerySubject.next(true); 
   }
 }

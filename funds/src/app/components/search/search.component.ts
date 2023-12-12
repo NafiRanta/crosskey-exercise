@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FundService } from 'src/app/services/fund.service';
 @Component({
   selector: 'app-search',
@@ -6,26 +6,24 @@ import { FundService } from 'src/app/services/fund.service';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent {
+  searchQuery: string[] = [];
+  showCloseIcon: boolean = false;
+  @ViewChild('searchInput') searchInputEl: ElementRef;
 
   constructor(private fundService: FundService) { }
 
-  searchText: string[] = [];
-  @ViewChild('searchInput') searchInputEl: ElementRef;
-  showCloseIcon: boolean = false;
-
-  updateSearchText() {
-    this.searchText = this.searchInputEl.nativeElement.value.split(' ').filter((word: string) => word.trim() != '');
-    this.fundService.setSearchText(this.searchText);
-    console.log("searchText: ", this.fundService.getSearchText());
-    this.showCloseIcon = this.searchText.length > 0;
+  // Update search query and emit to subscribers
+  updateSearch() {
+    this.searchQuery = this.searchInputEl.nativeElement.value.split(' ').filter((word: string) => word.trim() != '');
+    this.fundService.setQuery(this.searchQuery);
+    this.showCloseIcon = this.searchQuery.length > 0;
   }
 
+  // Clear search query and emit to subscribers
   cancelSearch(item: string) {
-    console.log("cancelSearch: ", item);
-    this.searchText = this.searchText.filter((word: string) => word != item);
-    this.fundService.setSearchText(this.searchText);
+    this.searchQuery = this.searchQuery.filter((word: string) => word != item);
+    this.fundService.setQuery(this.searchQuery);
     this.searchInputEl.nativeElement.value = '';
-    this.showCloseIcon = this.searchText.length > 0;
+    this.showCloseIcon = this.searchQuery.length > 0;
   }
-
 }

@@ -20,25 +20,21 @@ export class FundComponent implements AfterViewInit {
     private renderer: Renderer2
     ) { }
 
-  ngOnInit(): void {
-    // Subscribe to searchTextSet$ to be notified when searchText is set
-    this.fundService.searchTextSet$.subscribe((isSet) => {
-      if (isSet) {
-        this.searchText = this.fundService.getSearchText();
-        const sth = this.searchText?.some(keyword => this.fund.fundName.toLowerCase().includes(keyword.toLowerCase()))
-      }
-    });
-  }
-
   ngAfterViewInit(): void {
     this.fundService.selectedFund$.subscribe((fund) => {
       const fundToHighlight = document.getElementById(fund.instrumentId)
+      console.log("fund to highlight", fundToHighlight)
       if (fundToHighlight) {
+        const allFundInfoData = document.querySelectorAll('.fund-info-data');
+      allFundInfoData.forEach(element => {
+        this.renderer.removeClass(element, 'highlight');
+      });
         this.renderer.addClass(fundToHighlight, 'highlight');
       } else {
         console.warn(`Element with ID ${fund.instrumentId} not found.`);
       }
     });
+
   }
 
   onSelectedFund(fund: Fund) {

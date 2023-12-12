@@ -1,4 +1,4 @@
-<!-- app.component.html -->
+<!-- Success and data fetched -->
 <mat-card *ngIf="!isLoading">
   <mat-card-header>
     <div class="header-content">
@@ -8,18 +8,21 @@
   </mat-card-header>
   <div class="grid-container">
     <app-fund-list 
-      [funds]="allFunds$ | async" 
+      [allFunds]="allFunds$ | async" 
       class="fund-list"
       ></app-fund-list>
     <app-fund-details class="fund-details"></app-fund-details>
   </div>
 </mat-card>
 
+<!-- Fetching -->
 <ng-container *ngIf="isLoading && !isError">
   <div class="spinner-container">
     <mat-spinner></mat-spinner>
   </div>
 </ng-container>
+
+<!-- Error -->
 <ng-container *ngIf="!isLoading && isError">
   <div>Error loading data. Please try again.</div>
 </ng-container>

@@ -17,11 +17,16 @@ export class AppComponent implements OnInit{
   constructor(private fundService: FundService) { }
 
   ngOnInit(): void {
-    this.getFundList();
+    this.getAPIData();
   }
 
-  getFundList(): void {
-    this.fundService.getFundList().pipe().subscribe({
+  // Get API data
+  // Show spinner while loading API data
+  // Show error message if there's an error
+  // Assign data object from API data to allFunds$ if no error
+  // Pass allFunds$ to fund-list component
+  getAPIData(): void {
+    this.fundService.getAPI().pipe().subscribe({
       next: response => {
         console.log('response: ', response);
         this.isLoading = false;
@@ -35,6 +40,5 @@ export class AppComponent implements OnInit{
       }
     })
   }
-
 }
 
