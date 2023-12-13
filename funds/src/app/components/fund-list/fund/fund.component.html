@@ -1,4 +1,4 @@
-<div #fundInfoData *ngIf="shouldShowFund" class="fund-info-data" id="{{fund.instrumentId}}" (click)="onSelectedFund(fund)">
+<div #fundInfoData class="fund-info-data" id="{{fund.instrumentId}}" (click)="onSelectedFund(fund)">
     <!-- Fund Name -->
     <div class="fund-info-value">
       <div class="name">{{ fund.fundName }}</div>
@@ -22,12 +22,22 @@
     <div class="fund-info-value" [ngClass]="{'positive-value': fund.change3y > 0, 'negative-value': fund.change3y < 0}">
       {{ fund.change3y || '-' }}
     </div>
+    <!-- Year High -->
+    <div class="fund-info-value" [ngClass]="{'positive-value': fund.yearHigh > 0, 'negative-value': fund.yearHigh < 0}">
+      {{ fund.yearHigh || '-' }}
+    </div>
+    <!-- Year Low -->
+    <div class="fund-info-value" [ngClass]="{'positive-value': fund.yearLow > 0, 'negative-value': fund.yearLow < 0}">
+      {{ fund.yearLow || '-' }}
+    </div>
+    <!-- Close Price -->
+    <div class="fund-info-value">{{ fund.closePrice || '-' }}</div>
     <!-- Close Price Date -->
     <div class="fund-info-value">{{ closePriceDate }}</div>
     <!-- View -->
     <mat-icon class="fund-info-value">keyboard_arrow_right</mat-icon>
 </div>
 <!-- Accordion for small viewport-->
-<div *ngIf="isSmallScreen && isAccordionOpen" class="accordion">
+<div *ngIf="isAccordionOpen" class="accordion">
   <app-fund-details></app-fund-details>
 </div>

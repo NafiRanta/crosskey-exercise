@@ -1,29 +1,24 @@
-
-  <mat-form-field class="search-field">
-    <!--Update search query when user press on enter in input -->
+  <mat-form-field class="search-field" appearance="fill">
+    <!-- Search input -->
     <input
       #searchInput
       (keyup.enter)="updateSearch()"
       matInput
-      placeholder="Search funds by name, type, company"
+      placeholder="Search funds by ISIN, name, type, company"
       class="search-input"
     />
-
-    <!--Show search icon when search query is empty -->
-    <!--Update search query when user clicks on search icon -->
     <button mat-button matSuffix *ngIf="!showCloseIcon" (click)="updateSearch()">
       <mat-icon>search</mat-icon>
     </button>
   </mat-form-field>
 
-   <!-- Show search result -->
+   <!-- Search result -->
   <div class="search-result-for" *ngIf="searchQuery.length > 0">
     <p><strong>Search result for:</strong></p>
     <div *ngFor="let item of searchQuery" class="search-item-results">
         <div class="search-item">
             {{ item }}
         </div>
-          <!--Clear search query when user clicks on close icon -->
         <button
           mat-button
           matSuffix

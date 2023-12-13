@@ -1,6 +1,6 @@
 <div class="fund-details-data">
     <!--Fund Details: name, isin, type, company-->
-    <div class="fund-info-value fund-header" *ngIf="!isSmallScreen && !isAccordionOpen">
+    <div class="fund-info-value fund-header" *ngIf="!isAccordionOpen">
         <div class="name">{{selectedFund.fundName}}</div>
         <div class="subtext">{{selectedFund.isin}}. {{selectedFund.currency}}. {{selectedFund.fundType}} . {{selectedFund.fundCompany}}</div>
     </div>

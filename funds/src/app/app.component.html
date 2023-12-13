@@ -4,11 +4,7 @@
     <app-search></app-search>
   </div>
   <div class="grid-container" *ngIf="!isZeroResults" >
-    <app-fund-list 
-      [allFunds]="allFunds$ | async" 
-      class="fund-list"
-      ></app-fund-list>
-    <app-fund-details class="fund-details" *ngIf="!isSmallScreen"></app-fund-details>
+    <app-fund-list [allFunds]="allFunds$ | async" class="fund-list"></app-fund-list>
   </div>
 </mat-card>
 <!-- Fetching -->

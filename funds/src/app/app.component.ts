@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FundService } from './services/fund.service';
 import { Fund } from './models/fund';
 import { Observable, of } from 'rxjs';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 
 @Component({
@@ -19,21 +18,13 @@ export class AppComponent implements OnInit{
   selectedFund: Fund | null = null;
   isZeroResults: boolean = false;
 
-  constructor(
-    private fundService: FundService, 
-    private breakpointObserver: BreakpointObserver
-    ) { }
+  constructor(private fundService: FundService) { }
   
   // Get API data on init
-  // Show app-fund-details for only large viewports 
   // Display no results found if isZeroResults$ is true
   ngOnInit(): void {
     this.getAPIData();
-    this.breakpointObserver.observe([Breakpoints.XSmall, Breakpoints.Small])
-    .subscribe(result => {
-      this.isSmallScreen = result.matches;
-    });
-
+    
     this.fundService.isZeroResults$.subscribe((zeroResults) => {
       if (zeroResults) {
         this.isZeroResults = true;
