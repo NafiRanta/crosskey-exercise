@@ -1,11 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Fund } from 'src/app/models/fund';
 import { FundService } from 'src/app/services/fund.service';
+import { GraphComponent } from '../graph/graph.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatIconModule } from '@angular/material/icon';
+import { NgIf, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-fund-details',
-  templateUrl: './fund-details.component.html',
-  styleUrls: ['./fund-details.component.css']
+    selector: 'app-fund-details',
+    templateUrl: './fund-details.component.html',
+    styleUrls: ['./fund-details.component.css'],
+    standalone: true,
+    imports: [NgIf, MatIconModule, MatTooltipModule, GraphComponent, NgFor]
 })
 export class FundDetailsComponent implements OnInit {
   selectedFund: Fund | null;

@@ -8,8 +8,8 @@ describe('FundListComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [FundListComponent]
-    });
+    imports: [FundListComponent]
+});
     fixture = TestBed.createComponent(FundListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

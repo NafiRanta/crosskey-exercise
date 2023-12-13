@@ -1,14 +1,25 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FundService } from './services/fund.service';
 import { Fund } from './models/fund';
 import { Observable, of } from 'rxjs';
+import { AsyncPipe, CommonModule } from '@angular/common';
+import { SearchComponent } from './components/search/search.component';
+import { FundListComponent } from './components/fund-list/fund-list.component';
+import { MaterialModule } from './modules/material/material.module';
 
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    standalone: true,
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css'],
+    imports: [
+      SearchComponent, 
+      AsyncPipe, 
+      CommonModule, 
+      FundListComponent, MaterialModule]
 })
+
 export class AppComponent implements OnInit{
   title = 'Investment Funds';
   isLoading = true;

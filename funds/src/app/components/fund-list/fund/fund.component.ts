@@ -1,11 +1,16 @@
 import { Component, EventEmitter, Input, Output, ElementRef, Renderer2, ViewChild, AfterViewInit, OnInit  } from '@angular/core';
 import { Fund } from 'src/app/models/fund';
 import { FundService } from 'src/app/services/fund.service';
+import { FundDetailsComponent } from '../../fund-details/fund-details.component';
+import { MatIconModule } from '@angular/material/icon';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-fund',
-  templateUrl: './fund.component.html',
-  styleUrls: ['./fund.component.css']
+    selector: 'app-fund',
+    templateUrl: './fund.component.html',
+    styleUrls: ['./fund.component.css'],
+    standalone: true,
+    imports: [NgClass, MatIconModule, NgIf, FundDetailsComponent]
 })
 export class FundComponent implements OnInit {
   @Input() fund: Fund;

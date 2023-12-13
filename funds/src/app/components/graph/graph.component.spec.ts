@@ -8,8 +8,8 @@ describe('GraphComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [GraphComponent]
-    });
+    imports: [GraphComponent]
+});
     fixture = TestBed.createComponent(GraphComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

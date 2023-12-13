@@ -1,10 +1,16 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Fund } from 'src/app/models/fund';
 import { FundService } from 'src/app/services/fund.service';
+import { FundComponent } from './fund/fund.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatIconModule } from '@angular/material/icon';
+import { NgIf, NgFor } from '@angular/common';
 @Component({
-  selector: 'app-fund-list',
-  templateUrl: './fund-list.component.html',
-  styleUrls: ['./fund-list.component.css']
+    selector: 'app-fund-list',
+    templateUrl: './fund-list.component.html',
+    styleUrls: ['./fund-list.component.css'],
+    standalone: true,
+    imports: [NgIf, MatIconModule, MatTooltipModule, NgFor, FundComponent]
 })
 export class FundListComponent implements OnInit{
 @Input() allFunds: Fund[];
