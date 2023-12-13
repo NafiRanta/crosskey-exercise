@@ -1,8 +1,10 @@
 <div class="fund-details-data">
+    <!--Fund Details: name, isin, type, company-->
     <div class="fund-info-value fund-header" *ngIf="!isSmallScreen && !isAccordionOpen">
         <div class="name">{{selectedFund.fundName}}</div>
         <div class="subtext">{{selectedFund.isin}}. {{selectedFund.currency}}. {{selectedFund.fundType}} . {{selectedFund.fundCompany}}</div>
     </div>
+    <!--Performance-->
     <div class="fund-details-value performance">
         <div class="performance-header">
             <h1>Performance</h1>
@@ -10,8 +12,8 @@
         <div class="fund-details-value facts-table">
             <div class="fact-info-labels">
                 <div class="fact-info-label">Close Price</div>
-                <div class="fact-info-label"><mat-icon>trending_up</mat-icon></div>
-                <div class="fact-info-label"><mat-icon>trending_down</mat-icon></div>
+                <div class="fact-info-label"><mat-icon matTooltip="Year High" aria-label="Year High">trending_up</mat-icon></div>
+                <div class="fact-info-label"><mat-icon matTooltip="Year Low" aria-label="Year Low">trending_down</mat-icon></div>
             </div>
         </div>
         <div class="facts-details-data" >
@@ -30,6 +32,7 @@
             <app-graph></app-graph>    
         </div>
     </div>
+    <!--Key Facts-->
     <div class="fund-details-value">
         <div class="facts-header">
             <h1>Key Facts</h1>
@@ -54,6 +57,7 @@
         </div>
     </div> 
     <hr>
+    <!--Documents-->
     <div class="fund-details-data " *ngIf="documents.length > 0">
         <div class="documents-header">
             <h1>Documents</h1>

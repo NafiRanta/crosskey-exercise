@@ -42,7 +42,9 @@ filteredFunds: Fund[];
           (fund.isin?.toLowerCase() || '').includes(keyword.toLowerCase()) 
         )
       );
-      console.log("filteredFunds in fund-list", this.filteredFunds)
+      if (this.filteredFunds.length === 0) {
+        this.fundService.setZeroResults(true);
+      }
       this.fundService.setFundArr(this.filteredFunds);
     } else {
       this.filteredFunds = this.allFunds;

@@ -1,30 +1,33 @@
-<!-- fund.component.html -->
-<div #fundInfoData *ngIf="shouldShowFund"
-    class="fund-info-data" 
-    id="{{fund.instrumentId}}" 
-    (click)="onSelectedFund(fund)"
-    >
+<div #fundInfoData *ngIf="shouldShowFund" class="fund-info-data" id="{{fund.instrumentId}}" (click)="onSelectedFund(fund)">
+    <!-- Fund Name -->
     <div class="fund-info-value">
       <div class="name">{{ fund.fundName }}</div>
       <div class="subtext">
         {{fund.isin}} . {{fund.currency}} . {{fund.fundType}} . {{fund.fundCompany}}
       </div>
     </div>
+    <!-- Change1m -->
     <div class="fund-info-value" [ngClass]="{'positive-value': fund.change1m > 0, 'negative-value': fund.change1m < 0}">
       {{ fund.change1m || '-' }}
     </div>
+    <!-- Change3m -->
     <div class="fund-info-value" [ngClass]="{'positive-value': fund.change3m > 0, 'negative-value': fund.change3m < 0}">
       {{ fund.change3m || '-' }}
     </div>
+    <!-- Change1y -->
     <div class="fund-info-value" [ngClass]="{'positive-value': fund.change1y > 0, 'negative-value': fund.change1y < 0}">
       {{ fund.change1y || '-' }}
     </div>
+    <!-- Change3y -->
     <div class="fund-info-value" [ngClass]="{'positive-value': fund.change3y > 0, 'negative-value': fund.change3y < 0}">
       {{ fund.change3y || '-' }}
     </div>
+    <!-- Close Price Date -->
     <div class="fund-info-value">{{ closePriceDate }}</div>
+    <!-- View -->
     <mat-icon class="fund-info-value">keyboard_arrow_right</mat-icon>
-  </div>
-  <div *ngIf="isSmallScreen && isAccordionOpen" class="accordion">
-    <app-fund-details></app-fund-details>
+</div>
+<!-- Accordion for small viewport-->
+<div *ngIf="isSmallScreen && isAccordionOpen" class="accordion">
+  <app-fund-details></app-fund-details>
 </div>

@@ -11,23 +11,35 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  title = 'funds';
+  title = 'Investment Funds';
   isLoading = true;
   isError = false;
   allFunds$: Observable<Fund[]>;
   isSmallScreen: boolean = false;
   selectedFund: Fund | null = null;
+  isZeroResults: boolean = false;
 
   constructor(
     private fundService: FundService, 
     private breakpointObserver: BreakpointObserver
     ) { }
-
+  
+  // Get API data on init
+  // Show app-fund-details for only large viewports 
+  // Display no results found if isZeroResults$ is true
   ngOnInit(): void {
     this.getAPIData();
     this.breakpointObserver.observe([Breakpoints.XSmall, Breakpoints.Small])
     .subscribe(result => {
       this.isSmallScreen = result.matches;
+    });
+
+    this.fundService.isZeroResults$.subscribe((zeroResults) => {
+      if (zeroResults) {
+        this.isZeroResults = true;
+      } else {  
+        this.isZeroResults = false;
+      }
     });
   }
 

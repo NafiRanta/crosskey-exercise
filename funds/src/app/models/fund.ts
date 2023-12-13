@@ -18,5 +18,6 @@ export class Fund{
     administrativeFee: number;
     countDecimals: number;
     startDate: number;
-    isin: string
+    isin: string;
+    document: any[];
 }

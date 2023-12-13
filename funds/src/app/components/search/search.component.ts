@@ -25,5 +25,6 @@ export class SearchComponent {
     this.fundService.setQuery(this.searchQuery);
     this.searchInputEl.nativeElement.value = '';
     this.showCloseIcon = this.searchQuery.length > 0;
+    this.fundService.setZeroResults(false);
   }
 }

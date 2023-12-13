@@ -23,6 +23,10 @@ export class FundService {
   private isQuerySubject = new BehaviorSubject<boolean>(false);
   isQuery$ = this.isQuerySubject.asObservable();
 
+  // Observable for zero results
+  private isZeroResultsSubject = new BehaviorSubject<boolean>(false);
+  isZeroResults$ = this.isZeroResultsSubject.asObservable();
+
   constructor(private http: HttpClient) { }
 
   // Get API data
@@ -52,5 +56,10 @@ export class FundService {
   setQuery(searchText: string[]): void {
     this.querySubject.next(searchText);
     this.isQuerySubject.next(true); 
+  }
+
+  // Emit zero results to subscribers
+  setZeroResults(isZeroResults: boolean): void {
+    this.isZeroResultsSubject.next(isZeroResults);
   }
 }

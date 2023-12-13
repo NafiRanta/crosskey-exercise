@@ -18,7 +18,11 @@ export class FundDetailsComponent implements OnInit {
 
   constructor(
     private fundService: FundService, private breakpointObserver: BreakpointObserver) { }
-
+  
+  // Display selected or first fund from list
+  // Format dates to DD-MMM-YYYY
+  // Get documents from selected fund
+  // Observe screen size for responsive design
   ngOnInit() {
     this.fundService.selectedFund$.subscribe((fund) => {
       this.selectedFund = fund;
@@ -26,24 +30,19 @@ export class FundDetailsComponent implements OnInit {
         this.isAccordionOpen = !this.isAccordionOpen;
       }
       
-      this.closePriceDate = new Date(this.selectedFund?.latestClosePriceDate);
-      this.closePriceDate = this.closePriceDate?.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
-      this.closePriceDate = this.closePriceDate?.replace(/ /g, '-');
-
-      this.inceptDate = new Date(this.selectedFund?.startDate);
-      this.inceptDate = this.inceptDate?.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
-      this.inceptDate = this.inceptDate?.replace(/ /g, '-');
-
+      this.closePriceDate = new Date(this.selectedFund?.latestClosePriceDate)?.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })?.replace(/ /g, '-');
+      this.inceptDate = new Date(this.selectedFund?.startDate)?.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })?.replace(/ /g, '-');
+      
       this.documents = this.selectedFund?.documents;
     });
 
-    console.log("selectedFund: fund-details", this.selectedFund)
     this.breakpointObserver.observe([Breakpoints.XSmall, Breakpoints.Small])
     .subscribe(result => {
       this.isSmallScreen = result.matches;
     });
   }
 
+  // Display first or selected fund from list as accordion if screen size is small
   ngOnChanges(): void {
     this.fundService.selectedFund$.subscribe((fund) => {
       this.selectedFund = fund;
@@ -51,7 +50,5 @@ export class FundDetailsComponent implements OnInit {
         this.isAccordionOpen = !this.isAccordionOpen;
       }
     });
-
-    console.log("selectedFund: fund-details 2", this.selectedFund)
   }
 }
