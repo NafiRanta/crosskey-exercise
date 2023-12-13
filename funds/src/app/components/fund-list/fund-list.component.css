@@ -1,4 +1,22 @@
 /* fund-list.component.css */
 .fund-info-labels {
-  color: #7b7b7c;
+  color: white;
+  background-color: black;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+}
+
+.name {
+  margin-left: 6px;
+}
+
+.subtext {
+  margin-left: 6px;
+  font-size: 8px;
+  color: white;
+  font-weight: lighter;
 }

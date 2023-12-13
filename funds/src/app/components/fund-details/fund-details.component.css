@@ -1,3 +1,26 @@
+.fund-details-labels {
+  display: flex;
+  background-color: #ffce00;
+}
+
+.fund-details-label {
+  font-weight: bold;
+  font-size: 15px;
+
+  .name {
+    margin-top: 3px;
+    margin-left: 6px;
+  }
+
+  .subtext {
+    margin-left: 6px;
+    margin-top: -3px;
+    font-size: 8px;
+    color: black;
+    font-weight: lighter;
+  }
+}
+
 .fund-info-data {
   display: flex;
   flex-direction: column;
@@ -6,12 +29,6 @@
 .fund-info-value {
   width: 100%;
   margin: 0px;
-}
-
-.type-name {
-  font-size: 20px;
-  font-weight: bold;
-  line-height: 44px;
 }
 
 .fund-header {
@@ -25,7 +42,7 @@
 
 .performance-header,
 .facts-header,
-.key-facts {
+.documents-header {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -66,4 +83,38 @@ h5 {
   display: flex;
   justify-content: flex-end;
   margin-right: 50px;
+}
+
+.documents-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.document-item {
+  width: 48%; /* Adjust as needed */
+  margin-bottom: 15px; /* Adjust as needed */
+  display: flex;
+  align-items: center;
+}
+
+&.left-column {
+  justify-content: flex-start;
+}
+
+&.right-column {
+  justify-content: flex-end;
+}
+
+mat-icon {
+  margin-right: 10px; /* Adjust as needed */
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  text-decoration: underline;
 }

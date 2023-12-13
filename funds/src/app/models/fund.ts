@@ -10,6 +10,7 @@ export class Fund{
     latestClosePriceDate: number;
     change1m: number;
     change3m: number;
+    change1y: number;
     change3y: number;           
     yearHigh: number;
     yearLow: number;

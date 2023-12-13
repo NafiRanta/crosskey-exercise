@@ -11,7 +11,8 @@ export class FundDetailsComponent implements OnInit {
   selectedFund: Fund | null;
   closePriceDate: any;
   startDate: any;
-
+  documents: any[] = [];
+  
   constructor(private fundService: FundService) { }
 
   ngOnInit() {
@@ -24,6 +25,8 @@ export class FundDetailsComponent implements OnInit {
       this.startDate = new Date(this.selectedFund?.startDate);
       this.startDate = this.startDate?.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
       this.startDate = this.startDate?.replace(/ /g, '-');
+
+      this.documents = this.selectedFund?.documents;
     });
 
     console.log("selectedFund: fund-details", this.selectedFund)

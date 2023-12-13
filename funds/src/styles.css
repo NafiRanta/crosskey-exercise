@@ -36,10 +36,14 @@ body {
 .fund-info-label {
   flex: 1.5;
   font-weight: bold;
+  font-size: 10px;
 }
 
 .fund-info-label:not(:first-child) {
-  flex: 1;
+  flex: 0.5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .fund-info {
@@ -48,12 +52,25 @@ body {
   flex: 1;
 }
 
+.even-row {
+  background-color: #f3f3f3;
+}
+
+.odd-row {
+  background-color: #e8e8e8;
+}
+
 .fund-info-data {
   display: flex;
+  font-size: 10px;
 }
 
 .fund-info-value {
   flex: 1.5;
-  margin: 5px;
   width: 100%;
+}
+
+hr {
+  margin: 0px;
+  padding: 0px;
 }

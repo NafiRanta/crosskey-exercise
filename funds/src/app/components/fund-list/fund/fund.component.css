@@ -1,12 +1,44 @@
-/* fund.component.css */
 .fund-info-value:not(:first-child) {
-  flex: 1;
+  flex: 0.5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .highlight {
-  background-color: #ccc;
+  background-color: #ffe67f;
 }
 
 .fund-info-data {
   cursor: pointer;
+}
+
+.fund-info-data:hover {
+  background-color: #ffce00;
+}
+
+.name {
+  font-size: 12px;
+  font-weight: bold;
+  color: black;
+}
+
+.subtext {
+  font-size: 8px;
+  color: black;
+}
+
+.positive-value {
+  color: green;
+}
+
+.negative-value {
+  color: red;
+}
+
+mat-icon {
+  color: grey;
+  display: flex;
+  height: auto;
+  width: auto;
 }

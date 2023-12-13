@@ -48,6 +48,5 @@ filteredFunds: Fund[];
       this.filteredFunds = this.allFunds;
       this.fundService.setFundArr(this.filteredFunds);
     }
-    
   }
 }

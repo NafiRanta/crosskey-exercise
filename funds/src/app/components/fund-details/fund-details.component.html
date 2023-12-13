@@ -1,13 +1,12 @@
-<div class="fund-info-labels">
-    <div class="fund-info-label">Fund Details</div>
+<div class="fund-details-labels">
+    <div class="fund-details-label">
+        <div class="name">{{selectedFund.fundName}}</div>
+        <div class="subtext">{{selectedFund.isin}}. {{selectedFund.currency}}. {{selectedFund.fundType}} . {{selectedFund.fundCompany}}</div>
+      </div>
 </div>
 <hr>
 <div class="fund-info">
     <div class="fund-info-data">
-        <div class="fund-info-value type-name">
-            <h5>{{selectedFund.fundType.toUpperCase()}}</h5>
-            {{selectedFund.fundName}}
-        </div>
         <div class="fund-info-value fund-header">
             <div class="fund-info-value price">
                 <div>As of {{closePriceDate}} </div>
@@ -76,6 +75,17 @@
                     </div> 
                 </div>
            </div>
+        </div>
+        <div class="fund-info-value" *ngIf="documents.length > 0">
+            <div class="fund-info-value documents-header">
+                <h1>Documents</h1>
+            </div>
+            <div class="documents-container">
+                <div *ngFor="let document of documents" class="document-item">
+                  <mat-icon>description</mat-icon>
+                  <a [href]="document.url" target="_blank">{{ document.title }}</a>
+                </div>
+            </div>
         </div>
     </div>
     

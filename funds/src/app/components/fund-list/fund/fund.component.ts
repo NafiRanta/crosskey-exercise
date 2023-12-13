@@ -13,18 +13,34 @@ export class FundComponent implements AfterViewInit {
   isSelected: boolean = false;
   @ViewChild('fundInfoData') fundInfoData: ElementRef;
   searchText: string[] = [];
-  
+  closePriceDate: any;
 
   constructor(
     private fundService: FundService,
     private renderer: Renderer2
     ) { }
 
+    ngOnInit() {
+      this.closePriceDate = new Date(this.fund?.latestClosePriceDate);
+      this.closePriceDate = this.closePriceDate?.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+      this.closePriceDate = this.closePriceDate?.replace(/ /g, '-');
+
+      const allFundInfoData = document.querySelectorAll('.fund-info-data');
+      // assign odd/even class to funds
+      allFundInfoData.forEach((element, index) => {
+        if (index % 2 === 0) {
+          this.renderer.addClass(element, 'even-row');
+        } else {
+          this.renderer.addClass(element, 'odd-row');
+        }
+      });
+    }
+
   ngAfterViewInit(): void {
     this.fundService.selectedFund$.subscribe((fund) => {
       const fundToHighlight = document.getElementById(fund.instrumentId)
       if (fundToHighlight) {
-        const allFundInfoData = document.querySelectorAll('.fund-info-data');
+        const allFundInfoData = document.querySelectorAll('.fund-info');
       allFundInfoData.forEach(element => {
         this.renderer.removeClass(element, 'highlight');
       });
@@ -55,5 +71,4 @@ export class FundComponent implements AfterViewInit {
     }
     return this.searchText?.some(keyword => fund.fundName.toLowerCase().includes(keyword.toLowerCase()));
   }
-
 }
