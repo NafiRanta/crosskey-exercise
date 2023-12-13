@@ -25,3 +25,6 @@
     <div class="fund-info-value">{{ closePriceDate }}</div>
     <mat-icon class="fund-info-value">keyboard_arrow_right</mat-icon>
   </div>
+  <div *ngIf="isSmallScreen && isAccordionOpen" class="accordion">
+    <app-fund-details></app-fund-details>
+</div>

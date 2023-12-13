@@ -33,7 +33,7 @@
 }
 
 .negative-value {
-  color: red;
+  color: #e3543e;
 }
 
 mat-icon {
@@ -41,4 +41,9 @@ mat-icon {
   display: flex;
   height: auto;
   width: auto;
+}
+
+.accordion {
+  display: flex;
+  flex-direction: column; /* Stack elements in a column on small screens */
 }

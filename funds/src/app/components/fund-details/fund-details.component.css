@@ -1,43 +1,47 @@
-.fund-details-labels {
-  display: flex;
-  background-color: #ffce00;
-}
-
-.fund-details-label {
-  font-weight: bold;
-  font-size: 15px;
-
-  .name {
-    margin-top: 3px;
-    margin-left: 6px;
-  }
-
-  .subtext {
-    margin-left: 6px;
-    margin-top: -3px;
-    font-size: 8px;
-    color: black;
-    font-weight: lighter;
-  }
-}
-
-.fund-info-data {
+.fund-details-data {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
 }
 
-.fund-info-value {
+.fund-details-value {
   width: 100%;
-  margin: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1.5px;
+}
+
+.fund-details-value {
+  flex: 1;
+  font-size: 10px;
+  margin: 7px;
 }
 
 .fund-header {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-}
+  display: flex;
+  background-color: #ffe67f;
+  font-weight: bold;
+  font-size: 25px;
+  flex-direction: column;
+  margin: 0;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
 
-.price {
-  grid-column: 1;
+  .name {
+    margin: 8px;
+  }
+
+  .subtext {
+    font-size: 10px;
+    color: #0f1014;
+    font-weight: normal;
+  }
 }
 
 .performance-header,
@@ -47,11 +51,41 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 10px;
 }
 
-.facts-table {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.facts-table,
+.facts-details-data {
+  display: flex;
+}
+
+.facts-details-data {
+  width: 465px;
+}
+
+.fact-info-labels {
+  display: flex;
+  margin: 7px;
+  color: white;
+  background-color: #31353f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  width: 465px;
+}
+
+.fact-info-label {
+  flex: 1;
+  font-weight: bold;
+  font-size: 10px;
+  margin: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
 }
 
 h1 {
@@ -69,10 +103,6 @@ h5 {
   font-weight: bold;
 }
 
-.facts-table-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
 .facts-label {
   display: flex;
   justify-content: flex-start;
@@ -88,28 +118,22 @@ h5 {
 .documents-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
+  margin-right: 71px;
+  margin-left: 128px;
 }
 
 .document-item {
-  width: 48%; /* Adjust as needed */
-  margin-bottom: 15px; /* Adjust as needed */
+  flex: 0 0 calc(50% - 20px);
+  margin: 10px;
+  text-align: center;
   display: flex;
   align-items: center;
 }
 
-&.left-column {
-  justify-content: flex-start;
+.mat-icon {
+  overflow: inherit;
 }
-
-&.right-column {
-  justify-content: flex-end;
-}
-
-mat-icon {
-  margin-right: 10px; /* Adjust as needed */
-}
-
 a {
   text-decoration: none;
   color: black;
@@ -117,4 +141,9 @@ a {
 
 a:hover {
   text-decoration: underline;
+  text-align: justify;
+}
+
+hr {
+  width: 66%;
 }

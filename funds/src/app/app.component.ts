@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FundService } from './services/fund.service';
 import { Fund } from './models/fund';
 import { Observable, of } from 'rxjs';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+
 
 @Component({
   selector: 'app-root',
@@ -13,11 +15,20 @@ export class AppComponent implements OnInit{
   isLoading = true;
   isError = false;
   allFunds$: Observable<Fund[]>;
+  isSmallScreen: boolean = false;
+  selectedFund: Fund | null = null;
 
-  constructor(private fundService: FundService) { }
+  constructor(
+    private fundService: FundService, 
+    private breakpointObserver: BreakpointObserver
+    ) { }
 
   ngOnInit(): void {
     this.getAPIData();
+    this.breakpointObserver.observe([Breakpoints.XSmall, Breakpoints.Small])
+    .subscribe(result => {
+      this.isSmallScreen = result.matches;
+    });
   }
 
   // Get API data
@@ -39,6 +50,9 @@ export class AppComponent implements OnInit{
         console.error('There was an error!', error);
       }
     })
+  }
+  onSelectedFund(fund: Fund) {
+    this.selectedFund = fund;
   }
 }
 

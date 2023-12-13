@@ -13,13 +13,16 @@
 .grid-container {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 50px;
 }
 
-.fund-list,
+.fund-list {
+  flex: 1;
+  order: 0;
+}
+
 .fund-details {
-  border: 1px solid gray;
-  width: 50%;
-  box-sizing: border-box;
-  overflow-y: auto;
+  flex: 1;
+  order: 1;
+  max-width: 700px; /* Adjust the value based on your design */
+  margin: 0 auto; /* Center the element horizontally */
 }

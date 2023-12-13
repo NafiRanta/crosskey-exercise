@@ -37,6 +37,7 @@ body {
   flex: 1.5;
   font-weight: bold;
   font-size: 10px;
+  margin: 7px;
 }
 
 .fund-info-label:not(:first-child) {
@@ -68,6 +69,7 @@ body {
 .fund-info-value {
   flex: 1.5;
   width: 100%;
+  margin: 11px;
 }
 
 hr {

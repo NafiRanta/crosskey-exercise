@@ -8,9 +8,9 @@
       [allFunds]="allFunds$ | async" 
       class="fund-list"
       ></app-fund-list>
-    <app-fund-details class="fund-details"></app-fund-details>
+    <app-fund-details class="fund-details" *ngIf="!isSmallScreen"></app-fund-details>
   </div>
-</mat-card>
+
 
 <!-- Fetching -->
 <ng-container *ngIf="isLoading && !isError">
@@ -23,3 +23,4 @@
 <ng-container *ngIf="!isLoading && isError">
   <div>Error loading data. Please try again.</div>
 </ng-container>
+</mat-card>

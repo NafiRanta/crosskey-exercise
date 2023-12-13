@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output, ElementRef, Renderer2, ViewChild, AfterViewInit, OnInit  } from '@angular/core';
 import { Fund } from 'src/app/models/fund';
 import { FundService } from 'src/app/services/fund.service';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-fund',
@@ -14,10 +15,13 @@ export class FundComponent implements AfterViewInit {
   @ViewChild('fundInfoData') fundInfoData: ElementRef;
   searchText: string[] = [];
   closePriceDate: any;
+  isSmallScreen: boolean = false;
+  isAccordionOpen: boolean = false;
 
   constructor(
     private fundService: FundService,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private breakpointObserver: BreakpointObserver
     ) { }
 
     ngOnInit() {
@@ -33,6 +37,10 @@ export class FundComponent implements AfterViewInit {
         } else {
           this.renderer.addClass(element, 'odd-row');
         }
+      });
+      this.breakpointObserver.observe([Breakpoints.XSmall, Breakpoints.Small])
+      .subscribe(result => {
+        this.isSmallScreen = result.matches;
       });
     }
 
@@ -54,6 +62,7 @@ export class FundComponent implements AfterViewInit {
 
   onSelectedFund(fund: Fund) {
     this.isSelected = true;
+    this.isAccordionOpen = !this.isAccordionOpen;
     this.fundService.setSelectedFund(fund);
     if (this.isSelected){
       // Remove selected class from all other divs

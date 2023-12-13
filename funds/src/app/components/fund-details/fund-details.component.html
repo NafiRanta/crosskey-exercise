@@ -1,94 +1,70 @@
-<div class="fund-details-labels">
-    <div class="fund-details-label">
+<div class="fund-details-data">
+    <div class="fund-info-value fund-header" *ngIf="!isSmallScreen && !isAccordionOpen">
         <div class="name">{{selectedFund.fundName}}</div>
         <div class="subtext">{{selectedFund.isin}}. {{selectedFund.currency}}. {{selectedFund.fundType}} . {{selectedFund.fundCompany}}</div>
-      </div>
-</div>
-<hr>
-<div class="fund-info">
-    <div class="fund-info-data">
-        <div class="fund-info-value fund-header">
-            <div class="fund-info-value price">
-                <div>As of {{closePriceDate}} </div>
-                <div>{{selectedFund.closePrice}}</div>
+    </div>
+    <div class="fund-details-value performance">
+        <div class="performance-header">
+            <h1>Performance</h1>
+        </div>
+        <div class="fund-details-value facts-table">
+            <div class="fact-info-labels">
+                <div class="fact-info-label">Close Price</div>
+                <div class="fact-info-label"><mat-icon>trending_up</mat-icon></div>
+                <div class="fact-info-label"><mat-icon>trending_down</mat-icon></div>
             </div>
         </div>
-        <div class="fund-info-value performance">
-            <div class="fund-info-value performance-header">
-                <h1>Performance</h1>
+        <div class="facts-details-data" >
+            <div class="fund-details-value ">
+                <div class="inceptDate">{{ selectedFund.closePrice }}</div>
             </div>
-            <div class="fund-info-value graph">
-                <app-graph></app-graph>    
+            <div class="fund-details-value ">
+                <div class="name">{{ selectedFund.yearHigh || '-' }}</div>
+            </div>
+            <div class="fund-details-value ">
+                <div class="name">{{ selectedFund.yearLow || '-' }}</div>
             </div>
         </div>
-        <div class="fund-info-value key-facts">
-            <div class="fund-info-value facts-header">
-                <h1>Key Facts</h1>
-            </div>
-           <div class="fund-info-value facts-table">
-                <div class="fund-info-value facts-table-grid">
-                    <div class="facts-label">
-                        <h4>Fund Inception</h4>
-                    </div>
-                    <div class="facts-value">
-                        <h4>{{startDate}}</h4>
-                    </div>                    
-                </div>
-                <div class="fund-info-value facts-table-grid">
-                    <div class="facts-label">
-                        <h4>ISIN</h4>
-                    </div>
-                    <div class="facts-value">
-                        <h4>{{selectedFund.isin}}</h4>
-                    </div>  
-                </div>
-                <div class="fund-info-value facts-table-grid">
-                    <div class="facts-label">
-                        <h4>Fund Base Currency</h4>
-                    </div>
-                    <div class="facts-value">
-                        <h4>{{selectedFund.currency}}</h4>
-                    </div>  
-                </div>
-                <div class="fund-info-value facts-table-grid">
-                    <div class="facts-label">
-                        <h4>Minimum Initial Investment</h4>
-                    </div>
-                    <div class="facts-value">
-                        <h4>{{selectedFund.startValue}}</h4>
-                    </div>  
-                </div>
-                <div class="fund-info-value facts-table-grid">
-                    <div class="facts-label">
-                        <h4>Management Fee</h4>
-                    </div>
-                    <div class="facts-value">
-                        <h4>{{selectedFund.administrativeFee}}</h4>
-                    </div>  
-                </div>
-                <div class="fund-info-value facts-table-grid">
-                    <div class="facts-label">
-                        <h4>Management Company</h4>
-                    </div>
-                    <div class="facts-value">
-                        <h4>{{selectedFund.fundCompany}}</h4>
-                    </div> 
-                </div>
-           </div>
-        </div>
-        <div class="fund-info-value" *ngIf="documents.length > 0">
-            <div class="fund-info-value documents-header">
-                <h1>Documents</h1>
-            </div>
-            <div class="documents-container">
-                <div *ngFor="let document of documents" class="document-item">
-                  <mat-icon>description</mat-icon>
-                  <a [href]="document.url" target="_blank">{{ document.title }}</a>
-                </div>
-            </div>
+        <hr>
+        <div class="fund-details-value graph">
+            <app-graph></app-graph>    
         </div>
     </div>
-    
+    <div class="fund-details-value">
+        <div class="facts-header">
+            <h1>Key Facts</h1>
+        </div>
+        <div class="fund-details-value facts-table">
+            <div class="fact-info-labels">
+                <div class="fact-info-label">Inception</div>
+                <div class="fact-info-label">Min Initial Investment</div>
+                <div class="fact-info-label">Management Fee</div>
+            </div>
+        </div>
+        <div class="facts-details-data" >
+            <div class="fund-details-value ">
+                <div class="inceptDate">{{ inceptDate }}</div>
+            </div>
+            <div class="fund-details-value ">
+                <div class="name">{{ selectedFund.startValue }}</div>
+            </div>
+            <div class="fund-details-value ">
+                <div class="name">{{ selectedFund.administrativeFee }}</div>
+            </div>
+        </div>
+    </div> 
+    <hr>
+    <div class="fund-details-data " *ngIf="documents.length > 0">
+        <div class="documents-header">
+            <h1>Documents</h1>
+        </div>
+        <div class="documents-container">
+            <div *ngFor="let document of documents" class="document-item">
+                <mat-icon>description</mat-icon>
+                <a [href]="document.url" target="_blank">{{ document.title }}</a>
+            </div>
+        </div>
+    </div> 
 <div>
 
 
