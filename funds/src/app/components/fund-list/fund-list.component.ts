@@ -25,7 +25,18 @@ selectedFilters: any;
   // Subscribe to isQuery$, if true, set searchText to query
   // Display funds that match the searchText via filterFunds()
   ngOnInit(): void {
+
+    // set isGraph to funds with no graph properties
+    this.fundsArr.forEach((fund: Fund) => {
+      if (fund.change1m === null && fund.change3m == null && fund.change1y === null && fund.change3y === null && fund.yearHigh === null && fund.yearLow === null) {
+        fund.isGraph = false;
+      } else {
+        fund.isGraph = true;
+      }
+    });
+
     this.fundService.setFundsArr(this.fundsArr);
+    
   }
 
   ngOnChanges(): void {
@@ -43,6 +54,7 @@ selectedFilters: any;
       console.log('selectedFilters: ', this.selectedFilters)
     });
    this.filterFunds(this.searchText, this.selectedFilters);
+   console.log('fundsArr: ', this.fundsArr);
   
 
   }

@@ -1,14 +1,14 @@
 <div #fundInfoData class="fund-info-data" id="{{fund.instrumentId}}" >
      <!-- Favourites -->
      <div class="fund-info-value favourite-container">
-      <mat-icon *ngIf="isFavourite" class="fav-icon" matTooltip="Remove from favourites">star</mat-icon>
-      <mat-icon *ngIf="!isFavourite" class="fav-icon" matTooltip="Add to favourites">star_border</mat-icon>
+      <mat-icon *ngIf="isFavourite" class="fav-icon-remove" matTooltip="Remove from favourites" (click)="removeFromFav()">star</mat-icon>
+      <mat-icon *ngIf="!isFavourite" class="fav-icon-add" matTooltip="Add to favourites" (click)="addToFav()">star_border</mat-icon>
     </div> 
     <!-- Fund Name -->
     <div class="fund-info-value  name-container">
       <div class="name">{{ fund.fundName }}</div>
       <div class="subtext">
-        {{fund.isin}} . {{fund.currency}} . {{fund.fundType}} . {{fund.fundCompany}}
+        {{fund.isin}} . {{fund.fundType}} . {{fund.fundCompany}}
       </div>
     </div>
     <!-- Change1m -->

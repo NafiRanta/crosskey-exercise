@@ -20,4 +20,7 @@ export class Fund{
     startDate: number;
     isin: string;
     document: any[];
+    isFavourite: boolean;
+    isGraph: boolean;
 }
+

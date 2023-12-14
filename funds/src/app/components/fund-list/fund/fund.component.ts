@@ -19,7 +19,7 @@ export class FundComponent implements OnInit {
   searchText: string[] = [];
   closePriceDate: any;
   isAccordionOpen: boolean = false;
-  favouriteFunds: Fund[] = [];
+  favouriteFunds: string[] = [];
   isFavourite: boolean = false;
  
   constructor(
@@ -41,16 +41,51 @@ export class FundComponent implements OnInit {
         }
       });
 
-      // get from local storage if any
+      // Get favourites from local storage if any 
+      // Set isFavourite property to true if fund is in favourites
       let favFund = localStorage.getItem('favourites');
       if (favFund) {
         this.favouriteFunds = JSON.parse(favFund);
-        this.isFavourite = true;
-      }
+        this.favouriteFunds.forEach((id: string) => {
+          if (this.fund.instrumentId === id) {
+            this.isFavourite = true;
+          } 
+        });
+      } 
     }
 
+  // add to local storage array of favourites
+  addToFav() {
+    this.isFavourite = true;
+    this.updateLocalStorageFavourites(true);
+  }
+
+  // remove from local storage array of favourites
+  removeFromFav() {
+    this.isFavourite = false;
+    this.updateLocalStorageFavourites(false);
+  }
+
+  // update local storage array of favourites
+  private updateLocalStorageFavourites(addToFavourites: boolean): void {
+    let favFunds = localStorage.getItem('favourites') || '[]';
+    this.favouriteFunds = JSON.parse(favFunds);
+  
+    if (addToFavourites) {
+      this.favouriteFunds.push(this.fund.instrumentId);
+    } else {
+      this.favouriteFunds = this.favouriteFunds.filter((fav: string) => fav !== this.fund.instrumentId);
+    }
+  
+    localStorage.setItem('favourites', JSON.stringify(this.favouriteFunds));
+    this.fundService.updateFavourites(this.favouriteFunds);
+  }
+  
+  // Emit selected fund to subscribers
   onSelectedFund(fund: Fund) {
     this.isAccordionOpen = !this.isAccordionOpen;
     this.fundService.setSelectedFund(fund);
   }
+  
+  
 }

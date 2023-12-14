@@ -32,6 +32,10 @@ export class FundService {
   private isZeroResultsSubject = new BehaviorSubject<boolean>(false);
   isZeroResults$ = this.isZeroResultsSubject.asObservable();
 
+  // Observable for favourite changes
+  private favouritesSubject = new BehaviorSubject<string[]>([]);
+  favourites$ = this.favouritesSubject.asObservable();
+
   constructor(private http: HttpClient) { }
 
   // Get API data
@@ -83,6 +87,11 @@ export class FundService {
     }
       
       this.isFilterSubject.next(this.selectedFilters);
+  }
+
+  // Emit favourite changes to subscribers
+  updateFavourites(favourites: string[]): void {
+    this.favouritesSubject.next(favourites);
   }
 
   // Emit zero results to subscribers

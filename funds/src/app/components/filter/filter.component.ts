@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, ViewChild, SimpleChanges } from '@angular/core';
 import { CommonModule, NgIf } from '@angular/common';
 import { Fund } from 'src/app/models/fund';
 import { FundService } from 'src/app/services/fund.service';
@@ -20,6 +20,8 @@ export class FilterComponent implements OnInit {
   filterByCurrency: string[] = [];
   filterByFundType: string[] = [];
   filterByFundCompany: string[] = [];
+  filterByFavourites: string[] = [];
+  favourites: string[] = [];
 
   constructor(private fundService: FundService) { }
 
@@ -37,7 +39,6 @@ export class FilterComponent implements OnInit {
         this.filterByFundCompany.push(fund.fundCompany);
       }
     });
-  
     // Add 'All' to the beginning of each array
     this.filterByCurrency.unshift('All');
     this.filterByFundType.unshift('All');
@@ -47,8 +48,29 @@ export class FilterComponent implements OnInit {
     this.filterByCurrency.sort();
     this.filterByFundType.sort();
     this.filterByFundCompany.sort();
+
+    let favourites = localStorage.getItem('favourites');
+    if (favourites) {
+      this.favourites = JSON.parse(favourites);
+      this.filterByFavourites = JSON.parse(favourites);
+    } else {
+      // disable favourites filter if there are no favourites
+      this.filterByFavourites = ['All'];
+    }
+
   }
-  
+
+  ngOnChanges(): void {
+    this.subscribeToFavouriteChanges();
+  }
+
+
+  private subscribeToFavouriteChanges(): void {
+    this.fundService.favourites$.subscribe((favourites) => {
+      this.filterByFavourites = favourites || ['All'];
+    });
+  }
+
   // Emit selected currency to subscribers
   onFundTypeSelectionChange(event: any) {
     console.log('event: ', event);
