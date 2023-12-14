@@ -1,11 +1,29 @@
-.fund-info-value:not(:first-child) {
-  flex: 0.5;
+.fund-info-value {
+  flex: 1;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 .fund-info-data {
-  cursor: pointer;
+  display: flex;
+  font-size: 10px;
+}
+
+.favourite-container {
+  margin: 0 15px 0 30px;
+  flex: 0;
+}
+
+.view-container {
+  margin: 0 30px 0 9px;
+  flex: 0;
+}
+
+.name-container {
+  flex: 2;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .fund-info-data:hover {
@@ -40,5 +58,13 @@ mat-icon {
 
 .accordion {
   display: flex;
-  flex-direction: column; /* Stack elements in a column on small screens */
+  flex-direction: column;
+}
+
+.even-row {
+  background-color: #f3f3f3;
+}
+
+.odd-row {
+  background-color: #e8e8e8;
 }

@@ -1,5 +1,4 @@
 .header-content {
-  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,19 +11,9 @@
 
 .grid-container {
   display: flex;
-  flex-wrap: wrap;
-  flex: 1;
-}
-
-.fund-list {
-  flex: 1;
-  order: 0;
-}
-
-.fund-details {
-  flex: 1;
-  order: 1;
-  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .spinner-container {
@@ -78,4 +67,8 @@
   margin: 0;
   flex-direction: column;
   margin-top: -46px;
+}
+
+.fund-list {
+  width: 100%;
 }

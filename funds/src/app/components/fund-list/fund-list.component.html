@@ -1,7 +1,10 @@
 <div class="fund-info-labels" *ngIf="fundsToDisplay">
-  <div class="fund-info-label">
+  <div class="fund-info-label favourite">
+    <mat-icon>star</mat-icon>
+  </div>
+  <div class="fund-info-label name-container">
     <div class="name">Fund Name</div>
-    <div class="subtext">ISIN. CURRENCY. TYPE. COMPANY</div>
+    <div class="subtext">ISIN. TYPE. COMPANY</div>
   </div>
   <div class="fund-info-label">1m</div>
   <div class="fund-info-label">3m</div>
@@ -10,12 +13,13 @@
   <div class="fund-info-label"><mat-icon matTooltip="Year High" aria-label="Year High">trending_up</mat-icon></div>
   <div class="fund-info-label"><mat-icon matTooltip="Year Low" aria-label="Year Low">trending_down</mat-icon></div>
   <div class="fund-info-label">Close Price</div>
+  <div class="fund-info-label">Currency</div>
   <div class="fund-info-label">Perf. as of</div>
-  <div class="fund-info-label">View</div>
+  <div class="fund-info-label view">View</div>
 </div>
 <hr>
 
-<div *ngFor="let fund of fundsToDisplay" class="fund-info">
+<div *ngFor="let fund of fundsToDisplay">
   <app-fund [fund]="fund"></app-fund>
 </div>
 

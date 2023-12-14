@@ -1,69 +1,15 @@
 html,
 body {
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   font-family: Arial, sans-serif;
   font: 14px;
-  line-height: 1em;
-}
-body {
   margin: 0;
-  font: 14px;
-  line-height: 1em;
   padding: 0;
-}
-
-.header-content {
-  display: flex;
-  flex-direction: column;
 }
 
 .mat-card-title {
   margin-bottom: 8px;
-}
-
-.fund-info-labels {
-  display: flex;
-  margin: 5px;
-}
-
-.fund-info-label {
-  flex: 1.5;
-  font-weight: bold;
-  font-size: 10px;
-  margin: 7px;
-}
-
-.fund-info-label:not(:first-child) {
-  flex: 0.5;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.fund-info {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-
-.even-row {
-  background-color: #f3f3f3;
-}
-
-.odd-row {
-  background-color: #e8e8e8;
-}
-
-.fund-info-data {
-  display: flex;
-  font-size: 10px;
-}
-
-.fund-info-value {
-  flex: 1.5;
-  width: 100%;
-  margin: 11px;
 }
 
 hr {

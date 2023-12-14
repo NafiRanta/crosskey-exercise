@@ -1,5 +1,5 @@
 <!-- Success and data fetched -->
-<mat-card *ngIf="!isLoading">
+<mat-card *ngIf="!isLoading" class="main-container">
   <div class="header-content">
     <app-search></app-search>
     <app-filter [fundsArr]="allFunds$ | async"></app-filter>

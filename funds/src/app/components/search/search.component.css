@@ -5,7 +5,7 @@
 }
 
 input {
-  width: 100%;
+  width: 80vw;
   margin: 0px 0px 0px 0px;
 }
 
@@ -30,5 +30,5 @@ mat-icon {
 }
 
 .search-field {
-  width: 100vw;
+  width: 80vw; /* THIS TO CHANGE WIDTH OF SEARCH */
 }

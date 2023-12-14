@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, OnChanges, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { Fund } from 'src/app/models/fund';
 import { FundService } from 'src/app/services/fund.service';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
@@ -8,18 +8,18 @@ import { MaterialModule } from 'src/app/modules/material/material.module';
 @Component({
   selector: 'app-filter',
   standalone: true,
-  imports: [CommonModule, MaterialModule],
+  imports: [CommonModule, MaterialModule, NgIf],
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.css']
 })
 export class FilterComponent implements OnInit {
-@Input() fundsArr: Fund[];
-@ViewChild("selectedCurrency") selectedCurrency: MatFormField;
-@ViewChild("selectedFundType") selectedFundType: MatFormField;
-@ViewChild("selectedFundCompany") selectedFundCompany: MatFormField;
-filterByCurrency: string[] = [];
-filterByFundType: string[] = [];
-filterByFundCompany: string[] = [];
+  @Input() fundsArr: Fund[];
+  @ViewChild("selectedCurrency") selectedCurrency: MatFormField;
+  @ViewChild("selectedFundType") selectedFundType: MatFormField;
+  @ViewChild("selectedFundCompany") selectedFundCompany: MatFormField;
+  filterByCurrency: string[] = [];
+  filterByFundType: string[] = [];
+  filterByFundCompany: string[] = [];
 
   constructor(private fundService: FundService) { }
 

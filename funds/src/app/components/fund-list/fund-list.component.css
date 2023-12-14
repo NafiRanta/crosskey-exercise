@@ -1,21 +1,52 @@
 .fund-info-labels {
   color: white;
   background-color: #31353f;
-  margin: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   align-content: center;
   flex-wrap: wrap;
+  font-size: 10px;
 }
 
-.name {
-  margin-left: 6px;
+.fund-info-label {
+  flex: 1;
+  display: flex;
+  font-size: 10px;
+  align-items: center;
+  font-weight: bold;
+  justify-content: center;
 }
 
-.subtext {
-  margin-left: 6px;
-  font-size: 8px;
-  color: white;
-  font-weight: lighter;
+.favourite {
+  flex: 0;
+  margin: 0 9px 0 30px;
+
+  mat-icon {
+    color: #ff9800;
+  }
+}
+
+.view {
+  flex: 0;
+  margin: 0 30px 0 9px;
+}
+
+.name-container {
+  flex: 2;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  align-content: center;
+  margin-left: 5px;
+
+  .name {
+    margin-bottom: -7px;
+  }
+
+  .subtext {
+    font-size: 8px;
+    color: white;
+    font-weight: lighter;
+  }
 }

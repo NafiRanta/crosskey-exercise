@@ -1,6 +1,11 @@
-<div #fundInfoData class="fund-info-data" id="{{fund.instrumentId}}" (click)="onSelectedFund(fund)">
+<div #fundInfoData class="fund-info-data" id="{{fund.instrumentId}}" >
+     <!-- Favourites -->
+     <div class="fund-info-value favourite-container">
+      <mat-icon *ngIf="isFavourite" class="fav-icon" matTooltip="Remove from favourites">star</mat-icon>
+      <mat-icon *ngIf="!isFavourite" class="fav-icon" matTooltip="Add to favourites">star_border</mat-icon>
+    </div> 
     <!-- Fund Name -->
-    <div class="fund-info-value">
+    <div class="fund-info-value  name-container">
       <div class="name">{{ fund.fundName }}</div>
       <div class="subtext">
         {{fund.isin}} . {{fund.currency}} . {{fund.fundType}} . {{fund.fundCompany}}
@@ -32,10 +37,12 @@
     </div>
     <!-- Close Price -->
     <div class="fund-info-value">{{ fund.closePrice || '-' }}</div>
+    <!-- Currency -->
+    <div class="fund-info-value">{{ fund.currency }}</div>
     <!-- Close Price Date -->
     <div class="fund-info-value">{{ closePriceDate }}</div>
-    <!-- View -->
-    <mat-icon class="fund-info-value">keyboard_arrow_right</mat-icon>
+     <!-- View -->
+     <div class="fund-info-value view-container"><mat-icon class="fund-info-value" (click)="onSelectedFund(fund)">keyboard_arrow_down</mat-icon></div>
 </div>
 <!-- Accordion for small viewport-->
 <div *ngIf="isAccordionOpen" class="accordion">

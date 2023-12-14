@@ -3,14 +3,14 @@ import { Fund } from 'src/app/models/fund';
 import { FundService } from 'src/app/services/fund.service';
 import { FundDetailsComponent } from '../../fund-details/fund-details.component';
 import { MatIconModule } from '@angular/material/icon';
-import { NgClass, NgIf } from '@angular/common';
+import { CommonModule, NgClass, NgIf } from '@angular/common';
 
 @Component({
     selector: 'app-fund',
     templateUrl: './fund.component.html',
     styleUrls: ['./fund.component.css'],
     standalone: true,
-    imports: [NgClass, MatIconModule, NgIf, FundDetailsComponent]
+    imports: [CommonModule, MatIconModule, NgIf, FundDetailsComponent]
 })
 export class FundComponent implements OnInit {
   @Input() fund: Fund;
@@ -19,6 +19,8 @@ export class FundComponent implements OnInit {
   searchText: string[] = [];
   closePriceDate: any;
   isAccordionOpen: boolean = false;
+  favouriteFunds: Fund[] = [];
+  isFavourite: boolean = false;
  
   constructor(
     private fundService: FundService,
@@ -38,6 +40,13 @@ export class FundComponent implements OnInit {
           this.renderer.addClass(element, 'odd-row');
         }
       });
+
+      // get from local storage if any
+      let favFund = localStorage.getItem('favourites');
+      if (favFund) {
+        this.favouriteFunds = JSON.parse(favFund);
+        this.isFavourite = true;
+      }
     }
 
   onSelectedFund(fund: Fund) {
