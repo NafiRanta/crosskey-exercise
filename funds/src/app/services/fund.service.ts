@@ -10,6 +10,7 @@ import { Fund } from '../models/fund';
 export class FundService {
   private api = 'https://ivarpivar.netlify.app/api';
   private funds: Fund[] = []; 
+  selectedFilters: any;
 
   // Observable for selected fund
   private selectedFundSubject = new BehaviorSubject<Fund | null>(null);
@@ -23,17 +24,9 @@ export class FundService {
   private isQuerySubject = new BehaviorSubject<boolean>(false);
   isQuery$ = this.isQuerySubject.asObservable();
 
-  // Observable for fund type filter
-  private filterFundTypeSubject = new BehaviorSubject<string>('All');
-  filterFundTypeSubject$ = this.filterFundTypeSubject.asObservable();
-
-  // Observable for fund company filter
-  private filterFundCompanySubject = new BehaviorSubject<string>('All');
-  filterFundCompanySubject$ = this.filterFundCompanySubject.asObservable();
-
-  // Observable for currency filter
-  private filterCurrencySubject = new BehaviorSubject<string>('All');
-  filterCurrencySubject$ = this.filterCurrencySubject.asObservable();
+  // Observable for filter event
+  private isFilterSubject = new BehaviorSubject<Object[]>([]);
+  isFilter$ = this.isFilterSubject.asObservable();
 
   // Observable for zero results
   private isZeroResultsSubject = new BehaviorSubject<boolean>(false);
@@ -72,19 +65,24 @@ export class FundService {
     this.isQuerySubject.next(true); 
   }
 
-  // Emit selected currency to subscribers
-  setSelectedFundType(fundType: string): void {
-    this.filterFundTypeSubject.next(fundType);
-  }
-
-  // Emit selected currency to subscribers
-  setSelectedFundCompany(fundCompany: string): void {
-    this.filterFundCompanySubject.next(fundCompany);
-  }
-
-  // Emit selected currency to subscribers
-  setSelectedCurrency(currency: string): void {
-    this.filterCurrencySubject.next(currency);
+  // Emit selected filters to subscribers
+  setFilters(filter: any): void {
+    if (!this.selectedFilters) {
+      this.selectedFilters = [];
+    }
+    
+    if (filter.value !== 'All') { 
+      this.selectedFilters = this.selectedFilters.filter((selectedFilter: any) => {
+        return selectedFilter.id !== filter.id;
+      });     
+      this.selectedFilters.push(filter); 
+    } else{ // remove filter object that contains 'All' from value
+      this.selectedFilters = this.selectedFilters.filter((selectedFilter: any) => {
+        return selectedFilter.id !== filter.id;
+      });
+    }
+      
+      this.isFilterSubject.next(this.selectedFilters);
   }
 
   // Emit zero results to subscribers

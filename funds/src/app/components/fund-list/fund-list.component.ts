@@ -16,6 +16,7 @@ export class FundListComponent implements OnInit{
 @Input() fundsArr: Fund[];
 searchText: string[] = [];
 fundsToDisplay: Fund[]; 
+selectedFilters: any;
 
   constructor(private fundService: FundService) { }
 
@@ -24,32 +25,47 @@ fundsToDisplay: Fund[];
   // Display funds that match the searchText via filterFunds()
   ngOnInit(): void {
     this.fundService.setFundsArr(this.fundsArr);
+  }
+
+  ngOnChanges(): void {
     this.fundService.isQuery$.subscribe((query) => {
       if (query) {
         this.searchText = this.fundService.getQuery();
       }
       console.log('searchText: ', this.searchText)
-      this.filterFunds();
+    });  
+    
+    this.fundService.isFilter$.subscribe((filterArr) => {
+      if (filterArr) {
+        this.selectedFilters = filterArr;
+      }
+      console.log('selectedFilters: ', this.selectedFilters)
     });
-  }
+   this.filterFunds(this.searchText, this.selectedFilters);
+  
 
-  ngOnChanges(): void {
-    this.filterFunds();
   }
 
   // Display all funds if searchText is empty
   // Set filteredFunds to include only funds that match the isin, fundName, fundType, or fundCompany
-  filterFunds(): void {
-    console.log('allFunds: ', this.fundsArr);
-    if (this.searchText?.length > 0) {
-      this.fundsToDisplay = this.fundsArr.filter(fund =>
-        this.searchText.some(keyword =>
-          (fund.fundName?.toLowerCase() || '').includes(keyword.toLowerCase()) ||
-          (fund.fundType?.toLowerCase() || '').includes(keyword.toLowerCase()) ||
-          (fund.fundCompany?.toLowerCase() || '').includes(keyword.toLowerCase()) ||
-          (fund.isin?.toLowerCase() || '').includes(keyword.toLowerCase()) 
-        )
-      );
+  filterFunds(searchText: string[], filterArr: string[]): void {
+    if (searchText?.length > 0 || filterArr?.length > 0) {
+      // funds to display to show funds that match the search text and selected filters
+      this.fundsToDisplay = this.fundsArr.filter((fund: Fund) => {
+        return searchText.every((word: string) => {
+          return fund.isin.toLowerCase().includes(word.toLowerCase()) ||
+            fund.fundName.toLowerCase().includes(word.toLowerCase()) ||
+            fund.fundType.toLowerCase().includes(word.toLowerCase()) ||
+            fund.fundCompany.toLowerCase().includes(word.toLowerCase());
+        }) || filterArr.every((filter: string) => {
+          return fund.isin.toLowerCase().includes(filter.toLowerCase()) ||
+            fund.fundName.toLowerCase().includes(filter.toLowerCase()) ||
+            fund.fundType.toLowerCase().includes(filter.toLowerCase()) ||
+            fund.fundCompany.toLowerCase().includes(filter.toLowerCase());
+        });
+      });
+
+      console.log('fundsToDisplay: ', this.fundsToDisplay);
       if (this.fundsToDisplay.length === 0) {
         this.fundService.setZeroResults(true);
       }

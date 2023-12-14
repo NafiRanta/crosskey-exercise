@@ -24,8 +24,6 @@ filterByFundCompany: string[] = [];
   constructor(private fundService: FundService) { }
 
   ngOnInit(): void {
-    console.log('fundsArr: ', this.fundsArr);
-  
     this.fundsArr.forEach(fund => {
       if (fund.currency && !this.filterByCurrency.includes(fund.currency)) {
         this.filterByCurrency.push(fund.currency);
@@ -54,18 +52,10 @@ filterByFundCompany: string[] = [];
   // Emit selected currency to subscribers
   onFundTypeSelectionChange(event: any) {
     console.log('event: ', event);
-    this.fundService.setSelectedFundType(event.value);
-  }
-
-  // Emit selected fund type to subscribers
-  onCurrencySelectionChange(event: any) {
-    console.log('event: ', event);
-    this.fundService.setSelectedCurrency(event.value);
-  }
-
-  // Emit selected fund company to subscribers
-  onFundCompanySelectionChange(event: any) {
-    console.log('event: ', event);
-    this.fundService.setSelectedFundCompany(event.value);
+    let filterData = {
+      "id": event.source.id,
+      "value": event.value
+    }
+    this.fundService.setFilters(filterData);
   }
 }

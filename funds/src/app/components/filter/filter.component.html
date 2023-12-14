@@ -1,20 +1,20 @@
 <mat-form-field #selectedCurrency>
     <mat-label>Currency</mat-label>
-    <mat-select>
+    <mat-select (selectionChange)="onFundTypeSelectionChange($event)" id="currency">
         <mat-option *ngFor="let currency of filterByCurrency" [value]="currency">{{currency}}</mat-option>
     </mat-select>
 </mat-form-field>
 
 <mat-form-field #selectedType>
     <mat-label>Fund Type</mat-label>
-    <mat-select (selectionChange)="onFundTypeSelectionChange($event)">
+    <mat-select (selectionChange)="onFundTypeSelectionChange($event)" id="type">
         <mat-option *ngFor="let type of filterByFundType" [value]="type">{{type}}</mat-option>
     </mat-select>
 </mat-form-field>
 
 <mat-form-field #selectedCompany>
     <mat-label>Fund Company</mat-label>
-    <mat-select>
+    <mat-select (selectionChange)="onFundTypeSelectionChange($event)" id="company">
         <mat-option *ngFor="let company of filterByFundCompany" [value]="company">{{company}}</mat-option>
     </mat-select>
 </mat-form-field>
