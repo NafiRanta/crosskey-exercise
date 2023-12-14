@@ -13,9 +13,9 @@ import { NgIf, NgFor } from '@angular/common';
     imports: [NgIf, MatIconModule, MatTooltipModule, NgFor, FundComponent]
 })
 export class FundListComponent implements OnInit{
-@Input() allFunds: Fund[];
+@Input() fundsArr: Fund[];
 searchText: string[] = [];
-filteredFunds: Fund[]; 
+fundsToDisplay: Fund[]; 
 
   constructor(private fundService: FundService) { }
 
@@ -23,11 +23,12 @@ filteredFunds: Fund[];
   // Subscribe to isQuery$, if true, set searchText to query
   // Display funds that match the searchText via filterFunds()
   ngOnInit(): void {
-    this.fundService.setFundArr(this.allFunds);
+    this.fundService.setFundsArr(this.fundsArr);
     this.fundService.isQuery$.subscribe((query) => {
       if (query) {
         this.searchText = this.fundService.getQuery();
       }
+      console.log('searchText: ', this.searchText)
       this.filterFunds();
     });
   }
@@ -39,8 +40,9 @@ filteredFunds: Fund[];
   // Display all funds if searchText is empty
   // Set filteredFunds to include only funds that match the isin, fundName, fundType, or fundCompany
   filterFunds(): void {
+    console.log('allFunds: ', this.fundsArr);
     if (this.searchText?.length > 0) {
-      this.filteredFunds = this.allFunds.filter(fund =>
+      this.fundsToDisplay = this.fundsArr.filter(fund =>
         this.searchText.some(keyword =>
           (fund.fundName?.toLowerCase() || '').includes(keyword.toLowerCase()) ||
           (fund.fundType?.toLowerCase() || '').includes(keyword.toLowerCase()) ||
@@ -48,13 +50,12 @@ filteredFunds: Fund[];
           (fund.isin?.toLowerCase() || '').includes(keyword.toLowerCase()) 
         )
       );
-      if (this.filteredFunds.length === 0) {
+      if (this.fundsToDisplay.length === 0) {
         this.fundService.setZeroResults(true);
       }
-      this.fundService.setFundArr(this.filteredFunds);
+      this.fundService.setFundsArr(this.fundsToDisplay);
     } else {
-      this.filteredFunds = this.allFunds;
-      this.fundService.setFundArr(this.filteredFunds);
+      this.fundsToDisplay = this.fundsArr;
     }
   }
 }

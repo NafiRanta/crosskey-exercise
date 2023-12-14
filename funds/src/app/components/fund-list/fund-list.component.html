@@ -1,4 +1,4 @@
-<div class="fund-info-labels" *ngIf="filteredFunds">
+<div class="fund-info-labels" *ngIf="fundsToDisplay">
   <div class="fund-info-label">
     <div class="name">Fund Name</div>
     <div class="subtext">ISIN. CURRENCY. TYPE. COMPANY</div>
@@ -15,7 +15,7 @@
 </div>
 <hr>
 
-<div *ngFor="let fund of filteredFunds" class="fund-info">
+<div *ngFor="let fund of fundsToDisplay" class="fund-info">
   <app-fund [fund]="fund"></app-fund>
 </div>
 

@@ -6,6 +6,7 @@ import { AsyncPipe, CommonModule } from '@angular/common';
 import { SearchComponent } from './components/search/search.component';
 import { FundListComponent } from './components/fund-list/fund-list.component';
 import { MaterialModule } from './modules/material/material.module';
+import { FilterComponent } from './components/filter/filter.component';
 
 
 @Component({
@@ -17,7 +18,9 @@ import { MaterialModule } from './modules/material/material.module';
       SearchComponent, 
       AsyncPipe, 
       CommonModule, 
-      FundListComponent, MaterialModule]
+      FundListComponent, 
+      MaterialModule, 
+      FilterComponent]
 })
 
 export class AppComponent implements OnInit{

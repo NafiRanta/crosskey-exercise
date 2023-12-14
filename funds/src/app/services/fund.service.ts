@@ -23,6 +23,18 @@ export class FundService {
   private isQuerySubject = new BehaviorSubject<boolean>(false);
   isQuery$ = this.isQuerySubject.asObservable();
 
+  // Observable for fund type filter
+  private filterFundTypeSubject = new BehaviorSubject<string>('All');
+  filterFundTypeSubject$ = this.filterFundTypeSubject.asObservable();
+
+  // Observable for fund company filter
+  private filterFundCompanySubject = new BehaviorSubject<string>('All');
+  filterFundCompanySubject$ = this.filterFundCompanySubject.asObservable();
+
+  // Observable for currency filter
+  private filterCurrencySubject = new BehaviorSubject<string>('All');
+  filterCurrencySubject$ = this.filterCurrencySubject.asObservable();
+
   // Observable for zero results
   private isZeroResultsSubject = new BehaviorSubject<boolean>(false);
   isZeroResults$ = this.isZeroResultsSubject.asObservable();
@@ -35,11 +47,13 @@ export class FundService {
   }
 
   // Set fund array
-  setFundArr(funds: Fund[]) {
+  setFundsArr(funds: Fund[]) {
     this.funds = funds;
-    if (funds.length > 0) {
-      this.setSelectedFund(funds[0]); 
-    }
+  }
+
+  // Get filtered fund array
+  getFunds(): Fund[] {
+    return this.funds;
   }
 
   // Emit selected fund to subscribers
@@ -56,6 +70,21 @@ export class FundService {
   setQuery(searchText: string[]): void {
     this.querySubject.next(searchText);
     this.isQuerySubject.next(true); 
+  }
+
+  // Emit selected currency to subscribers
+  setSelectedFundType(fundType: string): void {
+    this.filterFundTypeSubject.next(fundType);
+  }
+
+  // Emit selected currency to subscribers
+  setSelectedFundCompany(fundCompany: string): void {
+    this.filterFundCompanySubject.next(fundCompany);
+  }
+
+  // Emit selected currency to subscribers
+  setSelectedCurrency(currency: string): void {
+    this.filterCurrencySubject.next(currency);
   }
 
   // Emit zero results to subscribers

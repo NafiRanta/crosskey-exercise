@@ -2,9 +2,10 @@
 <mat-card *ngIf="!isLoading">
   <div class="header-content">
     <app-search></app-search>
+    <app-filter [fundsArr]="allFunds$ | async"></app-filter>
   </div>
   <div class="grid-container" *ngIf="!isZeroResults" >
-    <app-fund-list [allFunds]="allFunds$ | async" class="fund-list"></app-fund-list>
+    <app-fund-list [fundsArr]="allFunds$ | async" class="fund-list"></app-fund-list>
   </div>
 </mat-card>
 <!-- Fetching -->
