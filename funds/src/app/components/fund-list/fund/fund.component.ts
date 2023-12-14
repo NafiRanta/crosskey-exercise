@@ -3,7 +3,7 @@ import { Fund } from 'src/app/models/fund';
 import { FundService } from 'src/app/services/fund.service';
 import { FundDetailsComponent } from '../../fund-details/fund-details.component';
 import { MatIconModule } from '@angular/material/icon';
-import { CommonModule, NgClass, NgIf } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 
 @Component({
     selector: 'app-fund',
@@ -19,7 +19,7 @@ export class FundComponent implements OnInit {
   searchText: string[] = [];
   closePriceDate: any;
   isAccordionOpen: boolean = false;
-  favouriteFunds: string[] = [];
+  favouriteFunds: Fund[] = [];
   isFavourite: boolean = false;
  
   constructor(
@@ -46,12 +46,14 @@ export class FundComponent implements OnInit {
       let favFund = localStorage.getItem('favourites');
       if (favFund) {
         this.favouriteFunds = JSON.parse(favFund);
-        this.favouriteFunds.forEach((id: string) => {
-          if (this.fund.instrumentId === id) {
+        this.favouriteFunds.forEach((fund: Fund) => {
+          if (this.fund.instrumentId === fund.instrumentId) {
             this.isFavourite = true;
           } 
         });
       } 
+
+      this.fundService.getFunds()
     }
 
   // add to local storage array of favourites
@@ -72,11 +74,11 @@ export class FundComponent implements OnInit {
     this.favouriteFunds = JSON.parse(favFunds);
   
     if (addToFavourites) {
-      this.favouriteFunds.push(this.fund.instrumentId);
+      this.favouriteFunds.push(this.fund);
     } else {
-      this.favouriteFunds = this.favouriteFunds.filter((fav: string) => fav !== this.fund.instrumentId);
+      this.favouriteFunds = this.favouriteFunds.filter((fund: Fund) => fund.instrumentId !== this.fund.instrumentId);
     }
-  
+    
     localStorage.setItem('favourites', JSON.stringify(this.favouriteFunds));
     this.fundService.updateFavourites(this.favouriteFunds);
   }

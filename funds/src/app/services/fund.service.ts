@@ -33,8 +33,12 @@ export class FundService {
   isZeroResults$ = this.isZeroResultsSubject.asObservable();
 
   // Observable for favourite changes
-  private favouritesSubject = new BehaviorSubject<string[]>([]);
+  private favouritesSubject = new BehaviorSubject<Fund[]>([]);
   favourites$ = this.favouritesSubject.asObservable();
+
+  // Observable for favourite button click
+  private isFavouriteSubject = new BehaviorSubject<boolean>(false);
+  isFavourite$ = this.isFavouriteSubject.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -75,12 +79,12 @@ export class FundService {
       this.selectedFilters = [];
     }
     
-    if (filter.value !== 'All') { 
+    if (filter.value !== 'None') { 
       this.selectedFilters = this.selectedFilters.filter((selectedFilter: any) => {
         return selectedFilter.id !== filter.id;
       });     
       this.selectedFilters.push(filter); 
-    } else{ // remove filter object that contains 'All' from value
+    } else{ // remove filter object that contains 'None' from value
       this.selectedFilters = this.selectedFilters.filter((selectedFilter: any) => {
         return selectedFilter.id !== filter.id;
       });
@@ -90,12 +94,17 @@ export class FundService {
   }
 
   // Emit favourite changes to subscribers
-  updateFavourites(favourites: string[]): void {
+  updateFavourites(favourites: Fund[]): void {
     this.favouritesSubject.next(favourites);
   }
 
   // Emit zero results to subscribers
   setZeroResults(isZeroResults: boolean): void {
     this.isZeroResultsSubject.next(isZeroResults);
+  }
+
+  // Emit favourite button click to subscribers
+  setFavourite(isFavourite: boolean): void {
+    this.isFavouriteSubject.next(isFavourite);
   }
 }

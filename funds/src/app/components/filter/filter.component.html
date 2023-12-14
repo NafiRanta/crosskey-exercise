@@ -5,25 +5,15 @@
     </mat-select>
 </mat-form-field>
 
-<mat-form-field #selectedType>
+<mat-form-field #selectedFundType>
     <mat-label>Fund Type</mat-label>
-    <mat-select (selectionChange)="onFundTypeSelectionChange($event)" id="type">
+    <mat-select (selectionChange)="onFundTypeSelectionChange($event)" id="fundType">
         <mat-option *ngFor="let type of filterByFundType" [value]="type">{{type}}</mat-option>
     </mat-select>
 </mat-form-field>
 
-<mat-form-field #selectedCompany>
-    <mat-label>Fund Company</mat-label>
-    <mat-select (selectionChange)="onFundTypeSelectionChange($event)" id="company">
-        <mat-option *ngFor="let company of filterByFundCompany" [value]="company">{{company}}</mat-option>
-    </mat-select>
-</mat-form-field>
+<button class="reset-button" (click)="resetFilters()">Reset Filters</button>
 
-<mat-form-field #selectedFilter>
-    <mat-label>Favourites</mat-label>
-    <mat-select (selectionChange)="onFundTypeSelectionChange($event)" id="company">
-        <mat-option *ngFor="let fav of filterByFavourites" [value]="fav">{{fav}}</mat-option>
-    </mat-select>
-</mat-form-field>
+<button id="fav-button" class="favourites-button" (click)="showFavourites()">Show Favourites</button>
 
 

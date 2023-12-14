@@ -5,6 +5,7 @@ import { FundComponent } from './fund/fund.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
 import { NgIf, NgFor, CommonModule } from '@angular/common';
+import { filter } from 'rxjs';
 @Component({
     selector: 'app-fund-list',
     templateUrl: './fund-list.component.html',
@@ -13,12 +14,12 @@ import { NgIf, NgFor, CommonModule } from '@angular/common';
     imports: [CommonModule, MatIconModule, MatTooltipModule, NgFor, FundComponent]
 })
 export class FundListComponent implements OnInit{
-@Input() fundsArr: Fund[];
-searchText: string[] = [];
-fundsToDisplay: Fund[]; 
-selectedFilters: any;
-
-
+  @Input() fundsArr: Fund[];
+  searchText: string[] = [];
+  fundsToDisplay: Fund[]; 
+  selectedFilters: any;
+  favourites: Fund[] = [];
+  
   constructor(private fundService: FundService) { }
 
   // Initialize filteredFunds with allFunds
@@ -36,6 +37,21 @@ selectedFilters: any;
     });
 
     this.fundService.setFundsArr(this.fundsArr);
+
+    this.fundService.isFavourite$.subscribe((isFavourite) => {
+      if (isFavourite) {
+        let favFund = localStorage.getItem('favourites');
+        if (favFund) {
+          this.favourites = JSON.parse(favFund);
+          // show only favourites
+          this.fundsToDisplay = this.fundsArr.filter((fund: Fund) => {
+            return this.favourites.some((favFund: Fund) => {
+              return fund.instrumentId === favFund.instrumentId;
+            });
+          });
+        }
+      }
+    });
     
   }
 
@@ -43,48 +59,48 @@ selectedFilters: any;
     this.fundService.isQuery$.subscribe((query) => {
       if (query) {
         this.searchText = this.fundService.getQuery();
+        console.log('searchText: ', this.searchText)
+        this.filterFunds(this.selectedFilters);
       }
-      console.log('searchText: ', this.searchText)
     });  
     
     this.fundService.isFilter$.subscribe((filterArr) => {
       if (filterArr) {
         this.selectedFilters = filterArr;
+        console.log('selectedFilters: ', this.selectedFilters)
+        this.filterFunds(this.selectedFilters);
       }
-      console.log('selectedFilters: ', this.selectedFilters)
     });
-   this.filterFunds(this.searchText, this.selectedFilters);
-   console.log('fundsArr: ', this.fundsArr);
-  
-
+   
   }
 
   // Display all funds if searchText is empty
   // Set filteredFunds to include only funds that match the isin, fundName, fundType, or fundCompany
-  filterFunds(searchText: string[], filterArr: string[]): void {
-    if (searchText?.length > 0 || filterArr?.length > 0) {
-      // funds to display to show funds that match the search text and selected filters
-      this.fundsToDisplay = this.fundsArr.filter((fund: Fund) => {
-        return searchText.every((word: string) => {
-          return fund.isin.toLowerCase().includes(word.toLowerCase()) ||
-            fund.fundName.toLowerCase().includes(word.toLowerCase()) ||
-            fund.fundType.toLowerCase().includes(word.toLowerCase()) ||
-            fund.fundCompany.toLowerCase().includes(word.toLowerCase());
-        }) || filterArr.every((filter: string) => {
-          return fund.isin.toLowerCase().includes(filter.toLowerCase()) ||
-            fund.fundName.toLowerCase().includes(filter.toLowerCase()) ||
-            fund.fundType.toLowerCase().includes(filter.toLowerCase()) ||
-            fund.fundCompany.toLowerCase().includes(filter.toLowerCase());
+  filterFunds( filterArr: any): void {
+    if (filterArr.length > 0) {
+      console.log('FILTER ARR: ', filterArr);
+      console.log('FILTER ARR LENGTH: ', filterArr.length);
+      this.fundsToDisplay = [...this.fundsArr];
+      for (let i = 0; i < filterArr.length; i++) {
+        console.log('FILTER ARR I: ', filterArr[i]);
+        
+        this.fundsToDisplay = this.fundsToDisplay.filter((fund: Fund) => {
+          return fund.currency === filterArr[i].value || fund.fundType === filterArr[i].value;
         });
-      });
-
-      console.log('fundsToDisplay: ', this.fundsToDisplay);
+      }
+  
+      console.log('FUNDS TO DISPLAY: ', this.fundsToDisplay);
+  
       if (this.fundsToDisplay.length === 0) {
         this.fundService.setZeroResults(true);
+      } else {
+        this.fundService.setZeroResults(false);
       }
       this.fundService.setFundsArr(this.fundsToDisplay);
     } else {
       this.fundsToDisplay = this.fundsArr;
+      this.fundService.setZeroResults(false);
+      this.fundService.setFundsArr(this.fundsToDisplay);
     }
   }
-}
+}  
