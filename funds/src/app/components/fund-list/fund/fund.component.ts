@@ -18,6 +18,7 @@ export class FundComponent implements OnInit {
   @ViewChild('fundInfoData') fundInfoData: ElementRef;
   searchText: string[] = [];
   closePriceDate: any;
+  inceptionDate: any;
   isAccordionOpen: boolean = false;
   favouriteFunds: Fund[] = [];
   isFavourite: boolean = false;
@@ -31,7 +32,7 @@ export class FundComponent implements OnInit {
     // Add even/odd row class to fund 
     ngOnInit() {
       this.closePriceDate = new Date(this.fund?.latestClosePriceDate)?.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })?.replace(/ /g, '-');
-      
+      this.inceptionDate = new Date(this.fund?.startDate)?.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })?.replace(/ /g, '-');
       const allFundInfoData = document.querySelectorAll('.fund-info-data');
       allFundInfoData.forEach((element, index) => {
         if (index % 2 === 0) {

@@ -22,5 +22,6 @@ export class Fund{
     document: any[];
     isFavourite: boolean;
     isGraph: boolean;
+    rate: number;
 }
 

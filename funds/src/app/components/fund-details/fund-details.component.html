@@ -4,69 +4,33 @@
         <div class="name">{{selectedFund.fundName}}</div>
         <div class="subtext">{{selectedFund.isin}}. {{selectedFund.currency}}. {{selectedFund.fundType}} . {{selectedFund.fundCompany}}</div>
     </div>
-    <!--Performance-->
-    <div class="fund-details-value performance">
+    <!--Performance & Graph-->
+    <div class="fund-details-value performance" >
         <div class="performance-header">
             <h1>Performance</h1>
         </div>
-        <div class="fund-details-value facts-table">
-            <div class="fact-info-labels">
-                <div class="fact-info-label">Close Price</div>
-                <div class="fact-info-label"><mat-icon matTooltip="Year High" aria-label="Year High">trending_up</mat-icon></div>
-                <div class="fact-info-label"><mat-icon matTooltip="Year Low" aria-label="Year Low">trending_down</mat-icon></div>
-            </div>
+         <!--Graph -->
+        <div class="fund-details-value graph" *ngIf="selectedFund.isGraph">
+            <app-graph [selectedFund]="selectedFund"></app-graph>    
         </div>
-        <div class="facts-details-data" >
-            <div class="fund-details-value ">
-                <div class="inceptDate">{{ selectedFund.closePrice }}</div>
-            </div>
-            <div class="fund-details-value ">
-                <div class="name">{{ selectedFund.yearHigh || '-' }}</div>
-            </div>
-            <div class="fund-details-value ">
-                <div class="name">{{ selectedFund.yearLow || '-' }}</div>
-            </div>
-        </div>
-        <hr>
-        <div class="fund-details-value graph">
-            <app-graph></app-graph>    
+        <div class="fund-details-value graph" *ngIf="!selectedFund.isGraph">
+            <p>No graph to show</p>   
         </div>
     </div>
-    <!--Key Facts-->
-    <div class="fund-details-value">
-        <div class="facts-header">
-            <h1>Key Facts</h1>
-        </div>
-        <div class="fund-details-value facts-table">
-            <div class="fact-info-labels">
-                <div class="fact-info-label">Inception</div>
-                <div class="fact-info-label">Min Initial Investment</div>
-                <div class="fact-info-label">Management Fee</div>
-            </div>
-        </div>
-        <div class="facts-details-data" >
-            <div class="fund-details-value ">
-                <div class="inceptDate">{{ inceptDate }}</div>
-            </div>
-            <div class="fund-details-value ">
-                <div class="name">{{ selectedFund.startValue }}</div>
-            </div>
-            <div class="fund-details-value ">
-                <div class="name">{{ selectedFund.administrativeFee }}</div>
-            </div>
-        </div>
-    </div> 
     <hr>
     <!--Documents-->
-    <div class="fund-details-data " *ngIf="documents.length > 0">
+    <div class="fund-details-data " >
         <div class="documents-header">
             <h1>Documents</h1>
         </div>
-        <div class="documents-container">
+        <div class="documents-container" *ngIf="documents.length > 0">
             <div *ngFor="let document of documents" class="document-item">
                 <mat-icon>description</mat-icon>
                 <a [href]="document.url" target="_blank">{{ document.title }}</a>
             </div>
+        </div>
+        <div class="fund-details-value graph" *ngIf="!selectedFund.isGraph">
+            <p>No documents to show</p>   
         </div>
     </div> 
 <div>
