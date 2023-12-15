@@ -24,21 +24,17 @@ export class FundService {
   private isQuerySubject = new BehaviorSubject<boolean>(false);
   isQuery$ = this.isQuerySubject.asObservable();
 
-  // Observable for filter event
-  private isFilterSubject = new BehaviorSubject<Object[]>([]);
-  isFilter$ = this.isFilterSubject.asObservable();
-
   // Observable for zero results
   private isZeroResultsSubject = new BehaviorSubject<boolean>(false);
   isZeroResults$ = this.isZeroResultsSubject.asObservable();
 
-  // Observable for favourite changes
-  private favouritesSubject = new BehaviorSubject<Fund[]>([]);
-  favourites$ = this.favouritesSubject.asObservable();
-
   // Observable for favourite button click
   private isFavouriteSubject = new BehaviorSubject<boolean>(false);
   isFavourite$ = this.isFavouriteSubject.asObservable();
+
+  // Observable for all button click
+  private isAllSubject = new BehaviorSubject<boolean>(false);
+  isAll$ = this.isAllSubject.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -73,31 +69,6 @@ export class FundService {
     this.isQuerySubject.next(true); 
   }
 
-  // Emit selected filters to subscribers
-  setFilters(filter: any): void {
-    if (!this.selectedFilters) {
-      this.selectedFilters = [];
-    }
-    
-    if (filter.value !== 'None') { 
-      this.selectedFilters = this.selectedFilters.filter((selectedFilter: any) => {
-        return selectedFilter.id !== filter.id;
-      });     
-      this.selectedFilters.push(filter); 
-    } else{ // remove filter object that contains 'None' from value
-      this.selectedFilters = this.selectedFilters.filter((selectedFilter: any) => {
-        return selectedFilter.id !== filter.id;
-      });
-    }
-      
-      this.isFilterSubject.next(this.selectedFilters);
-  }
-
-  // Emit favourite changes to subscribers
-  updateFavourites(favourites: Fund[]): void {
-    this.favouritesSubject.next(favourites);
-  }
-
   // Emit zero results to subscribers
   setZeroResults(isZeroResults: boolean): void {
     this.isZeroResultsSubject.next(isZeroResults);
@@ -106,5 +77,10 @@ export class FundService {
   // Emit favourite button click to subscribers
   setFavourite(isFavourite: boolean): void {
     this.isFavouriteSubject.next(isFavourite);
+  }
+
+  // Emit all button click to subscribers
+  setAll(isAll: boolean): void {
+    this.isAllSubject.next(isAll);
   }
 }

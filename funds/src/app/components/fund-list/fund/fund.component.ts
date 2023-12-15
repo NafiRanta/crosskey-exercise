@@ -80,7 +80,6 @@ export class FundComponent implements OnInit {
     }
     
     localStorage.setItem('favourites', JSON.stringify(this.favouriteFunds));
-    this.fundService.updateFavourites(this.favouriteFunds);
   }
   
   // Emit selected fund to subscribers

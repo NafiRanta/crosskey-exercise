@@ -1,19 +1,7 @@
-<mat-form-field #selectedCurrency>
-    <mat-label>Currency</mat-label>
-    <mat-select (selectionChange)="onFundTypeSelectionChange($event)" id="currency">
-        <mat-option *ngFor="let currency of filterByCurrency" [value]="currency">{{currency}}</mat-option>
-    </mat-select>
-</mat-form-field>
-
-<mat-form-field #selectedFundType>
-    <mat-label>Fund Type</mat-label>
-    <mat-select (selectionChange)="onFundTypeSelectionChange($event)" id="fundType">
-        <mat-option *ngFor="let type of filterByFundType" [value]="type">{{type}}</mat-option>
-    </mat-select>
-</mat-form-field>
-
-<button class="reset-button" (click)="resetFilters()">Reset Filters</button>
 
 <button id="fav-button" class="favourites-button" (click)="showFavourites()">Show Favourites</button>
+
+<button class="reset-button" (click)="showAll()">All</button>
+
 
 

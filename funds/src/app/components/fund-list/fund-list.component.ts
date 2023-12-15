@@ -17,33 +17,61 @@ export class FundListComponent implements OnInit{
   @Input() fundsArr: Fund[];
   searchText: string[] = [];
   fundsToDisplay: Fund[]; 
-  selectedFilters: any;
   favourites: Fund[] = [];
   
   constructor(private fundService: FundService) { }
 
-  // Initialize filteredFunds with allFunds
-  // Subscribe to isQuery$, if true, set searchText to query
-  // Display funds that match the searchText via filterFunds()
   ngOnInit(): void {
+    // Initialize data
+    this.setGraphProperties();
+    this.fundsToDisplay = this.fundsArr;
+    this.fundService.setFundsArr(this.fundsToDisplay);
 
-    // set isGraph to funds with no graph properties
+    
+   // Setup subscriptions
+    this.subscribeToFavouriteButtonClicked();
+    this.subscribeToAllButtonClicked();  
+  }
+
+  ngOnChanges(): void {
+    // Display funds that matches the searchText
+    this.fundService.isQuery$.subscribe((query) => {
+      if (query) {
+        this.searchText = this.fundService.getQuery();
+        this.filterFunds();
+      }
+    });     
+  }
+
+  // Set isGraph property for each fund
+  setGraphProperties(): void {
     this.fundsArr.forEach((fund: Fund) => {
-      if (fund.change1m === null && fund.change3m == null && fund.change1y === null && fund.change3y === null && fund.yearHigh === null && fund.yearLow === null) {
+      if (this.isGraphPropertiesEmpty(fund)) {
         fund.isGraph = false;
       } else {
         fund.isGraph = true;
       }
     });
+  }
 
-    this.fundService.setFundsArr(this.fundsArr);
+  isGraphPropertiesEmpty(fund: Fund): boolean {
+    return (
+      fund.change1m === null &&
+      fund.change3m === null &&
+      fund.change1y === null &&
+      fund.change3y === null &&
+      fund.yearHigh === null &&
+      fund.yearLow === null
+    );
+  }
 
+  // Display funds that are in favourites
+  subscribeToFavouriteButtonClicked(): void {
     this.fundService.isFavourite$.subscribe((isFavourite) => {
       if (isFavourite) {
         let favFund = localStorage.getItem('favourites');
         if (favFund) {
           this.favourites = JSON.parse(favFund);
-          // show only favourites
           this.fundsToDisplay = this.fundsArr.filter((fund: Fund) => {
             return this.favourites.some((favFund: Fund) => {
               return fund.instrumentId === favFund.instrumentId;
@@ -52,43 +80,29 @@ export class FundListComponent implements OnInit{
         }
       }
     });
-    
   }
 
-  ngOnChanges(): void {
-    this.fundService.isQuery$.subscribe((query) => {
-      if (query) {
-        this.searchText = this.fundService.getQuery();
-        console.log('searchText: ', this.searchText)
-        this.filterFunds(this.selectedFilters);
-      }
-    });  
-    
-    this.fundService.isFilter$.subscribe((filterArr) => {
-      if (filterArr) {
-        this.selectedFilters = filterArr;
-        console.log('selectedFilters: ', this.selectedFilters)
-        this.filterFunds(this.selectedFilters);
+  // Display all funds
+  subscribeToAllButtonClicked(): void {
+    this.fundService.isAll$.subscribe((isAll) => {
+      if (isAll) {
+        this.fundsToDisplay = this.fundsArr;
       }
     });
-   
   }
 
-  // Display all funds if searchText is empty
-  // Set filteredFunds to include only funds that match the isin, fundName, fundType, or fundCompany
-  filterFunds( filterArr: any): void {
-    if (filterArr.length > 0) {
-      console.log('FILTER ARR: ', filterArr);
-      console.log('FILTER ARR LENGTH: ', filterArr.length);
-      this.fundsToDisplay = [...this.fundsArr];
-      for (let i = 0; i < filterArr.length; i++) {
-        console.log('FILTER ARR I: ', filterArr[i]);
-        
-        this.fundsToDisplay = this.fundsToDisplay.filter((fund: Fund) => {
-          return fund.currency === filterArr[i].value || fund.fundType === filterArr[i].value;
+  // Display funds that matches the searchText
+  filterFunds(): void {
+    if (this.searchText?.length > 0) {
+      // Use filter to include only funds that match the searchText
+      this.fundsToDisplay = this.fundsArr.filter((fund: Fund) => {
+        return this.searchText.some((searchText: string) => {
+          return (fund.fundName?.toLowerCase() || '').includes(searchText.toLowerCase()) 
+          || (fund.fundCompany?.toLowerCase() || '').includes(searchText.toLowerCase()) 
+          || (fund.fundType?.toLowerCase() || '').includes(searchText.toLowerCase()) 
+          || (fund.isin?.toLowerCase() || '').includes(searchText.toLowerCase());
         });
-      }
-  
+      });
       console.log('FUNDS TO DISPLAY: ', this.fundsToDisplay);
   
       if (this.fundsToDisplay.length === 0) {
