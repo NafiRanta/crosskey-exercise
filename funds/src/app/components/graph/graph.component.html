@@ -1,49 +1,16 @@
 <div class="description">
-    <p class="conversion">1 {{selectedFund.currency}} = {{performance1m.conversionRate}} USD </p>
     <p class="est-date">Latest Estimation Date: {{estimationDate}}</p>
 </div>
 <div class="container">
-    <div>
-        
-    </div>
-    <div class="change1m">
-        <h1>Change1m</h1>
+    <div *ngFor="let period of ['change1m', 'change3m', 'change1y', 'change3y']" [class]="period">
+        <h1>{{period}}</h1>
         <div>
-            <p>Fund: {{ performance1m.fund }}</p>
-            <p>Benchmark: {{ performance1m.benchmark }}</p>
-            <p>Rate: {{ performance1m.rate }}</p>
-            <p>Year High: {{ performance1m.yearHigh }}</p>
-            <p>Year Low: {{ performance1m.yearLow }}</p>
-        </div>
-    </div>
-    <div class="change3m">
-        <h1>Change3m</h1>
-        <div>
-            <p>Fund: {{ performance3m.fund }}</p>
-            <p>Benchmark: {{ performance3m.benchmark }}</p>
-            <p>Rate: {{ performance3m.rate }}</p>
-            <p>Year High: {{ performance3m.yearHigh }}</p>
-            <p>Year Low: {{ performance3m.yearLow }}</p>
-        </div>
-    </div>
-    <div class="change1y">
-        <h1>Change1y</h1>
-        <div>
-            <p>Fund: {{ performance1y.fund }}</p>
-            <p>Benchmark: {{ performance1y.benchmark }}</p>
-            <p>Rate: {{ performance1y.rate }}</p>
-            <p>Year High: {{ performance1y.yearHigh }}</p>
-            <p>Year Low: {{ performance1y.yearLow }}</p>
-        </div>
-    </div>
-    <div class="change3y">
-        <h1>Change3y</h1>
-        <div>
-            <p>Fund: {{ performance3y.fund }}</p>
-            <p>Benchmark: {{ performance3y.benchmark }}</p>
-            <p>Rate: {{ performance3y.rate }}</p>
-            <p>Year High: {{ performance3y.yearHigh }}</p>
-            <p>Year Low: {{ performance3y.yearLow }}</p>
+            <p matTooltip="{{ performanceData[period].benchmark }}">Benchmark: {{ performanceData[period].benchmark.toFixed(2)}}</p>
+            <p>Fund Change: {{ performanceData[period].fundChange }}</p>
+            <p>Rate: {{ performanceData[period].rate }}</p>
+            <p matTooltip="{{ performanceData[period].fundRate }}">Current Rate: {{ performanceData[period].fundRate.toFixed(2)}}</p>
+            <p matTooltip="{{ performanceData[period].yearHigh }}">Year High: {{ performanceData[period].yearHigh.toFixed(2)}}</p>
+            <p matTooltip="{{ performanceData[period].yearLow }}">Year Low: {{ performanceData[period].yearLow.toFixed(2)}}</p>
         </div>
     </div>
 </div>
