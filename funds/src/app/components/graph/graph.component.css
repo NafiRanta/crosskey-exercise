@@ -32,3 +32,28 @@
 .empty {
   margin-bottom: 49pxz;
 }
+
+.mat-elevation-z8 {
+  width: 100%;
+  overflow-x: auto;
+  margin-bottom: 20px; /* Adjust as needed for spacing between the table and other elements */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 8px; /* Adjust as needed for spacing between cell content and cell borders */
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2; /* Background color for header cells */
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9; /* Alternate row background color */
+}

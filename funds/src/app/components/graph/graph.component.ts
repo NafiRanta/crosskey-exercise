@@ -7,14 +7,23 @@ import { NgChartsModule } from 'ng2-charts';
 import { Chart, registerables  } from 'chart.js';
 import { FundService } from 'src/app/services/fund.service';
 import annotationPlugin  from 'chartjs-plugin-annotation';
+import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 
+interface TableRow {
+    title: string;
+    change1m: number; 
+    change3m: number; 
+    change1y: number; 
+    change3y: number; 
+  }
 @Component({
     selector: 'app-graph',
     templateUrl: './graph.component.html',
     styleUrls: ['./graph.component.css'],
     standalone: true,
-    imports: [CommonModule, NgFor, MaterialModule, NgChartsModule]
+    imports: [CommonModule, NgFor, MaterialModule, NgChartsModule, MatTableModule]
 })
+
 export class GraphComponent implements OnInit{
     @Input() selectedFund: Fund
     graphFunds: Fund[];
@@ -22,6 +31,14 @@ export class GraphComponent implements OnInit{
     estimationDate: string;
     performanceChart: Chart;
     performanceCharts: Chart[] = [];
+    displayedColumns: string[] = ['title', '1m', '3m', '1y', '3y'];
+    dataSource = new MatTableDataSource<TableRow>([]);
+    
+    tableData: TableRow[] = [
+        {title: 'Fund', change1m: 0, change3m: 0, change1y: 0, change3y: 0},
+        {title: 'Benchmark', change1m: 0, change3m: 0, change1y: 0, change3y: 0}
+    ];
+ 
 
     constructor(
         private graphService: GraphService, private fundService: FundService) {
@@ -32,11 +49,22 @@ export class GraphComponent implements OnInit{
     ngOnInit() {
         this.graphFunds = this.graphService.getFundsWithGraph();
         this.estimationDate = this.fundService.formatDate(this.selectedFund.estimationDate);
-        
-        this.performanceData['change1m'] = this.calculatePerformanceData('change1m');
-        this.performanceData['change3m'] = this.calculatePerformanceData('change3m');
-        this.performanceData['change1y'] = this.calculatePerformanceData('change1y');
-        this.performanceData['change3y'] = this.calculatePerformanceData('change3y');
+   
+     // Initialize tableData array with empty values
+ 
+    console.log("table", this.tableData);
+    
+    //Update values in tableData
+    this.tableData[0].change1m = this.selectedFund.change1m;
+    this.tableData[0].change3m = this.selectedFund.change3m;
+    this.tableData[0].change1y = this.selectedFund.change1y;
+    this.tableData[0].change3y = this.selectedFund.change3y;
+    this.tableData[1].change1m = this.graphService.calculateBenchmark('change1m', this.graphFunds);
+    this.tableData[1].change3m = this.graphService.calculateBenchmark('change3m', this.graphFunds);
+    this.tableData[1].change1y = this.graphService.calculateBenchmark('change1y', this.graphFunds);
+    this.tableData[1].change3y = this.graphService.calculateBenchmark('change3y', this.graphFunds);
+    
+    this.dataSource.data = this.tableData;  // Update dataSource with the new tableData
         
          // Create a new performance chart for the selected fund
         const chartConfig = this.createChartPerformance();
@@ -46,17 +74,6 @@ export class GraphComponent implements OnInit{
     ngOnAfterViewInit() {
         const chartConfig = this.createChartPerformance();
         this.performanceChart = new Chart('canvas', chartConfig);
-    }
-
-    calculatePerformanceData(period: string): any {
-        return {
-            "fundChange": this.selectedFund[period],
-            "fundRate": this.graphService.calculateFundRate(this.selectedFund, period),
-            "benchmark": this.graphService.calculateBenchmark(period, this.graphFunds),
-            "rate": this.selectedFund.rate,
-            "yearHigh": this.graphService.caculateYearHigh(this.selectedFund),
-            "yearLow": this.graphService.caculateYearLow(this.selectedFund),
-        };
     }
 
     createChartPerformance(): any {

@@ -32,7 +32,7 @@
   align-content: center;
   justify-content: center;
   align-items: center;
-
+  width: -webkit-fill-available;
   .name {
     margin: 8px;
   }

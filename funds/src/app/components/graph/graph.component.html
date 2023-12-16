@@ -1,32 +1,43 @@
 <div class="description">
-    <p class="est-date">Latest Estimation Date: {{estimationDate}}</p>
+    <p class="est-date">Latest Estimation Date: {{ estimationDate }}</p>
 </div>
+
 <div class="container">
-    <div class="performance-label">
-        <h1>FACT/PERIOD</h1>
-        <div>
-            <p>Benchmark:</p>
-            <p>Fund Change:</p>
-            <p>Rate:</p>
-            <p>Current Rate:</p>
-            <p >Year High:</p>
-            <p >Year Low:</p>
-        </div>
-    </div>
-    <div *ngFor="let period of ['change1m', 'change3m', 'change1y', 'change3y']" [class]="period">
-        <h1>{{period}}</h1>
-        <div>
-            <p matTooltip="{{ performanceData[period].benchmark }}"> {{ performanceData[period].benchmark.toFixed(2)}}</p>
-            <p>{{ performanceData[period].fundChange }}</p>
-            <p> {{performanceData[period].rate }}</p>
-            <p matTooltip="{{ performanceData[period].fundRate }}">{{ performanceData[period].fundRate.toFixed(2)}}</p>
-            <p matTooltip="{{ performanceData[period].yearHigh }}"> {{ performanceData[period].yearHigh.toFixed(2)}}</p>
-            <p matTooltip="{{ performanceData[period].yearLow }}"> {{ performanceData[period].yearLow.toFixed(2)}}</p>
-        </div>
-    </div>
+    <!-- Table -->
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-        <div>
-            <canvas #canvas id="canvas" >{{performanceChart}}</canvas>
-        </div>
+        <!-- Column definitions -->
+        <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
+            <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
+            <td mat-cell *matCellDef="let element">
+                <!-- Include the bindings for title, change1m, change3m, change1y, and change3y -->
+                <ng-container *ngIf="column === 'title'">
+                    {{ element.title }}
+                </ng-container>
+                <ng-container *ngIf="column === '1m'">
+                    {{ element.change1m | number: '1.2-2' }}
+                </ng-container>
+                <ng-container *ngIf="column === '3m'">
+                    {{ element.change3m | number: '1.2-2' }}
+                </ng-container>
+                <ng-container *ngIf="column === '1y'">
+                    {{ element.change1y | number: '1.2-2' }}
+                </ng-container>
+                <ng-container *ngIf="column === '3y'">
+                    {{ element.change3y | number: '1.2-2' }}
+                </ng-container>
+            </td>
+        </ng-container>
 
+        <!-- Header row -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+        <!-- Data rows -->
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <!-- Graph -->
+    <div>
+        <canvas #canvas id="canvas">{{ performanceChart }}</canvas>
+    </div>
 </div>
