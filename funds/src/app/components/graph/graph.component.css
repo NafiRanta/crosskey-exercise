@@ -22,3 +22,13 @@
 .change3y {
   margin-right: 32px;
 }
+
+.performance-label {
+  display: flex;
+  flex-direction: column;
+  margin-right: 14px;
+}
+
+.empty {
+  margin-bottom: 49pxz;
+}

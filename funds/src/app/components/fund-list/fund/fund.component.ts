@@ -31,8 +31,9 @@ export class FundComponent implements OnInit {
     // Format date to DD-MMM-YYYY
     // Add even/odd row class to fund 
     ngOnInit() {
-      this.closePriceDate = new Date(this.fund?.latestClosePriceDate)?.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })?.replace(/ /g, '-');
-      this.inceptionDate = new Date(this.fund?.startDate)?.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })?.replace(/ /g, '-');
+      this.closePriceDate = this.fundService.formatDate(this.fund?.latestClosePriceDate);
+      this.inceptionDate = this.fundService.formatDate(this.fund?.startDate);
+      
       const allFundInfoData = document.querySelectorAll('.fund-info-data');
       allFundInfoData.forEach((element, index) => {
         if (index % 2 === 0) {

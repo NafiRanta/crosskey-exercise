@@ -2,15 +2,31 @@
     <p class="est-date">Latest Estimation Date: {{estimationDate}}</p>
 </div>
 <div class="container">
+    <div class="performance-label">
+        <h1>FACT/PERIOD</h1>
+        <div>
+            <p>Benchmark:</p>
+            <p>Fund Change:</p>
+            <p>Rate:</p>
+            <p>Current Rate:</p>
+            <p >Year High:</p>
+            <p >Year Low:</p>
+        </div>
+    </div>
     <div *ngFor="let period of ['change1m', 'change3m', 'change1y', 'change3y']" [class]="period">
         <h1>{{period}}</h1>
         <div>
-            <p matTooltip="{{ performanceData[period].benchmark }}">Benchmark: {{ performanceData[period].benchmark.toFixed(2)}}</p>
-            <p>Fund Change: {{ performanceData[period].fundChange }}</p>
-            <p>Rate: {{ performanceData[period].rate }}</p>
-            <p matTooltip="{{ performanceData[period].fundRate }}">Current Rate: {{ performanceData[period].fundRate.toFixed(2)}}</p>
-            <p matTooltip="{{ performanceData[period].yearHigh }}">Year High: {{ performanceData[period].yearHigh.toFixed(2)}}</p>
-            <p matTooltip="{{ performanceData[period].yearLow }}">Year Low: {{ performanceData[period].yearLow.toFixed(2)}}</p>
+            <p matTooltip="{{ performanceData[period].benchmark }}"> {{ performanceData[period].benchmark.toFixed(2)}}</p>
+            <p>{{ performanceData[period].fundChange }}</p>
+            <p> {{performanceData[period].rate }}</p>
+            <p matTooltip="{{ performanceData[period].fundRate }}">{{ performanceData[period].fundRate.toFixed(2)}}</p>
+            <p matTooltip="{{ performanceData[period].yearHigh }}"> {{ performanceData[period].yearHigh.toFixed(2)}}</p>
+            <p matTooltip="{{ performanceData[period].yearLow }}"> {{ performanceData[period].yearLow.toFixed(2)}}</p>
         </div>
     </div>
+
+        <div>
+            <canvas #canvas id="canvas" >{{performanceChart}}</canvas>
+        </div>
+
 </div>

@@ -49,5 +49,41 @@ export class GraphService {
   caculateYearLow(fund: Fund): number {
     return (( fund.rate - fund.yearLow ) / 100) * 100;
   }
+
+  formatChartDate(date: Date): string {
+    return date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })?.replace(/ /g, '-');
+  }
+
+  getChartChangeDataset(graphFund: Fund): any {
+    return [
+      graphFund['change3y'],
+      graphFund['change1y'],
+      graphFund['change3m'],
+      graphFund['change1m'],
+      graphFund['closePrice']
+  ];
+}
+
+  getYearHighAnnotation(graphFund: Fund): any {
+    return {
+      type: 'line',
+      borderColor: 'blue',
+      borderWidth: 1,
+      borderDash: [1, 1],
+      scaleID: 'y',
+      value: graphFund.yearHigh
+    }
+  }
+
+  getYearLowAnnotation(graphFund: Fund): any {
+    return {
+      type: 'line',
+      borderColor: 'blue',
+      borderWidth: 1,
+      borderDash: [1, 1],
+      scaleID: 'y',
+      value: graphFund.yearLow
+    }
+  }
 }
 
