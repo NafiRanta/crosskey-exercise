@@ -71,27 +71,67 @@ export class FundListComponent implements OnInit{
    // Setup subscriptions
     this.subscribeToFavouriteButtonClicked();
     this.subscribeToAllButtonClicked();  
-    this.favouriteService
+   
   }
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
+    this.subscribeToFavouriteButtonClicked();
+    this.subscribeToAllButtonClicked();  
   }
 
   ngOnChanges(): void {
-        // Display funds that matches the searchText
-        this.fundService.isQuery$.subscribe((query) => {
-          if (query) {
-            this.searchText = this.fundService.getQuery();
-            console.log('SEARCH TEXT: ', this.searchText)
-            this.filterFunds();
-            // Update the data source with the filtered funds
-            this.dataSource.data = this.fundsToDisplay;
-            // Trigger change detection to update the UI
-            this.changeDetectorRef.detectChanges();
-          }
-        });
     this.setFavouriteProperties();
+     this.subscribeToFavouriteButtonClicked();
+    this.subscribeToAllButtonClicked(); 
+
+    // Display funds that matches the searchText
+    this.fundService.isQuery$.subscribe((query) => {
+      if (query) {
+        this.searchText = this.fundService.getQuery();
+        console.log('SEARCH TEXT: ', this.searchText)
+        this.filterFunds();
+        // Update the data source with the filtered funds
+        this.dataSource.data = this.fundsToDisplay;
+        // Trigger change detection to update the UI
+        this.changeDetectorRef.detectChanges();
+      }
+    });    
+  }
+
+   // Display funds that are in favourites
+   subscribeToFavouriteButtonClicked(): void {
+    this.fundService.isFavourite$.subscribe((isFavourite) => {
+      if (isFavourite) {
+        let favFund = localStorage.getItem('favourites');
+        if (favFund) {
+          this.favourites = JSON.parse(favFund);
+          console.log('FAV FUND: ', this.favourites);
+          // set isFavourite property to true if fund is in favourites
+          this.favourites.forEach((fund: Fund) => {
+            if (this.favourites.some((favFund: Fund) => {
+              return fund.instrumentId === favFund.instrumentId;
+            })) {
+              fund.isFavourite = true;
+            } else {
+              fund.isFavourite = false;
+            }
+          });
+          this.fundsToDisplay = this.favourites;
+        }
+      }
+
+    });
+  }
+
+  // Display all funds
+  subscribeToAllButtonClicked(): void {
+    this.fundService.isAll$.subscribe((isAll) => {
+      if (isAll) {
+      this.setFavouriteProperties();
+        this.fundsToDisplay = this.fundsArr;
+      }
+    });
   }
 
   // Set isGraph property for each fund
@@ -134,31 +174,7 @@ export class FundListComponent implements OnInit{
     );
   }
 
-  // Display funds that are in favourites
-  subscribeToFavouriteButtonClicked(): void {
-    this.fundService.isFavourite$.subscribe((isFavourite) => {
-      if (isFavourite) {
-        let favFund = localStorage.getItem('favourites');
-        if (favFund) {
-          this.favourites = JSON.parse(favFund);
-          this.fundsToDisplay = this.fundsArr.filter((fund: Fund) => {
-            return this.favourites.some((favFund: Fund) => {
-              return fund.instrumentId === favFund.instrumentId;
-            });
-          });
-        }
-      }
-    });
-  }
 
-  // Display all funds
-  subscribeToAllButtonClicked(): void {
-    this.fundService.isAll$.subscribe((isAll) => {
-      if (isAll) {
-        this.fundsToDisplay = this.fundsArr;
-      }
-    });
-  }
 
   // Display funds that matches the searchText
   filterFunds(): void {
@@ -181,9 +197,10 @@ export class FundListComponent implements OnInit{
       }
       this.fundService.setFundsArr(this.fundsToDisplay);
     } else {
-      this.fundsToDisplay = this.fundsArr;
+      this.subscribeToAllButtonClicked();
+      this.subscribeToFavouriteButtonClicked();
       this.fundService.setZeroResults(false);
-      this.fundService.setFundsArr(this.fundsToDisplay);
+      //this.fundService.setFundsArr(this.fundsToDisplay);
     }
   }
 

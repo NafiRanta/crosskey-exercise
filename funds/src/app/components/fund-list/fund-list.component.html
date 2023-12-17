@@ -1,4 +1,4 @@
-<div class="fund-info-labels" *ngIf="fundsToDisplay">
+
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)" class="mat-elevation-z8" >
     <!-- Favourite Column -->
@@ -119,6 +119,5 @@
     <!-- Data rows -->
     <tr mat-row *matRowDef="let row; columns: fundColumns;"></tr>
   </table>
-</div>
 </div>
 

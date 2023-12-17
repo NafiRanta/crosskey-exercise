@@ -1,8 +1,16 @@
 <!-- Success and data fetched -->
 <mat-card *ngIf="!isLoading" class="main-container">
   <div class="header-content">
-    <app-search></app-search>
+    <div class="header-nav">
+      <div><h1>CROSSKEY</h1></div>
+      <div (click)="showFavourites()"><mat-icon>star</mat-icon>Favourites</div>
+      <div (click)="showAll()">All</div>
+    </div>
+    <div class="search">s
+      <app-search></app-search>
     <app-filter [fundsArr]="allFunds$ | async"></app-filter>
+    </div>
+    
   </div>
   <div class="grid-container" *ngIf="!isZeroResults" >
     <app-fund-list [fundsArr]="allFunds$ | async" class="fund-list"></app-fund-list>

@@ -66,10 +66,25 @@ export class AppComponent implements OnInit{
         this.isError = true;
         console.error('There was an error!', error);
       }
-    })
+    })  
   }
+
   onSelectedFund(fund: Fund) {
     this.selectedFund = fund;
+  }
+
+  showAll(): void {
+    this.fundService.setAll(true);
+    this.fundService.setFavourite(false);
+    this.fundService.setQuery([]);
+   
+  }
+
+  showFavourites(): void {
+    this.fundService.setFavourite(true);
+    this.fundService.setAll(false); 
+    this.fundService.setQuery([]);
+ 
   }
 }
 
