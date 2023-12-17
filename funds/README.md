@@ -1,27 +1,75 @@
-# Funds
+# Crosskey Frontend Test Assignment
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.6.
+- This is a web application developed for Crosskey frontend test assignment.
+- This app allows users to view, search, add/remove to favourites, and analyze financial data related to funds.
+- The application is built using Angular 17 and the data is fetched from a REST API.
 
-## Development server
+## Table of Contents
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- [Features](#features)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Usage](#usage)
+- [Testing](#testing)
+- [Author](#author)
 
-## Code scaffolding
+## Features
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **View Funds**: Display a list of funds and their performance displayed using mat-table
+- **View Individual Fund**: Display individual fund details using mat-dialog
+- **Sort Funds:** Sort funds by various header cells using mat-sort-header
+- **Search Funds:** Search for funds by name, company and ISIN using mat-form-field and mat-input
+- **Local Storage Management:** Add and remove favourites to local storage.
+- **Benchmark Analysis:** Evaluate funds against benchmark performance based on average respective periods of all funds.
+- **Graphical Representation:** Visualize fund performance using Chart.js
+- **Data Insights:** Access key financial metrics for each fund.
 
-## Build
+## Getting Started
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Prerequisites
 
-## Running unit tests
+Before you begin, ensure you have the following installed:
+
+- [Node.js](https://nodejs.org/)
+- [Angular CLI](https://angular.io/cli)
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/NafiRanta/crosskey-exercise.git
+
+   ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd funds
+   ```
+
+3. Install the dependencies:
+
+   ```bash
+    npm install
+   ```
+
+## Usage
+
+1. Run the application:
+
+   ```bash
+   ng serve
+   ```
+
+2. Navigate to `http://localhost:4200/` in your browser.
+3. Explore the application!
+
+## Testing
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+## Author
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- Nafisah Rantasalmi

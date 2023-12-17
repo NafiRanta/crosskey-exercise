@@ -6,7 +6,16 @@
 }
 
 .est-date {
-  margin-top: -26px;
+  margin-top: -25px;
+  font-size: 11px;
+}
+.benchmark-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: -20px;
+  font-size: 11px;
 }
 
 .container {
@@ -56,4 +65,14 @@ th {
 
 tr:nth-child(even) {
   background-color: #f9f9f9; /* Alternate row background color */
+}
+
+.performance-table-header-cell {
+  background: inherit;
+  font-size: 14x;
+}
+
+.performance-table-cell {
+  background: inherit;
+  font-size: 12px;
 }
