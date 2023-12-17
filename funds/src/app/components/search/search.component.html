@@ -2,13 +2,17 @@
     <!-- Search input -->
     <input
       #searchInput
-      (keyup.enter)="updateSearch()"
+      (keyup.enter)="search()"
+      (input)="onInputChange($event)"
       matInput
       placeholder="Search funds by ISIN, name, type, company"
       class="search-input"
     />
-    <button mat-button matSuffix *ngIf="!showCloseIcon" (click)="updateSearch()">
+    <button mat-button matSuffix *ngIf="!showCancelButton" (click)="search()">
       <mat-icon>search</mat-icon>
+    </button>
+    <button mat-button matSuffix *ngIf="showCancelButton" (click)="clearInput()">
+      <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>
 
@@ -22,7 +26,7 @@
         <button
           mat-button
           matSuffix
-          (click)="cancelSearch(item)"
+          (click)="resetSearch(item)"
         >
           <mat-icon>close</mat-icon>
         </button>

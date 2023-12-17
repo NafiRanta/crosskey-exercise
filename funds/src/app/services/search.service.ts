@@ -13,6 +13,10 @@ export class SearchService {
   private isQuerySubject = new BehaviorSubject<boolean>(false);
   isQuery$ = this.isQuerySubject.asObservable();
 
+  // Observable for reset search
+  private resetSubject = new BehaviorSubject<boolean>(false);
+  reset$ = this.resetSubject.asObservable();
+
   // Observable for zero results
   private isZeroResultsSubject = new BehaviorSubject<boolean>(false);
   isZeroResults$ = this.isZeroResultsSubject.asObservable();
@@ -28,11 +32,15 @@ export class SearchService {
       this.querySubject.next(searchText);
       this.isQuerySubject.next(true); 
     }
-  
+
     // Emit zero results to subscribers
     setZeroResults(isZeroResults: boolean): void {
       this.isZeroResultsSubject.next(isZeroResults);
     }
 
-  
+    // Emit reset search to subscribers
+    resetSearch(): void {
+      this.querySubject.next([]);
+      this.resetSubject.next(true);
+    }
 }

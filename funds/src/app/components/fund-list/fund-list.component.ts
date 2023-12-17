@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, ChangeDetectorRef, ViewChild  } from '@angular/core';
 import { Fund } from 'src/app/models/fund';
 import { FundService } from 'src/app/services/fund.service';
-import { FundComponent } from './fund/fund.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
@@ -34,14 +33,14 @@ interface TableRow {
     templateUrl: './fund-list.component.html',
     styleUrls: ['./fund-list.component.css'],
     standalone: true,
-    imports: [CommonModule, MatSortModule, FundDetailsComponent, MatTableModule, MatIconModule, MatTooltipModule, NgFor, FundComponent]
+    imports: [CommonModule, MatSortModule, FundDetailsComponent, MatTableModule, MatIconModule, MatTooltipModule, NgFor]
 })
 
 export class FundListComponent implements OnInit{
   @Input() allFunds: Fund[];
   searchText: string[] = [];
   fundsToDisplay: Fund[]; 
-  favourites: Fund[] = [];
+
   fundColumns: string[] = ['favourite', 'name', 'type', 'change1m', 'change3m', 'change1y', 'change3y', 'yearHigh', 'yearLow', 'currency', 'closePriceDate', 'inceptionDate', 'view'];
   dataSource: MatTableDataSource<Fund>;
   favouriteFunds: Fund[] = [];
@@ -62,45 +61,46 @@ export class FundListComponent implements OnInit{
 
   ngOnInit(): void {
     // Initialize data
-    this.setGraphProperties();
-    this.setFavouriteProperties();
-    this.dataSource = new MatTableDataSource(this.allFunds);
-    
+    this.fundsToDisplay = this.allFunds;
+    this.dataSource = new MatTableDataSource(this.fundsToDisplay);
 
    // Setup subscriptions
     this.subscribeToFavouriteButtonClicked();
-    this.subscribeToAllButtonClicked();  
-   
+    this.subscribeToAllButtonClicked();      
   }
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
-    this.subscribeToFavouriteButtonClicked();
-    this.subscribeToAllButtonClicked();  
+    this.subscribeToResetSearch(); 
+    this.subscribeToQuery();
   }
 
   ngOnChanges(): void {
-    this.setFavouriteProperties();
-     this.subscribeToFavouriteButtonClicked();
-    this.subscribeToAllButtonClicked(); 
     this.subscribeToQuery();   
+    this.subscribeToResetSearch();
   }
 
-  // 
+  // subscribe to reset search
+  subscribeToResetSearch(): void {
+    this.searchService.reset$.subscribe((reset) => {
+      this.searchText = this.searchService.getQuery();
+      if (reset && this.searchText.length < 0) {
+        this.fundsToDisplay = this.allFunds;
+        console.log('RESET SEARCH: ',this.searchText );
+      } else {
+        this.searchService.setQuery(this.searchText);
+        this.filterFunds(this.searchText);
+      }
+    });
+  }
   
   // Display funds that matches the searchText
   subscribeToQuery(): void {
        // Display funds that matches the searchText
        this.searchService.isQuery$.subscribe((query) => {
         if (query) {
-          this.searchText = this.searchService.getQuery();
-          console.log('SEARCH TEXT: ', this.searchText)
-          this.filterFunds();
-          // Update the data source with the filtered funds
-          this.dataSource.data = this.fundsToDisplay;
-          // Trigger change detection to update the UI
-          this.changeDetectorRef.detectChanges();
-        } 
+          this.filterFunds( this.searchService.getQuery());
+        }
       });  
     }
 
@@ -110,22 +110,9 @@ export class FundListComponent implements OnInit{
       if (isFavourite) {
         let favFund = localStorage.getItem('favourites');
         if (favFund) {
-          this.favourites = JSON.parse(favFund);
-          console.log('FAV FUND: ', this.favourites);
-          // set isFavourite property to true if fund is in favourites
-          this.favourites.forEach((fund: Fund) => {
-            if (this.favourites.some((favFund: Fund) => {
-              return fund.instrumentId === favFund.instrumentId;
-            })) {
-              fund.isFavourite = true;
-            } else {
-              fund.isFavourite = false;
-            }
-          });
-          this.fundsToDisplay = this.favourites;
+          this.fundsToDisplay = JSON.parse(favFund);
         }
       }
-
     });
   }
 
@@ -133,78 +120,33 @@ export class FundListComponent implements OnInit{
   subscribeToAllButtonClicked(): void {
     this.fundService.isAll$.subscribe((isAll) => {
       if (isAll) {
-      this.setFavouriteProperties();
+      //this.setFavouriteProperties();
         this.fundsToDisplay = this.allFunds;
       }
     });
   }
-
-  // Set isGraph property for each fund
-  setGraphProperties(): void {
-    this.allFunds.forEach((fund: Fund) => {
-      if (this.isGraphPropertiesEmpty(fund)) {
-        fund.isGraph = false;
-      } else {
-        fund.isGraph = true;
-      }
-    });
-  }
-
-  // set isFavorite property for each fund
-  setFavouriteProperties(): void {
-    let favFund = localStorage.getItem('favourites');
-    if (favFund) {
-      this.favourites = JSON.parse(favFund);
-    }
-
-    this.allFunds.forEach((fund: Fund) => {
-      if (this.favourites.some((favFund: Fund) => {
-        return fund.instrumentId === favFund.instrumentId;
-      })) {
-        fund.isFavourite = true;
-      } else {
-        fund.isFavourite = false;
-      }
-    });
-  }
-
-  isGraphPropertiesEmpty(fund: Fund): boolean {
-    return (
-      fund.change1m === null &&
-      fund.change3m === null &&
-      fund.change1y === null &&
-      fund.change3y === null &&
-      fund.yearHigh === null &&
-      fund.yearLow === null
-    );
-  }
-
-
-
   // Display funds that matches the searchText
-  filterFunds(): void {
-    if (this.searchText?.length > 0) {
+  filterFunds(searchText: string[]): void {
+    if (searchText?.length > 0) {
       // Use filter to include only funds that match the searchText
       this.fundsToDisplay = this.allFunds.filter((fund: Fund) => {
-        return this.searchText.some((searchText: string) => {
-          return (fund.fundName?.toLowerCase() || '').includes(searchText.toLowerCase()) 
-          || (fund.fundCompany?.toLowerCase() || '').includes(searchText.toLowerCase()) 
-          || (fund.fundType?.toLowerCase() || '').includes(searchText.toLowerCase()) 
-          || (fund.isin?.toLowerCase() || '').includes(searchText.toLowerCase());
+        return searchText.some((word: string) => {
+          return (fund.fundName?.toLowerCase() || '').includes(word.toLowerCase()) 
+          || (fund.fundCompany?.toLowerCase() || '').includes(word.toLowerCase()) 
+          || (fund.fundType?.toLowerCase() || '').includes(word.toLowerCase()) 
+          || (fund.isin?.toLowerCase() || '').includes(word.toLowerCase());
         });
       });
       console.log('FUNDS TO DISPLAY: ', this.fundsToDisplay);
+      this.dataSource.data = this.fundsToDisplay;
+      this.changeDetectorRef.detectChanges();
   
       if (this.fundsToDisplay.length === 0) {
         this.searchService.setZeroResults(true);
       } else {
         this.searchService.setZeroResults(false);
       }
-    } else {
-      this.subscribeToAllButtonClicked();
-      this.subscribeToFavouriteButtonClicked();
-      this.searchService.setZeroResults(false);
-    }
+    } 
   }
 
   addToFav(selectedFund: Fund) {
