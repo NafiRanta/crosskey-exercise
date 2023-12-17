@@ -69,15 +69,16 @@ export class FundListComponent implements OnInit{
 
    // Setup subscriptions
     this.subscribeToFavouriteButtonClicked();
-    this.subscribeToAllButtonClicked();      
+    this.subscribeToAllButtonClicked(); 
+    this.subscribeToQuery();     
   }
 
   
   ngAfterViewInit() {
     // Sort funds by column
     this.dataSource.sort = this.sort;
-    this.subscribeToResetSearch(); 
-    this.subscribeToQuery();
+    //this.subscribeToResetSearch(); 
+    //this.subscribeToQuery();
 
     // Custom sort by date and string 
     this.dataSource.sortingDataAccessor = (item, property) => {
@@ -97,20 +98,18 @@ export class FundListComponent implements OnInit{
   }
 
   ngOnChanges(): void {
-    this.subscribeToQuery();   
+    //this.subscribeToQuery();   
     this.subscribeToResetSearch();
+    this.subscribeToAllButtonClicked(); 
   }
 
   // subscribe to reset search
   subscribeToResetSearch(): void {
     this.searchService.reset$.subscribe((reset) => {
-      this.searchText = this.searchService.getQuery();
-      if (reset && this.searchText.length < 0) {
+      if (reset) {
         this.fundsToDisplay = this.allFunds;
-        console.log('RESET SEARCH: ',this.searchText );
-      } else {
-        this.searchService.setQuery(this.searchText);
-        this.filterFunds(this.searchText);
+        this.dataSource.data = this.fundsToDisplay;
+        this.changeDetectorRef.detectChanges();
       }
     });
   }
@@ -119,6 +118,7 @@ export class FundListComponent implements OnInit{
   subscribeToQuery(): void {
        this.searchService.isQuery$.subscribe((query) => {
         if (query) {
+          console.log('QUERY: ', this.searchService.getQuery());
           this.filterFunds( this.searchService.getQuery());
         }
       });  
@@ -128,7 +128,6 @@ export class FundListComponent implements OnInit{
    subscribeToFavouriteButtonClicked(): void {
     this.favouriteService.isFavourite$.subscribe((isFavourite) => {
       if (isFavourite) {
-        console.log("isfav")
         let favFund = localStorage.getItem('favourites');
         if (favFund) {
           this.fundsToDisplay = JSON.parse(favFund);
@@ -143,8 +142,8 @@ export class FundListComponent implements OnInit{
   subscribeToAllButtonClicked(): void {
     this.fundService.isAll$.subscribe((isAll) => {
       if (isAll) {
-        this.fundsToDisplay = this.allFunds;
-        this.dataSource.data = this.fundsToDisplay;
+          this.fundsToDisplay = this.allFunds;
+          this.dataSource.data = this.fundsToDisplay;
           this.changeDetectorRef.detectChanges();
       }
     });
@@ -153,7 +152,6 @@ export class FundListComponent implements OnInit{
   // Display funds that matches the searchText
   filterFunds(searchText: string[]): void {
     if (searchText?.length > 0) {
-      // Use filter to include only funds that match the searchText
       this.fundsToDisplay = this.allFunds.filter((fund: Fund) => {
         return searchText.some((word: string) => {
           return (fund.fundName?.toLowerCase() || '').includes(word.toLowerCase()) 
@@ -162,28 +160,30 @@ export class FundListComponent implements OnInit{
           || (fund.isin?.toLowerCase() || '').includes(word.toLowerCase());
         });
       });
-      console.log('FUNDS TO DISPLAY: ', this.fundsToDisplay);
       this.dataSource.data = this.fundsToDisplay;
       this.changeDetectorRef.detectChanges();
   
       if (this.fundsToDisplay.length === 0) {
         this.searchService.setZeroResults(true);
       } else {
-        this.searchService.setZeroResults(false);
+        console.log("this.fundsToDisplay leng", this.fundsToDisplay.length);
+        console.log('zero: ');
+        //this.searchService.setZeroResults(false);
       }
-    } 
+    } else if (searchText.length === 0) {
+      this.dataSource.data = this.allFunds;
+      this.changeDetectorRef.detectChanges();
+    }
   }
 
   // add to local storage array of favourites
   addToFav(selectedFund: Fund) {
-    this.isFavourite = true;
     selectedFund.isFavourite = true;
     this.favouriteService.addToFavorites(selectedFund);
   }
 
   // remove from local storage array of favourites
   removeFromFav(selectedFund: Fund) {
-    this.isFavourite = false;
     selectedFund.isFavourite = false;
     this.favouriteService.removeFromFavorites(selectedFund);
   }
@@ -196,6 +196,7 @@ export class FundListComponent implements OnInit{
       },
     });
   }
+
 
   // Announce sort change
   announceSortChange(sortState: Sort) {

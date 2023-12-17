@@ -27,16 +27,17 @@ export class SearchComponent implements OnInit {
   search() {
     this.searchQuery = this.searchInputEl.nativeElement.value.split(' ').filter((word: string) => word.trim() != '');
     this.searchService.setQuery(this.searchQuery);
+    this.searchService.setZeroResults(false);
   }
 
   // Clear search query and emit to subscribers
   resetSearch(item: string) {
     this.searchQuery = this.searchQuery.filter((word: string) => word != item);
-    console.log('this.searchQuery: ', this.searchQuery);
     this.searchService.setQuery(this.searchQuery);
-    this.searchInputEl.nativeElement.value = '';
-    this.searchService.setZeroResults(false);
-    this.searchService.resetSearch();
+    if (this.searchQuery.length === 0) {
+      this.searchService.resetSearch();
+      this.searchInputEl.nativeElement.value = '';
+    }
   }
 
   // Display cancel button in search bar when user starts typing

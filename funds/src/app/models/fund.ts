@@ -19,7 +19,6 @@ export class Fund{
     countDecimals: number;
     startDate: number;
     isin: string;
-    document: any[];
     isFavourite: boolean;
     isGraph: boolean;
     rate: number;
