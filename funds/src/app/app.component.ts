@@ -5,7 +5,6 @@ import { MaterialModule } from './modules/material/material.module';
 
 import { SearchComponent } from './components/search/search.component';
 import { FundListComponent } from './components/fund-list/fund-list.component';
-import { FilterComponent } from './components/filter/filter.component';
 import { SearchService } from './services/search.service';
 import { FavouriteService } from './services/favourite.service';
 import { FundService } from './services/fund.service';
@@ -21,8 +20,7 @@ import { Fund } from './models/fund';
       AsyncPipe, 
       CommonModule, 
       FundListComponent, 
-      MaterialModule, 
-      FilterComponent]
+      MaterialModule]
 })
 
 export class AppComponent implements OnInit{
@@ -47,6 +45,11 @@ export class AppComponent implements OnInit{
     this.subscribeToFavourites();
   }
 
+  ngOnChanges(): void {
+    this.subscribeToNoResults();
+    this.subscribeToFavourites();
+  }
+
   // Get API data
   // Show spinner while loading API data
   // Show error message if there's an error
@@ -60,7 +63,7 @@ export class AppComponent implements OnInit{
         this.isLoading = false;
         this.isError = false;
         this.updateGraphProperties(response[0].data);
-        this.updateFavouriteProperties(response[0].data);
+        this.updateFavouriteProperties(response[0].data, this.favourites);
         this.allFunds$ = of(response[0].data);
         this.fundService.setAllFunds(response[0].data);
       },
@@ -84,13 +87,13 @@ export class AppComponent implements OnInit{
   }
 
   // Update favourite property for each fund
-  updateFavouriteProperties(allFunds: Fund[]): void {
+  updateFavouriteProperties(allFunds: Fund[], favFunds: Fund[]): void {
     let favFund = localStorage.getItem('favourites');
     if (favFund) {
-      this.favourites = JSON.parse(favFund);
+      favFunds = JSON.parse(favFund);
     }
     allFunds.forEach((fund: Fund) => {
-      if (this.favourites.some((favFund: Fund) => {
+      if (favFunds.some((favFund: Fund) => {
         return fund.instrumentId === favFund.instrumentId;
       })) {
         fund.isFavourite = true;
@@ -115,6 +118,7 @@ export class AppComponent implements OnInit{
   // Display no results found if isZeroResults$ is true
   subscribeToNoResults(): void {
     this.searchService.isZeroResults$.subscribe((zeroResults) => {
+      console.log('ZERO RESULTS: ', zeroResults)
       if (zeroResults) {
         this.noResults = true;
       } else {  
@@ -140,14 +144,14 @@ export class AppComponent implements OnInit{
     this.fundService.setAll(true);
     this.favouriteService.setFavourite(false);
     this.noFavorites = false;
-    this.searchService.setQuery([]);
+    //this.searchService.setQuery([]);
   }
 
   // Display favourite funds if favourite button is clicked
   showFavourites(): void {
     this.favouriteService.setFavourite(true);
     this.fundService.setAll(false); 
-    this.searchService.setQuery([]);
+    //this.searchService.setQuery([]);
   }
 }
 
