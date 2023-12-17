@@ -1,10 +1,11 @@
-import { Component, ElementRef, OnChanges, ViewChild } from '@angular/core';
-import { FundService } from 'src/app/services/fund.service';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { NgIf, NgFor } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { SearchService } from 'src/app/services/search.service';
+
 @Component({
     selector: 'app-search',
     templateUrl: './search.component.html',
@@ -12,56 +13,28 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     standalone: true,
     imports: [MatFormFieldModule, MatInputModule, NgIf, MatButtonModule, MatIconModule, NgFor]
 })
-export class SearchComponent implements OnChanges {
+export class SearchComponent {
   searchQuery: string[] = [];
   showCloseIcon: boolean = false;
   @ViewChild('searchInput') searchInputEl: ElementRef;
 
-  constructor(private fundService: FundService) { }
+  constructor(private searchService: SearchService) { }
 
-  ngOnInit(): void {
-    this.subscribeToFavouriteButtonClicked();
-    this.subscribeToAllButtonClicked();  
-  }
-
-  ngOnChanges(): void {
-    this.subscribeToFavouriteButtonClicked();
-    this.subscribeToAllButtonClicked();  
-  }
-
-  // Display funds that are in favourites
-  subscribeToFavouriteButtonClicked(): void {
-    this.fundService.isFavourite$.subscribe((isFavourite) => {
-      if (isFavourite) {
-       this.searchQuery = [];
-       this.searchInputEl.nativeElement.value = '';
-      }
-    });
-  }
-
-  // Display all funds
-  subscribeToAllButtonClicked(): void {
-    this.fundService.isAll$.subscribe((isAll) => {
-      if (isAll) {
-       this.searchQuery = [];
-        this.searchInputEl.nativeElement.value = '';
-      }
-    });
-  }
 
   // Update search query and emit to subscribers
   updateSearch() {
     this.searchQuery = this.searchInputEl.nativeElement.value.split(' ').filter((word: string) => word.trim() != '');
-    this.fundService.setQuery(this.searchQuery);
+    this.searchService.setQuery(this.searchQuery);
     this.showCloseIcon = this.searchQuery.length > 0;
   }
 
   // Clear search query and emit to subscribers
   cancelSearch(item: string) {
     this.searchQuery = this.searchQuery.filter((word: string) => word != item);
-    this.fundService.setQuery(this.searchQuery);
+    console.log('this.searchQuery: ', this.searchQuery);
+    this.searchService.setQuery(this.searchQuery);
     this.searchInputEl.nativeElement.value = '';
     this.showCloseIcon = this.searchQuery.length > 0;
-    this.fundService.setZeroResults(false);
+    this.searchService.setZeroResults(false);
   }
 }

@@ -1,21 +1,22 @@
 <!-- Success and data fetched -->
 <mat-card *ngIf="!isLoading" class="main-container">
-  <div class="header-content">
-    <div class="header-nav">
-      <div><h1>CROSSKEY</h1></div>
-      <div (click)="showFavourites()"><mat-icon>star</mat-icon>Favourites</div>
-      <div (click)="showAll()">All</div>
-    </div>
-    <div class="search">
-      <app-search></app-search>
-    <app-filter [fundsArr]="allFunds$ | async"></app-filter>
-    </div>
-    
-  </div>
-  <div class="grid-container" *ngIf="!isZeroResults" >
-    <app-fund-list [fundsArr]="allFunds$ | async" class="fund-list"></app-fund-list>
-  </div>
+  <!-- Header -->
+  <mat-card-header class="header-content">
+    <mat-toolbar class="custom-color">
+      <span><h1>CROSSKEY</h1></span>
+      <mat-icon class="fav-icon">star</mat-icon>
+      <span class="show-favourites" (click)="showFavourites()">Favourites</span>
+      <span class="show-all" (click)="showAll()">All</span>
+    </mat-toolbar>
+
+    <!-- Search Component-->
+    <app-search></app-search>
+  </mat-card-header>
+
+  <!-- Fund List Component -->
+  <app-fund-list [allFunds]="allFunds$ | async"></app-fund-list>
 </mat-card>
+
 <!-- Fetching -->
 <ng-container *ngIf="isLoading">
   <div class="spinner-container">
@@ -23,17 +24,15 @@
     Loading..
   </div>
 </ng-container>
+
 <!-- No results -->
-<ng-container *ngIf="isZeroResults">
-  <div class="no-results">
-    <mat-icon>search</mat-icon>
+<ng-container *ngIf="isZeroResults" class="no-results">
     <div class="no-results-text">
       <h1>No Results Found</h1>
       <h2>We've searched through {{(allFunds$ | async)?.length}} funds</h2>
-      <h2>We did not find any match</h2>
-      <h2>Try some other keywords</h2>
+      <h2>No funds match your current filter criteria</h2>
+      <h2>Try adjusting the filters or the keyword you have entered</h2>
     </div>
-  </div>
 </ng-container>
 <!-- Error -->
 <ng-container *ngIf="!isLoading && isError">

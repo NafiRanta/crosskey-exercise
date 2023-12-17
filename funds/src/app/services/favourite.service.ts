@@ -8,11 +8,18 @@ import { Fund } from '../models/fund';
 export class FavouriteService {
   private favoritesSubject: BehaviorSubject<Fund[]> = new BehaviorSubject<Fund[]>([]);
   favorites$: Observable<Fund[]> = this.favoritesSubject.asObservable();
+    // Observable for favourite button click
+    private isFavouriteSubject = new BehaviorSubject<boolean>(false);
+    isFavourite$ = this.isFavouriteSubject.asObservable();
 
   constructor() {
     this.loadFavoritesFromLocalStorage();
   }
 
+    // Emit favourite button click to subscribers
+    setFavourite(isFavourite: boolean): void {
+    this.isFavouriteSubject.next(isFavourite);
+  }
   private loadFavoritesFromLocalStorage() {
     const favoritesString = localStorage.getItem('favourites');
     const favorites = favoritesString ? JSON.parse(favoritesString) : [];

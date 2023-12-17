@@ -2,9 +2,9 @@ import { Component, Input, OnInit, OnChanges, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Fund } from 'src/app/models/fund';
 import { FundService } from 'src/app/services/fund.service';
-import { MatFormField } from '@angular/material/form-field';
 import { MaterialModule } from 'src/app/modules/material/material.module';
-import { MatButton } from '@angular/material/button';
+import { SearchService } from 'src/app/services/search.service';
+import { FavouriteService } from 'src/app/services/favourite.service';
 
 @Component({
   selector: 'app-filter',
@@ -14,16 +14,19 @@ import { MatButton } from '@angular/material/button';
   styleUrls: ['./filter.component.css']
 })
 export class FilterComponent implements OnInit {
-  @Input() fundsArr: Fund[];
+  @Input() allFunds: Fund[];
   filterByFavourites: Fund[] = [];
   favourites: string[] = [];
 
-  constructor(private fundService: FundService) { }
+  constructor(
+    private fundService: FundService,
+    private searchService: SearchService,
+    private favouriteService: FavouriteService
+    ) { }
 
   ngOnInit(): void {
     this.initializeFavourites();
   }
-
 
   // Get favourites from local storage if any and replace ids with fund names
   private initializeFavourites(): void {
@@ -37,12 +40,12 @@ export class FilterComponent implements OnInit {
   }
 
   showAll(): void {
-    this.fundService.setQuery([]);
+    this.searchService.setQuery([]);
     this.fundService.setAll(true);
   }
 
   showFavourites(): void {
-    this.fundService.setQuery([]);
-    this.fundService.setFavourite(true);
+    this.searchService.setQuery([]);
+    this.favouriteService.setFavourite(true);
   }
 }

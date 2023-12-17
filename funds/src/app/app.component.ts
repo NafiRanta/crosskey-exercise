@@ -7,7 +7,8 @@ import { SearchComponent } from './components/search/search.component';
 import { FundListComponent } from './components/fund-list/fund-list.component';
 import { MaterialModule } from './modules/material/material.module';
 import { FilterComponent } from './components/filter/filter.component';
-
+import { SearchService } from './services/search.service';
+import { FavouriteService } from './services/favourite.service';
 
 @Component({
     selector: 'app-root',
@@ -32,20 +33,15 @@ export class AppComponent implements OnInit{
   selectedFund: Fund | null = null;
   isZeroResults: boolean = false;
 
-  constructor(private fundService: FundService) { }
+  constructor(
+    private fundService: FundService,
+    private searchService: SearchService,
+    private favouriteService: FavouriteService
+    ) { }
   
-  // Get API data on init
-  // Display no results found if isZeroResults$ is true
   ngOnInit(): void {
     this.getAPIData();
-    
-    this.fundService.isZeroResults$.subscribe((zeroResults) => {
-      if (zeroResults) {
-        this.isZeroResults = true;
-      } else {  
-        this.isZeroResults = false;
-      }
-    });
+    this.subscribeToNoResults();
   }
 
   // Get API data
@@ -60,6 +56,7 @@ export class AppComponent implements OnInit{
         this.isLoading = false;
         this.isError = false;
         this.allFunds$ = of(response[0].data);
+        this.fundService.setAllFunds(response[0].data);
       },
       error: error => {
         this.isLoading = false;
@@ -69,22 +66,29 @@ export class AppComponent implements OnInit{
     })  
   }
 
-  onSelectedFund(fund: Fund) {
-    this.selectedFund = fund;
+  // Display no results found if isZeroResults$ is true
+  subscribeToNoResults(): void {
+    this.searchService.isZeroResults$.subscribe((zeroResults) => {
+      if (zeroResults) {
+        this.isZeroResults = true;
+      } else {  
+        this.isZeroResults = false;
+      }
+    });
   }
 
+  // Display all funds if all button is clicked
   showAll(): void {
     this.fundService.setAll(true);
-    this.fundService.setFavourite(false);
-    this.fundService.setQuery([]);
-   
+    this.favouriteService.setFavourite(false);
+    this.searchService.setQuery([]);
   }
 
+  // Display favourite funds if favourite button is clicked
   showFavourites(): void {
-    this.fundService.setFavourite(true);
+    this.favouriteService.setFavourite(true);
     this.fundService.setAll(false); 
-    this.fundService.setQuery([]);
- 
+    this.searchService.setQuery([]);
   }
 }
 

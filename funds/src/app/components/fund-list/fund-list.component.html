@@ -1,6 +1,5 @@
 
-<div class="mat-elevation-z8">
-  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)" class="mat-elevation-z8" >
+<table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)" class="mat-elevation-z8">
     <!-- Favourite Column -->
     <ng-container matColumnDef="favourite">
       <th mat-header-cell *matHeaderCellDef><mat-icon class="favourite" matTooltip="Add to favourites">star</mat-icon></th>
@@ -118,6 +117,9 @@
 
     <!-- Data rows -->
     <tr mat-row *matRowDef="let row; columns: fundColumns;" class="mat-row-hover"></tr>
-  </table>
-</div>
+      
+
+</table>
+
+
 

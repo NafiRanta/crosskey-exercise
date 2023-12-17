@@ -11,6 +11,7 @@ import { FavouriteService } from 'src/app/services/favourite.service';
 import { FundDetailsComponent } from '../fund-details/fund-details.component';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 import {MatSort, Sort, MatSortModule} from '@angular/material/sort';
+import { SearchService } from 'src/app/services/search.service';
 
 interface TableRow {
   favourite: boolean;
@@ -37,7 +38,7 @@ interface TableRow {
 })
 
 export class FundListComponent implements OnInit{
-  @Input() fundsArr: Fund[];
+  @Input() allFunds: Fund[];
   searchText: string[] = [];
   fundsToDisplay: Fund[]; 
   favourites: Fund[] = [];
@@ -53,6 +54,7 @@ export class FundListComponent implements OnInit{
   constructor(
     private fundService: FundService, 
     private favouriteService: FavouriteService,
+    private searchService: SearchService,
     private changeDetectorRef: ChangeDetectorRef,
     private dialog: MatDialog, 
     private _liveAnnouncer: LiveAnnouncer
@@ -62,10 +64,7 @@ export class FundListComponent implements OnInit{
     // Initialize data
     this.setGraphProperties();
     this.setFavouriteProperties();
-
-    this.fundsToDisplay = this.fundsArr;
-    this.fundService.setFundsArr(this.fundsToDisplay);
-    this.dataSource = new MatTableDataSource(this.fundsToDisplay);
+    this.dataSource = new MatTableDataSource(this.allFunds);
     
 
    // Setup subscriptions
@@ -84,24 +83,30 @@ export class FundListComponent implements OnInit{
     this.setFavouriteProperties();
      this.subscribeToFavouriteButtonClicked();
     this.subscribeToAllButtonClicked(); 
-
-    // Display funds that matches the searchText
-    this.fundService.isQuery$.subscribe((query) => {
-      if (query) {
-        this.searchText = this.fundService.getQuery();
-        console.log('SEARCH TEXT: ', this.searchText)
-        this.filterFunds();
-        // Update the data source with the filtered funds
-        this.dataSource.data = this.fundsToDisplay;
-        // Trigger change detection to update the UI
-        this.changeDetectorRef.detectChanges();
-      }
-    });    
+    this.subscribeToQuery();   
   }
+
+  // 
+  
+  // Display funds that matches the searchText
+  subscribeToQuery(): void {
+       // Display funds that matches the searchText
+       this.searchService.isQuery$.subscribe((query) => {
+        if (query) {
+          this.searchText = this.searchService.getQuery();
+          console.log('SEARCH TEXT: ', this.searchText)
+          this.filterFunds();
+          // Update the data source with the filtered funds
+          this.dataSource.data = this.fundsToDisplay;
+          // Trigger change detection to update the UI
+          this.changeDetectorRef.detectChanges();
+        } 
+      });  
+    }
 
    // Display funds that are in favourites
    subscribeToFavouriteButtonClicked(): void {
-    this.fundService.isFavourite$.subscribe((isFavourite) => {
+    this.favouriteService.isFavourite$.subscribe((isFavourite) => {
       if (isFavourite) {
         let favFund = localStorage.getItem('favourites');
         if (favFund) {
@@ -129,14 +134,14 @@ export class FundListComponent implements OnInit{
     this.fundService.isAll$.subscribe((isAll) => {
       if (isAll) {
       this.setFavouriteProperties();
-        this.fundsToDisplay = this.fundsArr;
+        this.fundsToDisplay = this.allFunds;
       }
     });
   }
 
   // Set isGraph property for each fund
   setGraphProperties(): void {
-    this.fundsArr.forEach((fund: Fund) => {
+    this.allFunds.forEach((fund: Fund) => {
       if (this.isGraphPropertiesEmpty(fund)) {
         fund.isGraph = false;
       } else {
@@ -152,7 +157,7 @@ export class FundListComponent implements OnInit{
       this.favourites = JSON.parse(favFund);
     }
 
-    this.fundsArr.forEach((fund: Fund) => {
+    this.allFunds.forEach((fund: Fund) => {
       if (this.favourites.some((favFund: Fund) => {
         return fund.instrumentId === favFund.instrumentId;
       })) {
@@ -180,7 +185,7 @@ export class FundListComponent implements OnInit{
   filterFunds(): void {
     if (this.searchText?.length > 0) {
       // Use filter to include only funds that match the searchText
-      this.fundsToDisplay = this.fundsArr.filter((fund: Fund) => {
+      this.fundsToDisplay = this.allFunds.filter((fund: Fund) => {
         return this.searchText.some((searchText: string) => {
           return (fund.fundName?.toLowerCase() || '').includes(searchText.toLowerCase()) 
           || (fund.fundCompany?.toLowerCase() || '').includes(searchText.toLowerCase()) 
@@ -191,16 +196,14 @@ export class FundListComponent implements OnInit{
       console.log('FUNDS TO DISPLAY: ', this.fundsToDisplay);
   
       if (this.fundsToDisplay.length === 0) {
-        this.fundService.setZeroResults(true);
+        this.searchService.setZeroResults(true);
       } else {
-        this.fundService.setZeroResults(false);
+        this.searchService.setZeroResults(false);
       }
-      this.fundService.setFundsArr(this.fundsToDisplay);
     } else {
       this.subscribeToAllButtonClicked();
       this.subscribeToFavouriteButtonClicked();
-      this.fundService.setZeroResults(false);
-      //this.fundService.setFundsArr(this.fundsToDisplay);
+      this.searchService.setZeroResults(false);
     }
   }
 
@@ -219,7 +222,7 @@ export class FundListComponent implements OnInit{
 
 
   private updateFavoritesState(favorites: Fund[]) {
-    this.fundsToDisplay = this.fundsArr.filter((fund) =>
+    this.fundsToDisplay = this.allFunds.filter((fund) =>
       favorites.some((favFund) => fund.instrumentId === favFund.instrumentId)
     );
   }
