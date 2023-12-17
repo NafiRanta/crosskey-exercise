@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FundService } from './services/fund.service';
-import { Fund } from './models/fund';
-import { Observable, of } from 'rxjs';
 import { AsyncPipe, CommonModule } from '@angular/common';
+import { Observable, of } from 'rxjs';
+import { MaterialModule } from './modules/material/material.module';
+
 import { SearchComponent } from './components/search/search.component';
 import { FundListComponent } from './components/fund-list/fund-list.component';
-import { MaterialModule } from './modules/material/material.module';
 import { FilterComponent } from './components/filter/filter.component';
 import { SearchService } from './services/search.service';
 import { FavouriteService } from './services/favourite.service';
+import { FundService } from './services/fund.service';
+import { Fund } from './models/fund';
 
 @Component({
     selector: 'app-root',
@@ -30,7 +31,8 @@ export class AppComponent implements OnInit{
   isError = false;
   allFunds$: Observable<Fund[]>;
   isSmallScreen: boolean = false;
-  isZeroResults: boolean = false;
+  noResults: boolean = false;
+  noFavorites: boolean = false;
   favourites: Fund[] = [];
 
   constructor(
@@ -42,6 +44,7 @@ export class AppComponent implements OnInit{
   ngOnInit(): void {
     this.getAPIData();
     this.subscribeToNoResults();
+    this.subscribeToFavourites();
   }
 
   // Get API data
@@ -113,9 +116,21 @@ export class AppComponent implements OnInit{
   subscribeToNoResults(): void {
     this.searchService.isZeroResults$.subscribe((zeroResults) => {
       if (zeroResults) {
-        this.isZeroResults = true;
+        this.noResults = true;
       } else {  
-        this.isZeroResults = false;
+        this.noResults = false;
+      }
+    });
+  }
+
+  // Display no favourties found if isZeroFavourites$ is true
+  subscribeToFavourites(): void {
+    this.favouriteService.favorites$.subscribe((favourites) => {
+      console.log('FAVOURITES: ', favourites)
+      if (favourites.length === 0) {
+        this.noFavorites = true;
+      } else {  
+        this.noFavorites = false;
       }
     });
   }
@@ -124,6 +139,7 @@ export class AppComponent implements OnInit{
   showAll(): void {
     this.fundService.setAll(true);
     this.favouriteService.setFavourite(false);
+    this.noFavorites = false;
     this.searchService.setQuery([]);
   }
 

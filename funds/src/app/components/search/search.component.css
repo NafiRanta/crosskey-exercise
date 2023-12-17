@@ -1,9 +1,3 @@
-.search-container {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
-
 input {
   width: 80vw;
   margin: 0px 0px 0px 0px;

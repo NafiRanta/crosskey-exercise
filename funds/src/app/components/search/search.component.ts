@@ -1,9 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { NgIf, NgFor } from '@angular/common';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { CommonModule } from '@angular/common';
+import { MaterialModule } from 'src/app/modules/material/material.module';
+
 import { SearchService } from 'src/app/services/search.service';
 
 @Component({
@@ -11,7 +9,7 @@ import { SearchService } from 'src/app/services/search.service';
     templateUrl: './search.component.html',
     styleUrls: ['./search.component.css'],
     standalone: true,
-    imports: [MatFormFieldModule, MatInputModule, NgIf, MatButtonModule, MatIconModule, NgFor]
+    imports: [CommonModule, MaterialModule]
 })
 export class SearchComponent implements OnInit {
   searchQuery: string[] = [];
@@ -41,11 +39,12 @@ export class SearchComponent implements OnInit {
     this.searchService.resetSearch();
   }
 
+  // Display cancel button in search bar when user starts typing
   onInputChange(event: any) {
-    this.searchInput = event.target.value;
-    this.showCancelButton = this.searchInput.length > 0;
+    this.showCancelButton = event.target.value.length > 0;
   }
 
+  // Clear search input and hide cancel button
   clearInput() {
     this.searchInputEl.nativeElement.value = '';
     this.showCancelButton = false;

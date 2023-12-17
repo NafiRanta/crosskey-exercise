@@ -1,16 +1,17 @@
-import { Component, Input, OnInit, ChangeDetectorRef, ViewChild  } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { MatTableModule, MatTableDataSource } from '@angular/material/table';
+import { MatSort, Sort, MatSortModule } from '@angular/material/sort';
+import { MaterialModule } from 'src/app/modules/material/material.module';
+import { MatDialog } from '@angular/material/dialog';
+import { CommonModule } from '@angular/common';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+
 import { Fund } from 'src/app/models/fund';
 import { FundService } from 'src/app/services/fund.service';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatIconModule } from '@angular/material/icon';
-import { MatDialog } from '@angular/material/dialog';
-import { NgFor, CommonModule } from '@angular/common';
-import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { FavouriteService } from 'src/app/services/favourite.service';
-import { FundDetailsComponent } from '../fund-details/fund-details.component';
-import {LiveAnnouncer} from '@angular/cdk/a11y';
-import {MatSort, Sort, MatSortModule} from '@angular/material/sort';
 import { SearchService } from 'src/app/services/search.service';
+import { FundDetailsComponent } from '../fund-details/fund-details.component';
+
 
 interface TableRow {
   favourite: boolean;
@@ -23,8 +24,8 @@ interface TableRow {
   yearHigh: number;
   yearLow: number;
   currency: string;
-  closePriceDate: any;
-  inceptionDate: any;
+  closePriceDate: Date;
+  inceptionDate: Date;
   view: string;
 }
 
@@ -33,21 +34,23 @@ interface TableRow {
     templateUrl: './fund-list.component.html',
     styleUrls: ['./fund-list.component.css'],
     standalone: true,
-    imports: [CommonModule, MatSortModule, FundDetailsComponent, MatTableModule, MatIconModule, MatTooltipModule, NgFor]
+    imports: [
+      CommonModule, 
+      MaterialModule,
+      FundDetailsComponent, 
+      MatTableModule]
 })
 
 export class FundListComponent implements OnInit{
   @Input() allFunds: Fund[];
-  searchText: string[] = [];
+  @ViewChild(MatSort) sort: MatSort;
   fundsToDisplay: Fund[]; 
-
+  favouriteFunds: Fund[] = [];
+  searchText: string[] = [];
   fundColumns: string[] = ['favourite', 'name', 'type', 'change1m', 'change3m', 'change1y', 'change3y', 'yearHigh', 'yearLow', 'currency', 'closePriceDate', 'inceptionDate', 'view'];
   dataSource: MatTableDataSource<Fund>;
-  favouriteFunds: Fund[] = [];
   isFavourite: boolean = false;
   isAccordionOpen: boolean = false;
-  selectedFund: Fund | null = null;
-  @ViewChild(MatSort) sort: MatSort;
   isHovered: boolean = false;
 
   constructor(
@@ -69,10 +72,28 @@ export class FundListComponent implements OnInit{
     this.subscribeToAllButtonClicked();      
   }
 
+  
   ngAfterViewInit() {
+    // Sort funds by column
     this.dataSource.sort = this.sort;
     this.subscribeToResetSearch(); 
     this.subscribeToQuery();
+
+    // Custom sort by date and string 
+    this.dataSource.sortingDataAccessor = (item, property) => {
+      switch (property) {
+        case 'closePriceDate':
+          return new Date(item.latestClosePriceDate);
+        case 'inceptionDate':
+          return new Date(item.startDate);
+        case 'name':
+          return item.fundName.toLocaleLowerCase();
+        case 'type':
+          return item.fundType.toLocaleLowerCase(); 
+        default:
+          return item[property];
+      }
+    };
   }
 
   ngOnChanges(): void {
@@ -96,7 +117,6 @@ export class FundListComponent implements OnInit{
   
   // Display funds that matches the searchText
   subscribeToQuery(): void {
-       // Display funds that matches the searchText
        this.searchService.isQuery$.subscribe((query) => {
         if (query) {
           this.filterFunds( this.searchService.getQuery());
@@ -108,9 +128,12 @@ export class FundListComponent implements OnInit{
    subscribeToFavouriteButtonClicked(): void {
     this.favouriteService.isFavourite$.subscribe((isFavourite) => {
       if (isFavourite) {
+        console.log("isfav")
         let favFund = localStorage.getItem('favourites');
         if (favFund) {
           this.fundsToDisplay = JSON.parse(favFund);
+          this.dataSource.data = this.fundsToDisplay;
+          this.changeDetectorRef.detectChanges();
         }
       }
     });
@@ -120,11 +143,13 @@ export class FundListComponent implements OnInit{
   subscribeToAllButtonClicked(): void {
     this.fundService.isAll$.subscribe((isAll) => {
       if (isAll) {
-      //this.setFavouriteProperties();
         this.fundsToDisplay = this.allFunds;
+        this.dataSource.data = this.fundsToDisplay;
+          this.changeDetectorRef.detectChanges();
       }
     });
   }
+
   // Display funds that matches the searchText
   filterFunds(searchText: string[]): void {
     if (searchText?.length > 0) {
@@ -149,46 +174,28 @@ export class FundListComponent implements OnInit{
     } 
   }
 
+  // add to local storage array of favourites
   addToFav(selectedFund: Fund) {
-    this.favouriteService.addToFavorites(selectedFund);
     this.isFavourite = true;
     selectedFund.isFavourite = true;
+    this.favouriteService.addToFavorites(selectedFund);
   }
 
   // remove from local storage array of favourites
   removeFromFav(selectedFund: Fund) {
+    this.isFavourite = false;
+    selectedFund.isFavourite = false;
     this.favouriteService.removeFromFavorites(selectedFund);
-     this.isFavourite = false;
-     selectedFund.isFavourite = false;
   }
 
-
-  private updateFavoritesState(favorites: Fund[]) {
-    this.fundsToDisplay = this.allFunds.filter((fund) =>
-      favorites.some((favFund) => fund.instrumentId === favFund.instrumentId)
-    );
+  // Open productDetail modal
+  openProductDetail(selectedFund: Fund): void {
+    this.dialog.open(FundDetailsComponent, {
+      data: {
+        selectedFund: selectedFund, 
+      },
+    });
   }
-
-    
-  // Emit selected fund to subscribers
-  onSelectedFund(fund: Fund) {
-    this.isAccordionOpen = !this.isAccordionOpen;
-    this.fundService.setSelectedFund(fund);
-    this.selectedFund = fund;
-  }
-  
-  onRowClick(row: Fund): void {
-    this.selectedFund = row;
-  }
-
-    // Open productDetail modal
-    openProductDetail(selectedFund: Fund): void {
-      this.dialog.open(FundDetailsComponent, {
-       data: {
-         selectedFund: selectedFund, 
-       },
-     });
-   }
 
    announceSortChange(sortState: Sort) {
     // This example uses English messages. If your application supports
