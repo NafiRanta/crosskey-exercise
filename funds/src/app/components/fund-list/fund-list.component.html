@@ -114,10 +114,10 @@
       </ng-container>
   
     <!-- Header row -->
-    <tr mat-header-row *matHeaderRowDef="fundColumns"></tr>
+    <tr mat-header-row *matHeaderRowDef="fundColumns" class="mat-header"></tr>
 
     <!-- Data rows -->
-    <tr mat-row *matRowDef="let row; columns: fundColumns;"></tr>
+    <tr mat-row *matRowDef="let row; columns: fundColumns;" class="mat-row-hover"></tr>
   </table>
 </div>
 

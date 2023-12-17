@@ -48,7 +48,7 @@ export class FundListComponent implements OnInit{
   isAccordionOpen: boolean = false;
   selectedFund: Fund | null = null;
   @ViewChild(MatSort) sort: MatSort;
-
+  isHovered: boolean = false;
 
   constructor(
     private fundService: FundService, 

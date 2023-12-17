@@ -1,12 +1,6 @@
-.fund-info-labels {
+.mat-header {
   color: white;
   background-color: #31353f;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  align-content: center;
-  flex-wrap: wrap;
-  font-size: 10px;
 }
 
 .fund-info-label {
@@ -62,7 +56,6 @@ mat-icon {
   color: red;
 }
 
-.accordion {
-  display: flex;
-  flex-direction: column;
+.mat-row-hover:hover {
+  background-color: #ffe67f;
 }
