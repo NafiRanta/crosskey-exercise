@@ -63,7 +63,7 @@ export class AppComponent implements OnInit{
         this.isLoading = false;
         this.isError = false;
         this.updateGraphProperties(response[0].data);
-        this.updateFavouriteProperties(response[0].data, this.favourites);
+        this.favouriteService.updateFavouriteProperties(response[0].data, this.favourites);
         this.allFunds$ = of(response[0].data);
         this.fundService.setAllFunds(response[0].data);
       },
@@ -86,22 +86,7 @@ export class AppComponent implements OnInit{
     });
   }
 
-  // Update favourite property for each fund
-  updateFavouriteProperties(allFunds: Fund[], favFunds: Fund[]): void {
-    let favFund = localStorage.getItem('favourites');
-    if (favFund) {
-      favFunds = JSON.parse(favFund);
-    }
-    allFunds.forEach((fund: Fund) => {
-      if (favFunds.some((favFund: Fund) => {
-        return fund.instrumentId === favFund.instrumentId;
-      })) {
-        fund.isFavourite = true;
-      } else {
-        fund.isFavourite = false;
-      }
-    });
-  }
+ 
 
   // Helper method to check if graph properties are empty
   isGraphPropertiesEmpty(fund: Fund): boolean {

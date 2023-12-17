@@ -73,12 +73,9 @@ export class FundListComponent implements OnInit{
     this.subscribeToQuery();     
   }
 
-  
   ngAfterViewInit() {
     // Sort funds by column
     this.dataSource.sort = this.sort;
-    //this.subscribeToResetSearch(); 
-    //this.subscribeToQuery();
 
     // Custom sort by date and string 
     this.dataSource.sortingDataAccessor = (item, property) => {
@@ -97,10 +94,9 @@ export class FundListComponent implements OnInit{
     };
   }
 
-  ngOnChanges(): void {
-    //this.subscribeToQuery();   
+  ngOnChanges(): void { 
     this.subscribeToResetSearch();
-    this.subscribeToAllButtonClicked(); 
+    this.subscribeToAllButtonClicked();  
   }
 
   // subscribe to reset search
@@ -129,6 +125,7 @@ export class FundListComponent implements OnInit{
     this.favouriteService.isFavourite$.subscribe((isFavourite) => {
       if (isFavourite) {
         let favFund = localStorage.getItem('favourites');
+        this.favouriteFunds = JSON.parse(favFund);
         if (favFund) {
           this.fundsToDisplay = JSON.parse(favFund);
           this.dataSource.data = this.fundsToDisplay;
@@ -142,9 +139,12 @@ export class FundListComponent implements OnInit{
   subscribeToAllButtonClicked(): void {
     this.fundService.isAll$.subscribe((isAll) => {
       if (isAll) {
-          this.fundsToDisplay = this.allFunds;
-          this.dataSource.data = this.fundsToDisplay;
-          this.changeDetectorRef.detectChanges();
+        let favFund = localStorage.getItem('favourites');
+        this.favouriteFunds = JSON.parse(favFund);
+        this.favouriteService.updateFavouriteProperties(this.allFunds, this.favouriteFunds);
+        this.fundsToDisplay = this.allFunds;
+        this.dataSource.data = this.fundsToDisplay;
+        this.changeDetectorRef.detectChanges();
       }
     });
   }
@@ -196,7 +196,6 @@ export class FundListComponent implements OnInit{
       },
     });
   }
-
 
   // Announce sort change
   announceSortChange(sortState: Sort) {
