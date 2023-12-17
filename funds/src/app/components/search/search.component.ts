@@ -27,7 +27,6 @@ export class SearchComponent implements OnInit {
   search() {
     this.searchQuery = this.searchInputEl.nativeElement.value.split(' ').filter((word: string) => word.trim() != '');
     this.searchService.setQuery(this.searchQuery);
-    this.searchService.setZeroResults(false);
   }
 
   // Clear search query and emit to subscribers

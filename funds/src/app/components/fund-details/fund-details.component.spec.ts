@@ -9,6 +9,7 @@ import { GraphComponent } from '../graph/graph.component';
 describe('FundDetailsComponent', () => {
   let component: FundDetailsComponent;
   let fixture: ComponentFixture<FundDetailsComponent>;
+  let graphComponent: GraphComponent;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -17,7 +18,7 @@ describe('FundDetailsComponent', () => {
       providers: [
         {
           provide: MAT_DIALOG_DATA,
-          useValue: { selectedFund: { /* mock your Fund data here */ } }
+          useValue: { selectedFund: {  } }
         }
       ]
     })
@@ -27,6 +28,7 @@ describe('FundDetailsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(FundDetailsComponent);
     component = fixture.componentInstance;
+    graphComponent = TestBed.createComponent(GraphComponent).componentInstance;
     fixture.detectChanges();
   });
 

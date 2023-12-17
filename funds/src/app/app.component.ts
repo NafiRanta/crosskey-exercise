@@ -41,13 +41,6 @@ export class AppComponent implements OnInit{
   
   ngOnInit(): void {
     this.getAPIData();
-    this.subscribeToNoResults();
-    this.subscribeToFavourites();
-  }
-
-  ngOnChanges(): void {
-    this.subscribeToNoResults();
-    this.subscribeToFavourites();
   }
 
   // Get API data
@@ -86,8 +79,6 @@ export class AppComponent implements OnInit{
     });
   }
 
- 
-
   // Helper method to check if graph properties are empty
   isGraphPropertiesEmpty(fund: Fund): boolean {
     return (
@@ -100,43 +91,17 @@ export class AppComponent implements OnInit{
     );
   }
 
-  // Display no results found if isZeroResults$ is true
-  subscribeToNoResults(): void {
-    this.searchService.isZeroResults$.subscribe((zeroResults) => {
-      console.log('ZERO RESULTS: ', zeroResults)
-      if (zeroResults) {
-        this.noResults = true;
-      } else {  
-        this.noResults = false;
-      }
-    });
-  }
-
-  // Display no favourties found if isZeroFavourites$ is true
-  subscribeToFavourites(): void {
-    this.favouriteService.favorites$.subscribe((favourites) => {
-      console.log('FAVOURITES: ', favourites)
-      if (favourites.length === 0) {
-        this.noFavorites = true;
-      } else {  
-        this.noFavorites = false;
-      }
-    });
-  }
-
   // Display all funds if all button is clicked
   showAll(): void {
     this.fundService.setAll(true);
     this.favouriteService.setFavourite(false);
     this.noFavorites = false;
-    //this.searchService.setQuery([]);
   }
 
   // Display favourite funds if favourite button is clicked
   showFavourites(): void {
     this.favouriteService.setFavourite(true);
     this.fundService.setAll(false); 
-    //this.searchService.setQuery([]);
   }
 }
 

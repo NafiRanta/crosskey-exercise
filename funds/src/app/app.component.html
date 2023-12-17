@@ -24,22 +24,6 @@
     Loading..
   </div>
 </ng-container>
-
-<!-- No results -->
-<ng-container *ngIf="noResults" class="no-results">
-    <div class="no-results-text">
-      <h1>No Results Found</h1>
-      <h2>We've searched through {{(allFunds$ | async)?.length}} funds</h2>
-      <h2>No funds match your current filter criteria</h2>
-      <h2>Try adjusting the filters or the keyword you have entered</h2>
-    </div>
-</ng-container>
-<!-- No results -->
-<ng-container *ngIf="noFavorites" class="no-results">
-  <div class="no-results-text">
-    <h2>You have no favourites yet</h2>
-  </div>
-</ng-container>
 <!-- Error -->
 <ng-container *ngIf="!isLoading && isError">
   <div>Error loading data. Please try again.</div>

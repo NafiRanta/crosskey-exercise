@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
-import { MatSort, Sort, MatSortModule } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MaterialModule } from 'src/app/modules/material/material.module';
 import { MatDialog } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
@@ -122,15 +122,18 @@ export class FundListComponent implements OnInit{
 
    // Display funds that are in favourites
    subscribeToFavouriteButtonClicked(): void {
-    this.favouriteService.isFavourite$.subscribe((isFavourite) => {
+    this.favouriteService.isFavouriteButtonClicked$.subscribe((isFavourite) => {
       if (isFavourite) {
         let favFund = localStorage.getItem('favourites');
         this.favouriteFunds = JSON.parse(favFund);
-        if (favFund) {
-          this.fundsToDisplay = JSON.parse(favFund);
-          this.dataSource.data = this.fundsToDisplay;
-          this.changeDetectorRef.detectChanges();
-        }
+        this.favouriteService.updateFavouriteProperties(this.allFunds, this.favouriteFunds);
+        this.fundsToDisplay = this.favouriteFunds;
+        this.dataSource.data = this.fundsToDisplay;
+        this.changeDetectorRef.detectChanges();
+      } else {
+        this.fundsToDisplay = this.allFunds;
+        this.dataSource.data = this.fundsToDisplay;
+        this.changeDetectorRef.detectChanges();
       }
     });
   }
@@ -163,13 +166,6 @@ export class FundListComponent implements OnInit{
       this.dataSource.data = this.fundsToDisplay;
       this.changeDetectorRef.detectChanges();
   
-      if (this.fundsToDisplay.length === 0) {
-        this.searchService.setZeroResults(true);
-      } else {
-        console.log("this.fundsToDisplay leng", this.fundsToDisplay.length);
-        console.log('zero: ');
-        //this.searchService.setZeroResults(false);
-      }
     } else if (searchText.length === 0) {
       this.dataSource.data = this.allFunds;
       this.changeDetectorRef.detectChanges();

@@ -66,10 +66,6 @@ Before you begin, ensure you have the following installed:
 2. Navigate to `http://localhost:4200/` in your browser.
 3. Explore the application!
 
-## Testing
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
 ## Author
 
 - Nafisah Rantasalmi

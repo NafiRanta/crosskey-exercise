@@ -9,8 +9,8 @@ export class FavouriteService {
   private favoritesSubject: BehaviorSubject<Fund[]> = new BehaviorSubject<Fund[]>([]);
   favorites$: Observable<Fund[]> = this.favoritesSubject.asObservable();
     // Observable for favourite button click
-    private isFavouriteSubject = new BehaviorSubject<boolean>(false);
-    isFavourite$ = this.isFavouriteSubject.asObservable();
+    private isFavouriteButtonClickedSubject = new BehaviorSubject<boolean>(false);
+    isFavouriteButtonClicked$ = this.isFavouriteButtonClickedSubject.asObservable();
 
   constructor() {
     this.loadFavoritesFromLocalStorage();
@@ -18,7 +18,7 @@ export class FavouriteService {
 
   // Emit favourite button click to subscribers
   setFavourite(isFavourite: boolean): void {
-    this.isFavouriteSubject.next(isFavourite);
+    this.isFavouriteButtonClickedSubject.next(isFavourite);
   }
 
   // Load favourites from local storage
@@ -51,6 +51,7 @@ export class FavouriteService {
     let favFund = localStorage.getItem('favourites');
     if (favFund) {
       favFunds = JSON.parse(favFund);
+      this.favoritesSubject.next(favFunds);
     }
     allFunds.forEach((fund: Fund) => {
       if (favFunds.some((favFund: Fund) => {
