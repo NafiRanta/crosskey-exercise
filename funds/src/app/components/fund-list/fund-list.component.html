@@ -1,6 +1,6 @@
 <div class="fund-info-labels" *ngIf="fundsToDisplay">
 <div class="mat-elevation-z8">
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)" class="mat-elevation-z8" >
     <!-- Favourite Column -->
     <ng-container matColumnDef="favourite">
       <th mat-header-cell *matHeaderCellDef><mat-icon class="favourite" matTooltip="Add to favourites">star</mat-icon></th>
@@ -11,22 +11,22 @@
     </ng-container>
 
     <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>Name</th>
+    <ng-container matColumnDef="name" >
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">Name</th>
       <td mat-cell *matCellDef="let element">{{ element.fundName }}
       </td>
     </ng-container>
 
      <!-- Type Column -->
      <ng-container matColumnDef="type">
-      <th mat-header-cell *matHeaderCellDef>Type</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by type">Type</th>
       <td mat-cell *matCellDef="let element">{{ element.fundType }}
       </td>
     </ng-container>
 
         <!-- Change1m Column -->
     <ng-container matColumnDef="change1m">
-      <th mat-header-cell *matHeaderCellDef>1m</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by change1m">1m</th>
       <td mat-cell *matCellDef="let element" [ngClass]="{'positive-value': element.change1m > 0, 'negative-value': element.change1m < 0}">
         {{ element.change1m !== null ? element.change1m.toFixed(2) : '-' }}
 
@@ -35,7 +35,7 @@
 
     <!-- Change3m Column -->
     <ng-container matColumnDef="change3m">
-      <th mat-header-cell *matHeaderCellDef>3m</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by change3m">3m</th>
       <td mat-cell *matCellDef="let element" [ngClass]="{'positive-value': element.change3m > 0, 'negative-value': element.change3m < 0}">
         {{ element.change3m !== null ? element.change3m.toFixed(2) : '-' }}
       </td>
@@ -43,7 +43,7 @@
 
     <!-- Change1y Column -->
     <ng-container matColumnDef="change1y">
-      <th mat-header-cell *matHeaderCellDef>1y</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by change1y">1y</th>
       <td mat-cell *matCellDef="let element" [ngClass]="{'positive-value': element.change1y > 0, 'negative-value': element.change1y < 0}">
         {{ element.change1y !== null ? element.change1y.toFixed(2) : '-' }}
       </td>
@@ -51,7 +51,7 @@
 
     <!-- Change3y Column -->
     <ng-container matColumnDef="change3y">
-      <th mat-header-cell *matHeaderCellDef>3y</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by change3y">3y</th>
       <td mat-cell *matCellDef="let element" [ngClass]="{'positive-value': element.change3y > 0, 'negative-value': element.change3y < 0}">
         {{ element.change3y !== null ? element.change3y.toFixed(2) : '-' }}
       </td>
@@ -59,7 +59,7 @@
 
     <!-- Year High Column -->
     <ng-container matColumnDef="yearHigh">
-      <th mat-header-cell *matHeaderCellDef><mat-icon matTooltip="Year High" aria-label="Year High">trending_up</mat-icon></th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by year high"><mat-icon matTooltip="Year High" aria-label="Year High">trending_up</mat-icon></th>
       <td mat-cell *matCellDef="let element" [ngClass]="{'positive-value': element.yearHigh > 0, 'negative-value': element.yearHigh < 0}">
         {{ element.yearHigh !== null ? element.yearHigh.toFixed(2) : '-' }}
       </td>
@@ -67,7 +67,7 @@
 
     <!-- Year Low Column -->
     <ng-container matColumnDef="yearLow">
-      <th mat-header-cell *matHeaderCellDef><mat-icon matTooltip="Year Low" aria-label="Year Low">trending_down</mat-icon></th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by year low"><mat-icon matTooltip="Year Low" aria-label="Year Low">trending_down</mat-icon></th>
       <td mat-cell *matCellDef="let element" [ngClass]="{'positive-value': element.yearLow > 0, 'negative-value': element.yearLow < 0}">
         {{ element.yearLow !== null ? element.yearLow.toFixed(2) : '-' }}
       </td>
@@ -75,7 +75,7 @@
 
     <!-- Close Price Column -->
     <ng-container matColumnDef="closePrice">
-      <th mat-header-cell *matHeaderCellDef>Close Price</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by close price">Close Price</th>
       <td mat-cell *matCellDef="let element">
         {{ element.closePrice !== null ? element.closePrice.toFixed(2) : '-' }}
       </td>
@@ -83,7 +83,7 @@
 
     <!-- Currency Column -->
     <ng-container matColumnDef="currency">
-      <th mat-header-cell *matHeaderCellDef>Currency</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by currency">Currency</th>
       <td mat-cell *matCellDef="let element">{{ element.currency }}</td>
     </ng-container>
 

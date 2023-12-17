@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ChangeDetectorRef  } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectorRef, ViewChild  } from '@angular/core';
 import { Fund } from 'src/app/models/fund';
 import { FundService } from 'src/app/services/fund.service';
 import { FundComponent } from './fund/fund.component';
@@ -9,6 +9,8 @@ import { NgFor, CommonModule } from '@angular/common';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { FavouriteService } from 'src/app/services/favourite.service';
 import { FundDetailsComponent } from '../fund-details/fund-details.component';
+import {LiveAnnouncer} from '@angular/cdk/a11y';
+import {MatSort, Sort, MatSortModule} from '@angular/material/sort';
 
 interface TableRow {
   favourite: boolean;
@@ -31,7 +33,7 @@ interface TableRow {
     templateUrl: './fund-list.component.html',
     styleUrls: ['./fund-list.component.css'],
     standalone: true,
-    imports: [CommonModule, FundDetailsComponent, MatTableModule, MatIconModule, MatTooltipModule, NgFor, FundComponent]
+    imports: [CommonModule, MatSortModule, FundDetailsComponent, MatTableModule, MatIconModule, MatTooltipModule, NgFor, FundComponent]
 })
 
 export class FundListComponent implements OnInit{
@@ -45,6 +47,7 @@ export class FundListComponent implements OnInit{
   isFavourite: boolean = false;
   isAccordionOpen: boolean = false;
   selectedFund: Fund | null = null;
+  @ViewChild(MatSort) sort: MatSort;
 
 
   constructor(
@@ -52,6 +55,7 @@ export class FundListComponent implements OnInit{
     private favouriteService: FavouriteService,
     private changeDetectorRef: ChangeDetectorRef,
     private dialog: MatDialog, 
+    private _liveAnnouncer: LiveAnnouncer
     ) { }
 
   ngOnInit(): void {
@@ -62,17 +66,16 @@ export class FundListComponent implements OnInit{
     this.fundsToDisplay = this.fundsArr;
     this.fundService.setFundsArr(this.fundsToDisplay);
     this.dataSource = new MatTableDataSource(this.fundsToDisplay);
-
-      // Subscribe to changes in favorites
-      this.favouriteService.favorites$.subscribe((favorites) => {
-        // Update your component's state based on the new favorites
-        this.updateFavoritesState(favorites);
-      });
+    
 
    // Setup subscriptions
     this.subscribeToFavouriteButtonClicked();
     this.subscribeToAllButtonClicked();  
     this.favouriteService
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
   }
 
   ngOnChanges(): void {
@@ -224,5 +227,17 @@ export class FundListComponent implements OnInit{
        },
      });
    }
-  
+
+   announceSortChange(sortState: Sort) {
+    // This example uses English messages. If your application supports
+    // multiple language, you would internationalize these strings.
+    // Furthermore, you can customize the message to add additional
+    // details about the values being sorted.
+    console.log("sortstate", sortState);
+    if (sortState.direction) {
+      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+    } else {
+      this._liveAnnouncer.announce('Sorting cleared');
+    }
+  }
 }  
