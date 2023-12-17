@@ -147,3 +147,9 @@ a:hover {
 hr {
   width: 66%;
 }
+
+.close {
+  cursor: pointer;
+  background-color: black;
+  color: white;
+}

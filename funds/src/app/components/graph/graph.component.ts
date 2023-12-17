@@ -70,12 +70,7 @@ export class GraphComponent implements OnInit{
         const chartConfig = this.createChartPerformance();
         this.performanceChart = new Chart('canvas', chartConfig);
     }
-
-    ngOnAfterViewInit() {
-        const chartConfig = this.createChartPerformance();
-        this.performanceChart = new Chart('canvas', chartConfig);
-    }
-
+    
     createChartPerformance(): any {
         const chartConfig = {
             type: 'line',

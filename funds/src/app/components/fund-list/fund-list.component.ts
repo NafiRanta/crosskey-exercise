@@ -1,46 +1,94 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectorRef  } from '@angular/core';
 import { Fund } from 'src/app/models/fund';
 import { FundService } from 'src/app/services/fund.service';
 import { FundComponent } from './fund/fund.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
-import { NgIf, NgFor, CommonModule } from '@angular/common';
-import { filter } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { NgFor, CommonModule } from '@angular/common';
+import { MatTableModule, MatTableDataSource } from '@angular/material/table';
+import { FavouriteService } from 'src/app/services/favourite.service';
+import { FundDetailsComponent } from '../fund-details/fund-details.component';
+
+interface TableRow {
+  favourite: boolean;
+  name: string;
+  type: string;
+  change1m: number;
+  change3m: number;
+  change1y: number;
+  change3y: number;
+  yearHigh: number;
+  yearLow: number;
+  currency: string;
+  closePriceDate: any;
+  inceptionDate: any;
+  view: string;
+}
+
 @Component({
     selector: 'app-fund-list',
     templateUrl: './fund-list.component.html',
     styleUrls: ['./fund-list.component.css'],
     standalone: true,
-    imports: [CommonModule, MatIconModule, MatTooltipModule, NgFor, FundComponent]
+    imports: [CommonModule, FundDetailsComponent, MatTableModule, MatIconModule, MatTooltipModule, NgFor, FundComponent]
 })
+
 export class FundListComponent implements OnInit{
   @Input() fundsArr: Fund[];
   searchText: string[] = [];
   fundsToDisplay: Fund[]; 
   favourites: Fund[] = [];
-  
-  constructor(private fundService: FundService) { }
+  fundColumns: string[] = ['favourite', 'name', 'type', 'change1m', 'change3m', 'change1y', 'change3y', 'yearHigh', 'yearLow', 'currency', 'closePriceDate', 'inceptionDate', 'view'];
+  dataSource: MatTableDataSource<Fund>;
+  favouriteFunds: Fund[] = [];
+  isFavourite: boolean = false;
+  isAccordionOpen: boolean = false;
+  selectedFund: Fund | null = null;
+
+
+  constructor(
+    private fundService: FundService, 
+    private favouriteService: FavouriteService,
+    private changeDetectorRef: ChangeDetectorRef,
+    private dialog: MatDialog, 
+    ) { }
 
   ngOnInit(): void {
     // Initialize data
     this.setGraphProperties();
+    this.setFavouriteProperties();
+
     this.fundsToDisplay = this.fundsArr;
     this.fundService.setFundsArr(this.fundsToDisplay);
+    this.dataSource = new MatTableDataSource(this.fundsToDisplay);
 
-    
+      // Subscribe to changes in favorites
+      this.favouriteService.favorites$.subscribe((favorites) => {
+        // Update your component's state based on the new favorites
+        this.updateFavoritesState(favorites);
+      });
+
    // Setup subscriptions
     this.subscribeToFavouriteButtonClicked();
     this.subscribeToAllButtonClicked();  
+    this.favouriteService
   }
 
   ngOnChanges(): void {
-    // Display funds that matches the searchText
-    this.fundService.isQuery$.subscribe((query) => {
-      if (query) {
-        this.searchText = this.fundService.getQuery();
-        this.filterFunds();
-      }
-    });     
+        // Display funds that matches the searchText
+        this.fundService.isQuery$.subscribe((query) => {
+          if (query) {
+            this.searchText = this.fundService.getQuery();
+            console.log('SEARCH TEXT: ', this.searchText)
+            this.filterFunds();
+            // Update the data source with the filtered funds
+            this.dataSource.data = this.fundsToDisplay;
+            // Trigger change detection to update the UI
+            this.changeDetectorRef.detectChanges();
+          }
+        });
+    this.setFavouriteProperties();
   }
 
   // Set isGraph property for each fund
@@ -50,6 +98,24 @@ export class FundListComponent implements OnInit{
         fund.isGraph = false;
       } else {
         fund.isGraph = true;
+      }
+    });
+  }
+
+  // set isFavorite property for each fund
+  setFavouriteProperties(): void {
+    let favFund = localStorage.getItem('favourites');
+    if (favFund) {
+      this.favourites = JSON.parse(favFund);
+    }
+
+    this.fundsArr.forEach((fund: Fund) => {
+      if (this.favourites.some((favFund: Fund) => {
+        return fund.instrumentId === favFund.instrumentId;
+      })) {
+        fund.isFavourite = true;
+      } else {
+        fund.isFavourite = false;
       }
     });
   }
@@ -117,4 +183,46 @@ export class FundListComponent implements OnInit{
       this.fundService.setFundsArr(this.fundsToDisplay);
     }
   }
+
+  addToFav(selectedFund: Fund) {
+    this.favouriteService.addToFavorites(selectedFund);
+    this.isFavourite = true;
+    selectedFund.isFavourite = true;
+  }
+
+  // remove from local storage array of favourites
+  removeFromFav(selectedFund: Fund) {
+    this.favouriteService.removeFromFavorites(selectedFund);
+     this.isFavourite = false;
+     selectedFund.isFavourite = false;
+  }
+
+
+  private updateFavoritesState(favorites: Fund[]) {
+    this.fundsToDisplay = this.fundsArr.filter((fund) =>
+      favorites.some((favFund) => fund.instrumentId === favFund.instrumentId)
+    );
+  }
+
+    
+  // Emit selected fund to subscribers
+  onSelectedFund(fund: Fund) {
+    this.isAccordionOpen = !this.isAccordionOpen;
+    this.fundService.setSelectedFund(fund);
+    this.selectedFund = fund;
+  }
+  
+  onRowClick(row: Fund): void {
+    this.selectedFund = row;
+  }
+
+    // Open productDetail modal
+    openProductDetail(selectedFund: Fund): void {
+      this.dialog.open(FundDetailsComponent, {
+       data: {
+         selectedFund: selectedFund, 
+       },
+     });
+   }
+  
 }  

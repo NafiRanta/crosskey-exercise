@@ -18,13 +18,16 @@
   justify-content: center;
 }
 
-.favourite {
-  flex: 0;
-  margin: 0 9px 0 30px;
+mat-icon {
+  cursor: pointer;
+}
 
-  mat-icon {
-    color: #ff9800;
-  }
+.favourite {
+  color: #ff9800;
+}
+
+.fav-icon-remove {
+  color: #ff9800;
 }
 
 .view {
@@ -49,4 +52,17 @@
     color: white;
     font-weight: lighter;
   }
+}
+
+.positive-value {
+  color: green;
+}
+
+.negative-value {
+  color: red;
+}
+
+.accordion {
+  display: flex;
+  flex-direction: column;
 }

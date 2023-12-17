@@ -3,9 +3,10 @@
 </div>
 
 <div class="container">
+     <!-- Graph -->
+    <canvas #canvas id="canvas">{{ performanceChart }}</canvas>
     <!-- Table -->
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
         <!-- Column definitions -->
         <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
             <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
@@ -35,9 +36,4 @@
         <!-- Data rows -->
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-
-    <!-- Graph -->
-    <div>
-        <canvas #canvas id="canvas">{{ performanceChart }}</canvas>
-    </div>
 </div>

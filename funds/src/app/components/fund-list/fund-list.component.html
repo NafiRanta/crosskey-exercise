@@ -1,27 +1,124 @@
 <div class="fund-info-labels" *ngIf="fundsToDisplay">
-  <div class="fund-info-label favourite">
-    <mat-icon matTooltip="Add to favourites">star</mat-icon>
-  </div>
-  <div class="fund-info-label name-container">
-    <div class="name">Fund Name</div>
-    <div class="subtext">ISIN. TYPE. COMPANY</div>
-  </div>
-  <div class="fund-info-label">1m</div>
-  <div class="fund-info-label">3m</div>
-  <div class="fund-info-label">1y</div>
-  <div class="fund-info-label">3y</div>
-  <div class="fund-info-label"><mat-icon matTooltip="Year High" aria-label="Year High">trending_up</mat-icon></div>
-  <div class="fund-info-label"><mat-icon matTooltip="Year Low" aria-label="Year Low">trending_down</mat-icon></div>
-  <div class="fund-info-label">Close Price</div>
-  <div class="fund-info-label">Currency</div>
-  <div class="fund-info-label">Perf. as of</div>
-  <div class="fund-info-label">Incept Date</div>
-  <div class="fund-info-label view">View</div>
-</div>
-<hr>
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!-- Favourite Column -->
+    <ng-container matColumnDef="favourite">
+      <th mat-header-cell *matHeaderCellDef><mat-icon class="favourite" matTooltip="Add to favourites">star</mat-icon></th>
+      <td mat-cell *matCellDef="let element">
+        <mat-icon *ngIf="element.isFavourite" class="fav-icon-remove" matTooltip="Remove from favourites"  (click)="removeFromFav(element)">star</mat-icon>
+        <mat-icon *ngIf="!element.isFavourite" class="fav-icon-add" matTooltip="Add to favourites"  (click)="addToFav(element)">star_border</mat-icon>
+      </td>
+    </ng-container>
 
-<div *ngFor="let fund of fundsToDisplay">
-  <app-fund [fund]="fund"></app-fund>
-</div>
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.fundName }}
+      </td>
+    </ng-container>
 
+     <!-- Type Column -->
+     <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef>Type</th>
+      <td mat-cell *matCellDef="let element">{{ element.fundType }}
+      </td>
+    </ng-container>
+
+        <!-- Change1m Column -->
+    <ng-container matColumnDef="change1m">
+      <th mat-header-cell *matHeaderCellDef>1m</th>
+      <td mat-cell *matCellDef="let element" [ngClass]="{'positive-value': element.change1m > 0, 'negative-value': element.change1m < 0}">
+        {{ element.change1m !== null ? element.change1m.toFixed(2) : '-' }}
+
+      </td>
+    </ng-container>
+
+    <!-- Change3m Column -->
+    <ng-container matColumnDef="change3m">
+      <th mat-header-cell *matHeaderCellDef>3m</th>
+      <td mat-cell *matCellDef="let element" [ngClass]="{'positive-value': element.change3m > 0, 'negative-value': element.change3m < 0}">
+        {{ element.change3m !== null ? element.change3m.toFixed(2) : '-' }}
+      </td>
+    </ng-container>
+
+    <!-- Change1y Column -->
+    <ng-container matColumnDef="change1y">
+      <th mat-header-cell *matHeaderCellDef>1y</th>
+      <td mat-cell *matCellDef="let element" [ngClass]="{'positive-value': element.change1y > 0, 'negative-value': element.change1y < 0}">
+        {{ element.change1y !== null ? element.change1y.toFixed(2) : '-' }}
+      </td>
+    </ng-container>
+
+    <!-- Change3y Column -->
+    <ng-container matColumnDef="change3y">
+      <th mat-header-cell *matHeaderCellDef>3y</th>
+      <td mat-cell *matCellDef="let element" [ngClass]="{'positive-value': element.change3y > 0, 'negative-value': element.change3y < 0}">
+        {{ element.change3y !== null ? element.change3y.toFixed(2) : '-' }}
+      </td>
+    </ng-container>
+
+    <!-- Year High Column -->
+    <ng-container matColumnDef="yearHigh">
+      <th mat-header-cell *matHeaderCellDef><mat-icon matTooltip="Year High" aria-label="Year High">trending_up</mat-icon></th>
+      <td mat-cell *matCellDef="let element" [ngClass]="{'positive-value': element.yearHigh > 0, 'negative-value': element.yearHigh < 0}">
+        {{ element.yearHigh !== null ? element.yearHigh.toFixed(2) : '-' }}
+      </td>
+    </ng-container>
+
+    <!-- Year Low Column -->
+    <ng-container matColumnDef="yearLow">
+      <th mat-header-cell *matHeaderCellDef><mat-icon matTooltip="Year Low" aria-label="Year Low">trending_down</mat-icon></th>
+      <td mat-cell *matCellDef="let element" [ngClass]="{'positive-value': element.yearLow > 0, 'negative-value': element.yearLow < 0}">
+        {{ element.yearLow !== null ? element.yearLow.toFixed(2) : '-' }}
+      </td>
+    </ng-container>
+
+    <!-- Close Price Column -->
+    <ng-container matColumnDef="closePrice">
+      <th mat-header-cell *matHeaderCellDef>Close Price</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.closePrice !== null ? element.closePrice.toFixed(2) : '-' }}
+      </td>
+    </ng-container>
+
+    <!-- Currency Column -->
+    <ng-container matColumnDef="currency">
+      <th mat-header-cell *matHeaderCellDef>Currency</th>
+      <td mat-cell *matCellDef="let element">{{ element.currency }}</td>
+    </ng-container>
+
+    <!-- Close Price Date Column -->
+    <ng-container matColumnDef="closePriceDate">
+      <th mat-header-cell *matHeaderCellDef>Close Price Date</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.closePriceDate !== null ? (element.closePriceDate | date: 'dd-MMM-yyyy') : '-' }}
+        {{ element.inceptionDate | json }} <!-- Log the raw value -->
+      </td>
+    </ng-container>
+
+    <!-- Inception Date Column -->
+    <ng-container matColumnDef="inceptionDate">
+      <th mat-header-cell *matHeaderCellDef>Inception Date</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.inceptionDate !== null ? (element.inceptionDate | date: 'dd-MMM-yyyy') : '-' }}
+        {{ element.inceptionDate | json }} <!-- Log the raw value -->
+      </td>
+    </ng-container>
+
+      <!-- View -->
+      <ng-container matColumnDef="view">
+        <th mat-header-cell *matHeaderCellDef>View</th>
+        <td mat-cell *matCellDef="let element">
+          <mat-icon class="fund-info-value" (click)="openProductDetail(element)">open_with</mat-icon>
+        </td>
+      </ng-container>
   
+    <!-- Header row -->
+    <tr mat-header-row *matHeaderRowDef="fundColumns"></tr>
+
+    <!-- Data rows -->
+    <tr mat-row *matRowDef="let row; columns: fundColumns;"></tr>
+  </table>
+</div>
+</div>
+

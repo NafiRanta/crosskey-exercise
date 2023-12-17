@@ -16,7 +16,6 @@ export class FundComponent implements OnInit {
   @Input() fund: Fund;
   @Output() selectedFund = new EventEmitter<Fund>();
   @ViewChild('fundInfoData') fundInfoData: ElementRef;
-  searchText: string[] = [];
   closePriceDate: any;
   inceptionDate: any;
   isAccordionOpen: boolean = false;
